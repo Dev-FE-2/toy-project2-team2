@@ -6,6 +6,7 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "composite": true, // 프로젝트 참조 기능 활성화, 각 모듈의 변경 감지시 필요한 부분만 다시 컴파일
 
     /* Bundler mode */
     "moduleResolution": "Bundler",
@@ -21,17 +22,23 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
+    "noImplicitAny": true, // 타입을 명시하지 않아 any로 추론되는 경우 에러
+    "strictBindCallApply": true, // call, bind apply 사용 시, 잘못된 타입의 argument를 넘길 때 에러
+    "allowUnreachableCode": false, //구문에 도달하지 못하는 코드가 있을 시 에러
+    "allowUnusedLabels": false, // 선언되지 않은 변수가 있을 시 에러
+    "strictNullChecks": true, // null 타입과 undefined 타입에 대해 엄격한 검사 진행
+    "exactOptionalPropertyTypes":true, // ontional property지정 시 타입이 string | undefined 형식이 아닌 string 
 
     /* Paths */
     "baseUrl": "./", //상대 위치로 가져오기 할 때, 모듈이 기본적으로 위치한 디렉토리 설정
-    "paths": {
+    "paths": {// 'baseUrl' 기준으로 상대 위치로 가져오기를 다시 매핑하는 항목
       "@components/*":[
         "src/components/*" // import {} from '@components/파일' 할때 어느 경로로 찾아 갈지 path 설정
       ],
       "@utils/*":[
         "src/utils/*"
       ]
-    },// 'baseUrl' 기준으로 상대 위치로 가져오기를 다시 매핑하는 항목
+    },
   },
   "include": ["src"]
 }

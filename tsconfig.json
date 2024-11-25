@@ -4,15 +4,4 @@
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
   ],
-  "compilerOptions": {
-    "baseUrl": "./", //상대 위치로 가져오기 할 때, 모듈이 기본적으로 위치한 디렉토리 설정
-    "paths": {
-      "@components/*":[
-        "src/components/*" // import {} from '@components/파일' 할때 어느 경로로 찾아 갈지 path 설정
-      ],
-      "@utils/*":[
-        "src/utils/*"
-      ]
-    }
-  }
 }
