@@ -1,14 +1,23 @@
-import reactLogo from "./assets/react.svg";
+import { useState } from "react";
+import "./App.css";
 
 function App() {
+	const count = useState(0);
+	// var count = useState(0)
 	return (
 		<>
-			<div>
-				<a href="https://react.dev" target="_blank">
-					<img src={reactLogo} className="logo react" alt="React logo" />
-				</a>
+			<h1>Vite + React</h1>
+			<div className="card">
+				<button onClick={() => count[1]((prevCount) => prevCount + 1)}>
+					count is {count[0]}
+				</button>
+				<p>
+					Edit <code>src/App.tsx</code> and save to test HMR
+				</p>
 			</div>
-			<h1>App</h1>
+			<p className="read-the-docs">
+				Click on the Vite and React logos to learn more
+			</p>
 		</>
 	);
 }
