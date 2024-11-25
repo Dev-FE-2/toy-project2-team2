@@ -17,10 +17,10 @@
     "jsx": "react-jsx",
 
     /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
+    "strict": true, //엄격모드 설정
+    "noUnusedLocals": true, //사용하지 않는 변수 에러 처리
+    "noUnusedParameters": true, // 사용하지 않는 매개변수 에러 처리
+    "noFallthroughCasesInSwitch": true, // switch 문 오류 유형에 대한 오류 보고
     "noUncheckedSideEffectImports": true,
     "noImplicitAny": true, // 타입을 명시하지 않아 any로 추론되는 경우 에러
     "strictBindCallApply": true, // call, bind apply 사용 시, 잘못된 타입의 argument를 넘길 때 에러

@@ -15,10 +15,10 @@
     "noEmit": true,
 
     /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
+    "strict": true, //엄격모드 설정
+    "noUnusedLocals": true, //사용하지 않는 변수 에러 처리
+    "noUnusedParameters": true, // 사용하지 않는 매개변수 에러 처리
+    "noFallthroughCasesInSwitch": true, // switch 문 오류 유형에 대한 오류 보고
     "noUncheckedSideEffectImports": true,
 
   },
