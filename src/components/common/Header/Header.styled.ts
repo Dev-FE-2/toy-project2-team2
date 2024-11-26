@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { NavLink as RouterNavLink } from "react-router-dom";
 
 export const HeaderContainer = styled.header`
 	display: flex;
@@ -28,13 +28,17 @@ export const Nav = styled.nav`
 	text-align: left;
 `;
 
-export const NavLink = styled(Link)`
+export const NavLink = styled(RouterNavLink)`
 	text-decoration: none;
 	color: black;
 	font-weight: 500;
 
 	&:hover {
-		color: gray;
+		color: #029688;
+		font-weight: bolder;
+	}
+	&.active {
+		font-weight: bolder;
 	}
 `;
 

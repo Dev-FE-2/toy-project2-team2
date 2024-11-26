@@ -14,6 +14,7 @@ import profileImage from "../../../assets/profile.png";
 import logoImage from "../../../assets/logo.png";
 
 const Header: React.FC = () => {
+	const user = { name: "홍길동", team: "디자인팀", position: "사원" };
 	return (
 		<HeaderContainer>
 			<LeftContainer>
@@ -31,8 +32,8 @@ const Header: React.FC = () => {
 
 			<ProfileContainer>
 				<ProfileInfo>
-					<div>홍길동</div>
-					<div>디자인팀 / 사원</div>
+					<div>{user.name}</div>
+					<div>{`${user.team} / ${user.position}`}</div>
 				</ProfileInfo>
 
 				<ProfileImageContainer>
