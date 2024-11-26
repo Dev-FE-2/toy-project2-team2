@@ -2,16 +2,24 @@ import React from "react";
 import {
 	HeaderContainer,
 	LeftContainer,
+	Logo,
 	Nav,
 	NavLink,
 	ProfileContainer,
+	Profile,
+	ProfileInfo,
+	ProfileImageContainer,
 } from "./Header.styled";
+import profileImage from "../../../assets/profile.png";
+import logoImage from "../../../assets/logo.png";
 
 const Header: React.FC = () => {
 	return (
 		<HeaderContainer>
 			<LeftContainer>
-				<NavLink to="/">Good Work</NavLink>
+				<NavLink to="/">
+					<Logo src={logoImage} alt="로고" />
+				</NavLink>
 
 				<Nav>
 					<NavLink to="/">내 일정</NavLink>
@@ -21,7 +29,16 @@ const Header: React.FC = () => {
 				</Nav>
 			</LeftContainer>
 
-			<ProfileContainer>{/* 프로필 기본이미지 */}</ProfileContainer>
+			<ProfileContainer>
+				<ProfileInfo>
+					<div>홍길동</div>
+					<div>디자인팀 / 사원</div>
+				</ProfileInfo>
+
+				<ProfileImageContainer>
+					<Profile src={profileImage} alt="프로필 이미지" />
+				</ProfileImageContainer>
+			</ProfileContainer>
 		</HeaderContainer>
 	);
 };
