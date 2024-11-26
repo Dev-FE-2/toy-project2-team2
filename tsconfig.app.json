@@ -34,12 +34,12 @@
     "paths": {// 'baseUrl' 기준으로 상대 위치로 가져오기를 다시 매핑하는 항목
       "@/*":["src/*"], // import {} from '@/파일' 할때 어느 경로로 찾아 갈지 path 설정
       "@components/*":["src/components/*"],
-      "@hooks":["src/hooks/*"],
-      "@pages":["src/pages/*"],
-      "@services":["src/services/*"],
-      "@store":["src/store/*"],
-      "@styles":["src/styles/*"],
-      "@types":["src/types/*"],
+      "@hooks/*":["src/hooks/*"],
+      "@pages/*":["src/pages/*"],
+      "@services/*":["src/services/*"],
+      "@store/*":["src/store/*"],
+      "@styles/*":["src/styles/*"],
+      "@types/*":["src/types/*"],
       "@utils/*":["src/utils/*"]
     },
   },
