@@ -1,13 +1,12 @@
 import { createBrowserRouter} from 'react-router-dom';
-import HomePage from '../pages/home';
-import LoginPage from '../pages/login';
-import MainLayout from '../layouts/main';
-import SignupPage from 'src/pages/signup';
-import PayPage from 'src/pages/pay';
-import PayCorrectionPage from 'src/pages/pay-correction';
-import MyPage from 'src/pages/mypage';
-import NotFoundPage from 'src/pages/notFound';
-// TODO: 경로별칭 적용예정
+import HomePage from '@pages/home';
+import LoginPage from '@pages/login';
+import MainLayout from '@/layouts/main';
+import SignupPage from '@pages/signup';
+import PayPage from '@pages/pay';
+import PayCorrectionPage from '@pages/pay-correction';
+import MyPage from '@pages/mypage';
+import NotFoundPage from '@pages/notFound';
 
 const Router = createBrowserRouter([
   {
