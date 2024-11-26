@@ -2,8 +2,8 @@ import React from "react";
 
 type Props = {};
 
-const Home = (props: Props) => {
-	return <div>Home</div>;
+const HomePage = (props: Props) => {
+	return <div>Home : 일정관리 페이지 </div>;
 };
 
-export default Home;
+export default HomePage;
