@@ -13,8 +13,14 @@ import {
 import profileImage from "../../../assets/profile.png";
 import logoImage from "../../../assets/logo.png";
 
+interface User {
+	name: string;
+	team: string;
+	position: string;
+}
+
 const Header: React.FC = () => {
-	const user = { name: "홍길동", team: "디자인팀", position: "사원" };
+	const user: User = { name: "홍길동", team: "디자인팀", position: "사원" };
 	return (
 		<HeaderContainer>
 			<LeftContainer>
