@@ -1,8 +1,9 @@
 import React from "react";
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 type Props = {};
-
-const MyPage= (props: Props) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const MyPage = (props: Props) => {
 	return <div>Mypage</div>;
 };
 
