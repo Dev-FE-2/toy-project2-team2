@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
 import {
 	ModalOverlay,
@@ -18,11 +18,23 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, title, onClose, children }) => {
+	useEffect(() => {
+		const preventGoBack = () => {
+			history.go(1);
+			onClose();
+		};
+
+		history.pushState(null, "", location.href);
+		window.addEventListener("popstate", preventGoBack);
+
+		return () => window.removeEventListener("popstate", preventGoBack);
+	}, [onClose]);
+
 	if (!isOpen) return null;
 
 	return createPortal(
-		<ModalOverlay>
-			<ModalContainer>
+		<ModalOverlay onClick={onClose}>
+			<ModalContainer onClick={(e) => e.stopPropagation()}>
 				<ModalBox>
 					<ModalHeader>
 						<h2>{title}</h2>
@@ -30,7 +42,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, title, onClose, children }) => {
 					<ModalContent>{children}</ModalContent>
 					<ButtonContainer>
 						<Button onClick={onClose}>취소</Button>
-						<Button>확인</Button>
+						<Button onClick={onClose}>확인</Button>
 					</ButtonContainer>
 				</ModalBox>
 			</ModalContainer>
