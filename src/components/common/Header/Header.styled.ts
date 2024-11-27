@@ -36,7 +36,7 @@ export const NavLink = styled(RouterNavLink)`
 
 	&:hover {
 		color: ${getColor("primary")};
-		ont-weight: ${getFontWeight("bold")};
+		font-weight: ${getFontWeight("bold")};
 	}
 	&.active {
 		color: ${getColor("secondaryDark")};
