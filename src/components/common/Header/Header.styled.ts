@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import { NavLink as RouterNavLink } from "react-router-dom";
+import { getColor, getFontWeight, getFontSize } from "../../../styles/theme";
 
 export const HeaderContainer = styled.header`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding: 15px 40px;
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid ${getColor("secondaryDark")};
 `;
 
 export const LeftContainer = styled.div`
@@ -30,16 +31,16 @@ export const Nav = styled.nav`
 
 export const NavLink = styled(RouterNavLink)`
 	text-decoration: none;
-	color: black;
-	font-weight: 500;
+	color:  ${getColor("grayDark")};
+	font-weight:  ${getFontWeight("medium")};;
 
 	&:hover {
-		color: #029688;
-		font-weight: bolder;
+		color: ${getColor("primary")};
+		ont-weight: ${getFontWeight("bold")};
 	}
 	&.active {
-		font-weight: bolder;
-	}
+		color: ${getColor("secondaryDark")};
+		font-weight: ${getFontWeight("bold")};
 `;
 
 export const ProfileContainer = styled.div`
@@ -52,7 +53,7 @@ export const ProfileImageContainer = styled.div`
 	width: 60px;
 	height: 60px;
 	border-radius: 50%;
-	overflow: hidden; /* 이미지가 원형을 벗어나지 않도록 */
+	overflow: hidden;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -73,6 +74,6 @@ export const ProfileInfo = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	font-size: 14px;
+	font-size: ${getFontSize("sm")};
 	line-height: 1.6;
 `;
