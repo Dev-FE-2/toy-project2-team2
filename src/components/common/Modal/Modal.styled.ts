@@ -30,19 +30,20 @@ export const ModalBox = styled.div`
 
 export const ModalHeader = styled.header`
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
-`;
+	position: relative;
 
-export const CloseButton = styled.button`
-	background: none;
-	border: none;
-	font-size: 1.5rem;
-	cursor: pointer;
+	h2 {
+		margin: 0;
+		font-size: 1.5rem;
+		text-align: center;
+	}
 `;
 
 export const ModalContent = styled.div`
-	margin-top: 20px;
+	text-align: center;
+	padding-bottom: 10px;
 `;
 
 export const ButtonContainer = styled.div`

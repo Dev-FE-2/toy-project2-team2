@@ -5,7 +5,6 @@ import {
 	ModalContainer,
 	ModalBox,
 	ModalHeader,
-	CloseButton,
 	ModalContent,
 	ButtonContainer,
 	Button,
@@ -27,7 +26,6 @@ const Modal: React.FC<ModalProps> = ({ isOpen, title, onClose, children }) => {
 				<ModalBox>
 					<ModalHeader>
 						<h2>{title}</h2>
-						<CloseButton onClick={onClose}>&times;</CloseButton>
 					</ModalHeader>
 					<ModalContent>{children}</ModalContent>
 					<ButtonContainer>
