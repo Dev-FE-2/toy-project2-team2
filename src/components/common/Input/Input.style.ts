@@ -1,10 +1,16 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import {
 	getBorderRadius,
 	getColor,
 	getFontSize,
 	getFontWeight,
 } from "@/styles/theme";
+
+const getReadOnlyStyles = (readOnly?: boolean) => css`
+	background-color: ${getColor(readOnly ? "grayLight" : "white")};
+	color: ${getColor(readOnly ? "grayDark" : "secondaryDark")};
+	cursor: ${readOnly ? "not-allowed" : "text"};
+`;
 
 export const InputContainer = styled.div`
 	width: 350px;
@@ -27,10 +33,7 @@ export const InputBox = styled.input<{ isError: boolean }>`
 		${({ isError }) => getColor(isError ? "danger" : "grayLight")};
 	border-radius: ${getBorderRadius("sm")};
 	outline: none;
-	background-color: ${({ readOnly }) =>
-		getColor(readOnly ? "grayLight" : "white")};
-	color: ${({ readOnly }) => getColor(readOnly ? "grayDark" : "secondaryDark")};
-	cursor: ${({ readOnly }) => (readOnly ? "not-allowed" : "text")};
+	${({ readOnly }) => getReadOnlyStyles(readOnly)};
 
 	&:focus {
 		border: 2px solid ${getColor("primary")};
