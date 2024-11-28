@@ -3,13 +3,25 @@ import Modal from "@/components/common/Modal";
 import TextArea from "@/components/common/TextArea";
 import CustomSelect from "@/components/Select";
 import React, { useState } from "react";
+import styled from "styled-components";
 
 const HomePage: React.FC = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	return (
 		<div>
-			MyPage
+			<HeaderContainer>
+				<CustomSelect
+					label="selectbox"
+					options={[
+						{ value: "지급 내역", label: "지급 내역" },
+						{ value: "공제 내역", label: "공제 내역" },
+						{ value: "근무 시간", label: "근무 시간" },
+						{ value: "기타", label: "기타" },
+					]}
+				/>
+			</HeaderContainer>
+
 			<button onClick={() => setIsModalOpen(true)}>모달 열기</button>
 			<Modal
 				isOpen={isModalOpen}
@@ -46,28 +58,13 @@ const HomePage: React.FC = () => {
 				readOnly
 				value="This is a read-only field"
 			/>
-			<CustomSelect
-				label="selectbox"
-				options={[
-					{ value: "지급 내역", label: "지급 내역" },
-					{ value: "공제 내역", label: "공제 내역" },
-					{ value: "근무 시간", label: "근무 시간" },
-					{ value: "기타", label: "기타" },
-				]}
-			/>
-			<CustomSelect
-				label="selectbox- readonly"
-				options={[
-					{ value: "지급 내역", label: "지급 내역" },
-					{ value: "공제 내역", label: "공제 내역" },
-					{ value: "근무 시간", label: "근무 시간" },
-					{ value: "기타", label: "기타" },
-				]}
-				placeholder="지급내역"
-				readOnly={true}
-			/>
 		</div>
 	);
 };
 
 export default HomePage;
+
+export const HeaderContainer = styled.div`
+	display: flex;
+	align-items: center;
+`;

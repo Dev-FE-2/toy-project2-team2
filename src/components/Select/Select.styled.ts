@@ -1,12 +1,5 @@
 import styled from "styled-components";
 import { getColor, getFontSize, getFontWeight } from "@/styles/theme";
-import { css } from "styled-components";
-
-const getReadOnlyStyles = (readOnly?: boolean) => css`
-	color: ${getColor(readOnly ? "grayDark" : "secondaryDark")};
-	background-color: ${getColor(readOnly ? "grayLight" : "white")};
-	cursor: ${readOnly ? "not-allowed" : "pointer"};
-`;
 
 export const SelectContainer = styled.div`
 	width: 350px;
@@ -29,7 +22,6 @@ export const SelectBox = styled.div<{ isOpen: boolean; readOnly?: boolean }>`
 		${({ isOpen, readOnly }) =>
 			getColor(readOnly ? "grayLight" : isOpen ? "primary" : "grayLight")};
 	border-radius: 4px;
-	${({ readOnly }) => getReadOnlyStyles(readOnly)};
 
 	&:hover {
 		border-color: ${({ readOnly }) =>
@@ -65,7 +57,6 @@ export const Option = styled.li<{ readOnly?: boolean }>`
 	padding: 10px;
 	font-size: ${getFontSize("md")};
 	font-weight: ${getFontWeight("regular")};
-	${({ readOnly }) => getReadOnlyStyles(readOnly)};
 
 	&:hover {
 		background-color: ${({ readOnly }) =>

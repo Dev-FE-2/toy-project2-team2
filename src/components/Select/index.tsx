@@ -15,7 +15,6 @@ interface SelectProps {
 	placeholder?: string;
 	value?: string;
 	onChange?: (value: string) => void;
-	readOnly?: boolean;
 }
 
 const Select: React.FC<SelectProps> = ({
@@ -23,13 +22,11 @@ const Select: React.FC<SelectProps> = ({
 	options,
 	placeholder = "Select",
 	value,
-	readOnly,
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedValue, setSelectedValue] = useState(value);
 
 	const handleOptionClick = (value: string) => {
-		if (readOnly) return;
 		setSelectedValue(value);
 		setIsOpen(false);
 	};
@@ -37,11 +34,7 @@ const Select: React.FC<SelectProps> = ({
 	return (
 		<SelectContainer>
 			{label && <Label>{label}</Label>}
-			<SelectBox
-				isOpen={isOpen}
-				readOnly={readOnly}
-				onClick={() => !readOnly && setIsOpen(!isOpen)}
-			>
+			<SelectBox isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
 				<SelectedValue>{selectedValue || placeholder}</SelectedValue>
 				<DownIcon isOpen={isOpen}>∨</DownIcon>
 				{isOpen && (
@@ -49,7 +42,6 @@ const Select: React.FC<SelectProps> = ({
 						{options.map((option) => (
 							<Option
 								key={option.value}
-								readOnly={readOnly}
 								onClick={() => handleOptionClick(option.value)}
 							>
 								{option.label}
