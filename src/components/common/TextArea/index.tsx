@@ -11,7 +11,7 @@ interface TextAreaProps {
 	error?: string;
 	placeholder?: string;
 	value?: string;
-	onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void; // 값 변경 이벤트 핸들러
+	onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 	readOnly?: boolean;
 }
 
