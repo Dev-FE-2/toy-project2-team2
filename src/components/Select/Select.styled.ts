@@ -10,9 +10,9 @@ export const SelectContainer = styled.div`
 `;
 
 export const Label = styled.label`
-	font-size: ${getFontSize("sm")};
+	font-size: ${getFontSize("md")};
 	font-weight: ${getFontWeight("medium")};
-	color: ${getColor("secondary")};
+	color: ${getColor("secondaryDark")};
 `;
 export const SelectBox = styled.div<{ isOpen: boolean; readOnly?: boolean }>`
 	position: relative;

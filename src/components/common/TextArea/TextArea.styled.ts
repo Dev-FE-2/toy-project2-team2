@@ -10,9 +10,9 @@ export const TextAreaContainer = styled.div`
 `;
 
 export const Label = styled.label`
-	font-size: ${getFontSize("sm")};
+	font-size: ${getFontSize("md")};
 	font-weight: ${getFontWeight("medium")};
-	color: ${getColor("secondary")};
+	color: ${getColor("secondaryDark")};
 `;
 
 export const TextAreaBox = styled.textarea<{ isError?: boolean }>`
