@@ -1,3 +1,4 @@
+import { Input } from "@/components/common";
 import Modal from "@/components/common/Modal";
 import React, { useState } from "react";
 
@@ -15,6 +16,27 @@ const HomePage: React.FC = () => {
 			>
 				<p>여기에 원하는 내용을 추가</p>
 			</Modal>
+			<Input
+				label="Input label"
+				placeholder="placeholder"
+				onChange={(e) => console.log(e.target.value)}
+				type="text"
+			/>
+			<Input
+				label="Input label"
+				placeholder="placeholder"
+				onChange={(e) => console.log(e.target.value)}
+				type="text"
+				error="errror message~~"
+			/>
+			<Input
+				label="Input label"
+				placeholder="placeholder"
+				value="input label readonly"
+				readOnly
+				onChange={(e) => console.log(e.target.value)}
+				type="text"
+			/>
 		</div>
 	);
 };
