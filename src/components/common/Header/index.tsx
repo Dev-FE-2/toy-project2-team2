@@ -10,8 +10,8 @@ import {
 	ProfileInfo,
 	ProfileImageContainer,
 } from "./Header.styled";
-import profileImage from "../../../assets/profile.png";
-import logoImage from "../../../assets/logo.png";
+import profileImage from "@/assets/img/profile.png";
+import logoImage from "@/assets/img/logo.png";
 
 interface User {
 	name: string;
