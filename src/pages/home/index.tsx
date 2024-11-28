@@ -1,11 +1,22 @@
-import React from "react";
+import Modal from "@/components/common/Modal";
+import React, { useState } from "react";
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-type Props = {};
+const HomePage: React.FC = () => {
+	const [isModalOpen, setIsModalOpen] = useState(false);
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const HomePage = (props: Props) => {
-	return <div>Home : 일정관리 페이지 </div>;
+	return (
+		<div>
+			HOME
+			<button onClick={() => setIsModalOpen(true)}>모달 열기</button>
+			<Modal
+				isOpen={isModalOpen}
+				title="정정 신청"
+				onClose={() => setIsModalOpen(false)}
+			>
+				<p>여기에 원하는 내용을 추가</p>
+			</Modal>
+		</div>
+	);
 };
 
 export default HomePage;
