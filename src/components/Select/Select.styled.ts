@@ -1,5 +1,10 @@
 import styled from "styled-components";
-import { getColor, getFontSize, getFontWeight } from "@/styles/theme";
+import {
+	getBorderRadius,
+	getColor,
+	getFontSize,
+	getFontWeight,
+} from "@/styles/theme";
 
 export const SelectContainer = styled.div`
 	width: 350px;
@@ -21,7 +26,7 @@ export const SelectBox = styled.div<{ isOpen: boolean; readOnly?: boolean }>`
 	border: 2px solid
 		${({ isOpen, readOnly }) =>
 			getColor(readOnly ? "grayLight" : isOpen ? "primary" : "grayLight")};
-	border-radius: 4px;
+	border-radius: ${getBorderRadius("sm")};
 
 	&:hover {
 		border-color: ${({ readOnly }) =>
@@ -49,7 +54,7 @@ export const Options = styled.ul`
 	width: 100%;
 	background-color: ${getColor("white")};
 	border: 1px solid ${getColor("grayLight")};
-	border-radius: 4px;
+	border-radius: ${getBorderRadius("sm")};
 	margin: 4px 0 0;
 	list-style: none;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

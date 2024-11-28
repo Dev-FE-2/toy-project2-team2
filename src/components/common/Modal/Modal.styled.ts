@@ -1,5 +1,10 @@
 import styled from "styled-components";
-import { getColor, getFontSize, getFontWeight } from "../../../styles/theme";
+import {
+	getColor,
+	getFontSize,
+	getFontWeight,
+	getBorderRadius,
+} from "../../../styles/theme";
 export const ModalOverlay = styled.div`
 	position: fixed;
 	top: 0;
@@ -19,7 +24,8 @@ export const ModalContainer = styled.div`
 
 export const ModalBox = styled.div`
 	background: ${getColor("white")};
-	border-radius: 8px;
+	border-radius: ${getBorderRadius("lg")};
+
 	padding: 50px;
 	width: 550px;
 	height: auto;

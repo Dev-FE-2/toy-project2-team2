@@ -1,5 +1,10 @@
 import styled from "styled-components";
-import { getColor, getFontSize, getFontWeight } from "@/styles/theme";
+import {
+	getBorderRadius,
+	getColor,
+	getFontSize,
+	getFontWeight,
+} from "@/styles/theme";
 
 export const TextAreaContainer = styled.div`
 	width: 350px;
@@ -21,7 +26,7 @@ export const TextAreaBox = styled.textarea<{ isError?: boolean }>`
 	font-family: inherit;
 	border: 1px solid
 		${({ isError }) => getColor(isError ? "danger" : "grayLight")};
-	border-radius: 4px;
+	border-radius: ${getBorderRadius("sm")};
 	outline: none;
 	background-color: ${({ readOnly }) =>
 		getColor(readOnly ? "grayLight" : "white")};
