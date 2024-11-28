@@ -22,6 +22,9 @@ declare module "styled-components" {
 			white: string;
 
 			dim: string;
+
+			primary_hover: string;
+			white_hover: string;
 		};
 
 		fontSize: {
@@ -45,6 +48,11 @@ declare module "styled-components" {
 			lg: string;
 			xl: string;
 			xxl: string;
+		};
+		borderRadius: {
+			sm: string;
+			md: string;
+			lg: string;
 		};
 	}
 }

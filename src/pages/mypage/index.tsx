@@ -1,4 +1,4 @@
-import { Input } from "@/components/common";
+import { Button, Input } from "@/components/common";
 import Modal from "@/components/common/Modal";
 import TextArea from "@/components/common/TextArea";
 import CustomSelect from "@/components/Select";
@@ -19,7 +19,7 @@ const MyPage: React.FC = () => {
 				]}
 			/>
 
-			<button onClick={() => setIsModalOpen(true)}>모달 열기</button>
+			<Button onClick={() => setIsModalOpen(true)}>모달 열기</Button>
 			<Modal
 				isOpen={isModalOpen}
 				title="정정 신청"

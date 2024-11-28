@@ -55,27 +55,3 @@ export const ButtonContainer = styled.div`
 	gap: 20px;
 	margin-top: 20px;
 `;
-
-export const Button = styled.button`
-	flex: 1;
-	padding: 10px 0;
-	border: none;
-	border-radius: 4px;
-	color: ${getColor("grayDark")};
-	font-size: ${getFontSize("md")};
-	font-weight: ${getFontWeight("medium")};
-	cursor: pointer;
-
-	&:hover {
-		background-color: ${getColor("grayDark")};
-		color: ${getColor("white")};
-	}
-
-	&:nth-child(2) {
-		background-color: ${getColor("primary")};
-		color: ${getColor("white")};
-		&:hover {
-			background-color: ${getColor("secondaryDark")};
-		}
-	}
-`;
