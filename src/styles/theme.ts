@@ -22,6 +22,9 @@ export const theme: DefaultTheme = {
 		white: "#FFFFFF",
 
 		dim: "rgba(0,0,0,0.7)",
+
+		primary_hover: "#027056",
+		white_hover: "#F3F4F6",
 	},
 
 	fontSize: {
@@ -45,6 +48,12 @@ export const theme: DefaultTheme = {
 		lg: "992px",
 		xl: "1280px",
 		xxl: "1440px",
+	},
+
+	borderRadius: {
+		sm: "6px",
+		md: "20px",
+		lg: "30px",
 	},
 };
 
@@ -76,3 +85,7 @@ export const getFontWeight = (key: keyof DefaultTheme["fontWeight"]) =>
 // theme의 breakpoints 부분 가져오는 함수
 export const getBreakPoints = (key: keyof DefaultTheme["breakpoints"]) =>
 	getThemeValue("breakpoints", key);
+
+// theme의 borderRadius 부분 가져오는 함수
+export const getBorderRadius = (key: keyof DefaultTheme["borderRadius"]) =>
+	getThemeValue("borderRadius", key);
