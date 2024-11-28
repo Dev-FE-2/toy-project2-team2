@@ -8,6 +8,7 @@ import {
 	SelectContainer,
 	SelectedValue,
 } from "./Select.styled";
+import DownArrow from "@/assets/img/down_arrow_icon.svg?react";
 
 interface SelectProps {
 	label?: string;
@@ -36,7 +37,9 @@ const Select: React.FC<SelectProps> = ({
 			{label && <Label>{label}</Label>}
 			<SelectBox isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
 				<SelectedValue>{selectedValue || placeholder}</SelectedValue>
-				<DownIcon isOpen={isOpen}>∨</DownIcon>
+				<DownIcon isOpen={isOpen}>
+					<DownArrow width="16" height="16" fill="#000" />
+				</DownIcon>
 				{isOpen && (
 					<Options>
 						{options.map((option) => (

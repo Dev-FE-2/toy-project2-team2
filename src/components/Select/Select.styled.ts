@@ -35,8 +35,11 @@ export const SelectedValue = styled.div`
 
 export const DownIcon = styled.span<{ isOpen: boolean }>`
 	position: absolute;
-	right: 10px;
-	top: 30%;
+	right: 15px;
+	top: 50%;
+	transform: translateY(-50%)
+		rotate(${({ isOpen }) => (isOpen ? "180deg" : "0")});
+	transition: transform 0.2s ease;
 `;
 
 export const Options = styled.ul`
