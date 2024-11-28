@@ -51,7 +51,7 @@ export const ModalContent = styled.div`
 
 export const ButtonContainer = styled.div`
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	gap: 20px;
 	margin-top: 20px;
 `;
