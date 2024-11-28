@@ -1,15 +1,21 @@
 import React from "react";
 import { StyledButton } from "./Button.styled";
-import { ButtonProps } from "../../../types/compontents/button";
+import { ButtonProps } from "@/types/compontents/button";
 
 const Button = ({
 	children,
 	buttonType = "primary",
+	size = "regular",
 	onClick,
 	disabled,
 }: ButtonProps) => {
 	return (
-		<StyledButton buttonType={buttonType} onClick={onClick} disabled={disabled}>
+		<StyledButton
+			buttonType={buttonType}
+			size={size}
+			onClick={onClick}
+			disabled={disabled}
+		>
 			{children}
 		</StyledButton>
 	);
