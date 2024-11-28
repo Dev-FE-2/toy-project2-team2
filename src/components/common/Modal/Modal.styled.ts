@@ -4,7 +4,7 @@ import {
 	getFontSize,
 	getFontWeight,
 	getBorderRadius,
-} from "../../../styles/theme";
+} from "@/styles/theme";
 export const ModalOverlay = styled.div`
 	position: fixed;
 	top: 0;
