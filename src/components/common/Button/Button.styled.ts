@@ -12,6 +12,14 @@ export const StyledButton = styled.button<{
 	buttonType: ButtonType;
 	size: ButtonSize;
 }>`
+	padding: 13px 28px;
+	font-size: ${getFontSize("md")};
+	font-weight: ${getFontWeight("bold")};
+	cursor: ${(props) => (props.disabled ? "default" : "pointer")};
+	width: ${(props) => (props.size === "regular" ? "400px" : "190px")};
+	border: ${(props) =>
+		props.buttonType === "white" ? "1px solid #DFE4EA" : "none"};
+	border-radius: ${getBorderRadius("sm")};
 	background-color: ${(props) =>
 		props.disabled
 			? getColor("grayWhite")
@@ -22,21 +30,12 @@ export const StyledButton = styled.button<{
 					: props.buttonType === "danger"
 						? getColor("danger")
 						: getColor("white")};
-	border: ${(props) =>
-		props.buttonType === "white" ? `1px solid #DFE4EA` : "none"};
-	border-radius: ${getBorderRadius("sm")};
-	width: ${(props) => (props.size === "regular" ? "400px" : "190px")};
 	color: ${(props) =>
 		props.disabled
 			? getColor("grayDark")
 			: props.buttonType === "white"
 				? getColor("secondaryDark")
 				: getColor("white")};
-	padding: 13px 28px;
-	font-size: ${getFontSize("md")};
-	font-weight: ${getFontWeight("bold")};
-	cursor: ${(props) => (props.disabled ? "default" : "pointer")};
-
 
 	&:hover {
 		background-color: ${(props) =>

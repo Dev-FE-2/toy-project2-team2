@@ -1,3 +1,4 @@
+import { Button } from "@/components/common";
 import Modal from "@/components/common/Modal";
 import React, { useState } from "react";
 
@@ -7,7 +8,7 @@ const HomePage: React.FC = () => {
 	return (
 		<div>
 			HOME
-			<button onClick={() => setIsModalOpen(true)}>모달 열기</button>
+			<Button onClick={() => setIsModalOpen(true)}>모달 열기</Button>
 			<Modal
 				isOpen={isModalOpen}
 				title="정정 신청"

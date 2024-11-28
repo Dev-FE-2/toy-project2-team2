@@ -7,8 +7,8 @@ import {
 	ModalHeader,
 	ModalContent,
 	ButtonContainer,
-	Button,
 } from "./Modal.styled";
+import Button from "../Button";
 
 interface ModalProps {
 	isOpen: boolean;
@@ -41,8 +41,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, title, onClose, children }) => {
 					</ModalHeader>
 					<ModalContent>{children}</ModalContent>
 					<ButtonContainer>
-						<Button onClick={onClose}>취소</Button>
-						<Button onClick={onClose}>확인</Button>
+						<Button buttonType={"white"} size={"small"} onClick={onClose}>
+							취소
+						</Button>
+						<Button size={"small"} onClick={onClose}>
+							확인
+						</Button>
 					</ButtonContainer>
 				</ModalBox>
 			</ModalContainer>
