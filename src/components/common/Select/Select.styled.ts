@@ -1,0 +1,73 @@
+import styled from "styled-components";
+import {
+	getBorderRadius,
+	getColor,
+	getFontSize,
+	getFontWeight,
+} from "@/styles/theme";
+
+export const SelectContainer = styled.div`
+	width: 350px;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+`;
+
+export const Label = styled.label`
+	font-size: ${getFontSize("md")};
+	font-weight: ${getFontWeight("medium")};
+	color: ${getColor("secondaryDark")};
+`;
+export const SelectBox = styled.div<{ isOpen: boolean; readOnly?: boolean }>`
+	position: relative;
+	padding: 10px;
+	font-size: ${getFontSize("md")};
+	border: 2px solid
+		${({ isOpen, readOnly }) =>
+			getColor(readOnly ? "grayLight" : isOpen ? "primary" : "grayLight")};
+	border-radius: ${getBorderRadius("sm")};
+
+	&:hover {
+		border-color: ${({ readOnly }) =>
+			getColor(readOnly ? "grayLight" : "primary")};
+	}
+`;
+export const SelectedValue = styled.div`
+	font-size: ${getFontSize("md")};
+	font-weight: ${getFontWeight("regular")};
+`;
+
+export const DownIcon = styled.span<{ isOpen: boolean }>`
+	position: absolute;
+	right: 15px;
+	top: 50%;
+	transform: translateY(-50%)
+		rotate(${({ isOpen }) => (isOpen ? "180deg" : "0")});
+	transition: transform 0.2s ease;
+`;
+
+export const Options = styled.ul`
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100%;
+	background-color: ${getColor("white")};
+	border: 1px solid ${getColor("grayLight")};
+	border-radius: ${getBorderRadius("sm")};
+	margin: 4px 0 0;
+	list-style: none;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	z-index: 1000;
+`;
+
+export const Option = styled.li<{ readOnly?: boolean }>`
+	padding: 10px;
+	font-size: ${getFontSize("md")};
+	font-weight: ${getFontWeight("regular")};
+
+	&:hover {
+		background-color: ${({ readOnly }) =>
+			getColor(readOnly ? "grayLight" : "grayLight")};
+	}
+`;
