@@ -50,4 +50,5 @@ export const StyledButton = styled.button<{
 				: props.buttonType === "primary"
 					? getColor("white")
 					: getColor("secondaryDark")};
+	}
 `;

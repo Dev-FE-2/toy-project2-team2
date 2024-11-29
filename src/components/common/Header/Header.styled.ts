@@ -3,6 +3,10 @@ import { NavLink as RouterNavLink } from "react-router-dom";
 import { getColor, getFontWeight, getFontSize } from "../../../styles/theme";
 
 export const HeaderContainer = styled.header`
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -31,8 +35,8 @@ export const Nav = styled.nav`
 
 export const NavLink = styled(RouterNavLink)`
 	text-decoration: none;
-	color:  ${getColor("grayDark")};
-	font-weight:  ${getFontWeight("medium")};;
+	color: ${getColor("grayDark")};
+	font-weight: ${getFontWeight("medium")};
 
 	&:hover {
 		color: ${getColor("primary")};
@@ -41,6 +45,7 @@ export const NavLink = styled(RouterNavLink)`
 	&.active {
 		color: ${getColor("secondaryDark")};
 		font-weight: ${getFontWeight("bold")};
+	}
 `;
 
 export const ProfileContainer = styled.div`
