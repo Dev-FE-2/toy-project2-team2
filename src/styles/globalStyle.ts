@@ -24,12 +24,6 @@ const GlobalStyle = createGlobalStyle`
     color: ${getColor("secondaryDark")};
   }
 
-  .flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
   // === 폰트 설정 === //
   @font-face {
     font-family: 'Pretendard';

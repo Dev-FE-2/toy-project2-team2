@@ -3,6 +3,10 @@ import { NavLink as RouterNavLink } from "react-router-dom";
 import { getColor, getFontWeight, getFontSize } from "../../../styles/theme";
 
 export const HeaderContainer = styled.header`
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
