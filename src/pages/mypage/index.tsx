@@ -1,7 +1,7 @@
 import { Button, Input } from "@/components/common";
 import Modal from "@/components/common/Modal";
 import TextArea from "@/components/common/TextArea";
-import CustomSelect from "@/components/Select";
+import CustomSelect from "@/components/common/Select";
 import React, { useState } from "react";
 
 const MyPage: React.FC = () => {

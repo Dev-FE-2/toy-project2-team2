@@ -31,8 +31,8 @@ export const Nav = styled.nav`
 
 export const NavLink = styled(RouterNavLink)`
 	text-decoration: none;
-	color:  ${getColor("grayDark")};
-	font-weight:  ${getFontWeight("medium")};;
+	color: ${getColor("grayDark")};
+	font-weight: ${getFontWeight("medium")};
 
 	&:hover {
 		color: ${getColor("primary")};
@@ -41,6 +41,7 @@ export const NavLink = styled(RouterNavLink)`
 	&.active {
 		color: ${getColor("secondaryDark")};
 		font-weight: ${getFontWeight("bold")};
+	}
 `;
 
 export const ProfileContainer = styled.div`
