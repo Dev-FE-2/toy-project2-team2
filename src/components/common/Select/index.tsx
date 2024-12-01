@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
 	DownIcon,
 	Label,
@@ -26,6 +26,24 @@ const Select: React.FC<SelectProps> = ({
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedValue, setSelectedValue] = useState(value);
+	const selectRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (
+				selectRef.current &&
+				!selectRef.current.contains(event.target as Node)
+			) {
+				setIsOpen(false);
+			}
+		};
+
+		document.addEventListener("mousedown", handleClickOutside);
+
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, []);
 
 	const handleOptionClick = (value: string) => {
 		setSelectedValue(value);
@@ -33,7 +51,7 @@ const Select: React.FC<SelectProps> = ({
 	};
 
 	return (
-		<SelectContainer>
+		<SelectContainer ref={selectRef}>
 			{label && <Label>{label}</Label>}
 			<SelectBox isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
 				<SelectedValue>{selectedValue || placeholder}</SelectedValue>

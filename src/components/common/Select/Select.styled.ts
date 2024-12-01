@@ -19,18 +19,16 @@ export const Label = styled.label`
 	font-weight: ${getFontWeight("medium")};
 	color: ${getColor("secondaryDark")};
 `;
-export const SelectBox = styled.div<{ isOpen: boolean; readOnly?: boolean }>`
+export const SelectBox = styled.div<{ isOpen: boolean }>`
 	position: relative;
 	padding: 10px;
 	font-size: ${getFontSize("md")};
 	border: 2px solid
-		${({ isOpen, readOnly }) =>
-			getColor(readOnly ? "grayLight" : isOpen ? "primary" : "grayLight")};
+		${({ isOpen }) => getColor(isOpen ? "primary" : "grayLight")};
 	border-radius: ${getBorderRadius("sm")};
 
 	&:hover {
-		border-color: ${({ readOnly }) =>
-			getColor(readOnly ? "grayLight" : "primary")};
+		border-color: ${getColor("primary")};
 	}
 `;
 export const SelectedValue = styled.div`
@@ -55,7 +53,7 @@ export const Options = styled.ul`
 	background-color: ${getColor("white")};
 	border: 1px solid ${getColor("grayLight")};
 	border-radius: ${getBorderRadius("sm")};
-	margin: 4px 0 0;
+	margin: 2px 0 0;
 	list-style: none;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	z-index: 1000;
@@ -67,7 +65,6 @@ export const Option = styled.li<{ readOnly?: boolean }>`
 	font-weight: ${getFontWeight("regular")};
 
 	&:hover {
-		background-color: ${({ readOnly }) =>
-			getColor(readOnly ? "grayLight" : "grayLight")};
+		background-color: ${getColor("grayLight")};
 	}
 `;
