@@ -36,7 +36,12 @@ export const InputBox = styled.input<{ isError: boolean }>`
 	${({ readOnly }) => getReadOnlyStyles(readOnly)};
 
 	&:focus {
-		border: 2px solid ${getColor("primary")};
+		${({ readOnly }) =>
+			readOnly
+				? css`2px solid`
+				: css`
+						border: 2px solid ${getColor("primary")};
+					`}
 	}
 `;
 

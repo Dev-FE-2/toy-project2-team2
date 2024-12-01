@@ -40,7 +40,12 @@ export const TextAreaBox = styled.textarea<{ isError?: boolean }>`
 	min-height: 100px;
 
 	&:focus {
-		border: 2px solid ${getColor("primary")};
+		${({ readOnly }) =>
+			readOnly
+				? css`2px solid`
+				: css`
+						border: 2px solid ${getColor("primary")};
+					`}
 	}
 `;
 
