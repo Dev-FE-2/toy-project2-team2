@@ -53,9 +53,9 @@ const Select: React.FC<SelectProps> = ({
 	return (
 		<SelectContainer ref={selectRef}>
 			{label && <Label>{label}</Label>}
-			<SelectBox isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
+			<SelectBox $isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
 				<SelectedValue>{selectedValue || placeholder}</SelectedValue>
-				<DownIcon isOpen={isOpen}>
+				<DownIcon $isOpen={isOpen}>
 					<DownArrow width="16" height="16" fill="#000" />
 				</DownIcon>
 				{isOpen && (

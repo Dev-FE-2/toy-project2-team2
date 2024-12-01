@@ -19,12 +19,12 @@ export const Label = styled.label`
 	font-weight: ${getFontWeight("medium")};
 	color: ${getColor("secondaryDark")};
 `;
-export const SelectBox = styled.div<{ isOpen: boolean }>`
+export const SelectBox = styled.div<{ $isOpen: boolean }>`
 	position: relative;
 	padding: 10px;
 	font-size: ${getFontSize("md")};
 	border: 2px solid
-		${({ isOpen }) => getColor(isOpen ? "primary" : "grayLight")};
+		${({ $isOpen }) => getColor($isOpen ? "primary" : "grayLight")};
 	border-radius: ${getBorderRadius("sm")};
 
 	&:hover {
@@ -36,12 +36,12 @@ export const SelectedValue = styled.div`
 	font-weight: ${getFontWeight("regular")};
 `;
 
-export const DownIcon = styled.span<{ isOpen: boolean }>`
+export const DownIcon = styled.span<{ $isOpen: boolean }>`
 	position: absolute;
 	right: 15px;
 	top: 50%;
 	transform: translateY(-50%)
-		rotate(${({ isOpen }) => (isOpen ? "180deg" : "0")});
+		rotate(${({ $isOpen }) => ($isOpen ? "180deg" : "0")});
 	transition: transform 0.2s ease;
 `;
 

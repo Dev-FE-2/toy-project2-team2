@@ -27,7 +27,7 @@ const Input: React.FC<InputProps> = ({
 				value={value}
 				onChange={onChange}
 				type={type}
-				isError={!!error}
+				$isError={!!error}
 				readOnly={readOnly}
 			/>
 			{error && <ErrorMessage>{error}</ErrorMessage>}
