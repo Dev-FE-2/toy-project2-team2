@@ -1,4 +1,3 @@
-import React from "react";
 import {
 	HeaderContainer,
 	LeftContainer,
@@ -19,7 +18,7 @@ interface User {
 	position: string;
 }
 
-const Header: React.FC = () => {
+const Header = () => {
 	const user: User = { name: "홍길동", team: "디자인팀", position: "사원" };
 	return (
 		<HeaderContainer>

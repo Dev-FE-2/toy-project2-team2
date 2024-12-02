@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
 	DownIcon,
 	Label,
@@ -15,17 +15,34 @@ interface SelectProps {
 	options: { value: string; label: string }[];
 	placeholder?: string;
 	value?: string;
-	onChange?: (value: string) => void;
 }
 
-const Select: React.FC<SelectProps> = ({
+const Select = ({
 	label,
 	options,
 	placeholder = "Select",
 	value,
-}) => {
+}: SelectProps) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedValue, setSelectedValue] = useState(value);
+	const selectRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (
+				selectRef.current &&
+				!selectRef.current.contains(event.target as Node)
+			) {
+				setIsOpen(false);
+			}
+		};
+
+		document.addEventListener("mousedown", handleClickOutside);
+
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, [selectRef]);
 
 	const handleOptionClick = (value: string) => {
 		setSelectedValue(value);
@@ -33,11 +50,11 @@ const Select: React.FC<SelectProps> = ({
 	};
 
 	return (
-		<SelectContainer>
+		<SelectContainer ref={selectRef}>
 			{label && <Label>{label}</Label>}
-			<SelectBox isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
+			<SelectBox $isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
 				<SelectedValue>{selectedValue || placeholder}</SelectedValue>
-				<DownIcon isOpen={isOpen}>
+				<DownIcon $isOpen={isOpen}>
 					<DownArrow width="16" height="16" fill="#000" />
 				</DownIcon>
 				{isOpen && (
