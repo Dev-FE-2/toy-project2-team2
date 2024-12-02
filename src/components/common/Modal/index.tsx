@@ -17,7 +17,7 @@ interface ModalProps {
 	children: React.ReactNode;
 }
 
-const Modal: React.FC<ModalProps> = ({ isOpen, title, onClose, children }) => {
+const Modal = ({ isOpen, title, onClose, children }: ModalProps) => {
 	useEffect(() => {
 		const preventGoBack = () => {
 			history.go(1);

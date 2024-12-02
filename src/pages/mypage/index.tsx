@@ -2,9 +2,9 @@ import { Button, Input } from "@/components/common";
 import Modal from "@/components/common/Modal";
 import TextArea from "@/components/common/TextArea";
 import CustomSelect from "@/components/common/Select";
-import React, { useState } from "react";
+import { useState } from "react";
 
-const MyPage: React.FC = () => {
+const MyPage = () => {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	return (
