@@ -8,7 +8,7 @@ export const MainWrapper = styled.div`
 `;
 
 export const Main = styled.main`
-	padding-top: 91px;
+	padding-top: 102px;
 	width: 100%;
 `;
 

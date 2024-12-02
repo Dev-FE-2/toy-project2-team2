@@ -81,4 +81,11 @@ export const ProfileInfo = styled.div`
 	align-items: center;
 	font-size: ${getFontSize("sm")};
 	line-height: 1.6;
+	button {
+		width: 65px;
+		height: 26px;
+		font-size: ${getFontSize("xs")};
+		font-weight: ${getFontWeight("regular")};
+		padding: 0;
+	}
 `;

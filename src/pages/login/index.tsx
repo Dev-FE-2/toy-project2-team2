@@ -32,6 +32,7 @@ const LoginPage = () => {
 			.then(() => {
 				setIsIdError(false);
 				setIsPasswordError(false);
+				console.log("로그인 성공");
 			})
 			.catch((e) => {
 				switch (e.code) {
