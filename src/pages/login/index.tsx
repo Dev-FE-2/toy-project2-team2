@@ -10,6 +10,7 @@ import {
 import { Button, Input } from "@/components/common";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase";
+import { useNavigate } from "react-router";
 
 const LoginPage = () => {
 	const [email, setEmail] = useState("");
@@ -17,6 +18,7 @@ const LoginPage = () => {
 	const [isIdError, setIsIdError] = useState(false);
 	const [isPasswordError, setIsPasswordError] = useState(false);
 
+	const navigate = useNavigate();
 	const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
 		setEmail(e.target.value);
@@ -32,7 +34,7 @@ const LoginPage = () => {
 			.then(() => {
 				setIsIdError(false);
 				setIsPasswordError(false);
-				console.log("로그인 성공");
+				navigate("/");
 			})
 			.catch((e) => {
 				switch (e.code) {
