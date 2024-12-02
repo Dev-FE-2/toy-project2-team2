@@ -15,7 +15,6 @@ interface SelectProps {
 	options: { value: string; label: string }[];
 	placeholder?: string;
 	value?: string;
-	onChange?: (value: string) => void;
 }
 
 const Select = ({
@@ -43,7 +42,7 @@ const Select = ({
 		return () => {
 			document.removeEventListener("mousedown", handleClickOutside);
 		};
-	}, []);
+	}, [selectRef]);
 
 	const handleOptionClick = (value: string) => {
 		setSelectedValue(value);
