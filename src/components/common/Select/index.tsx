@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
 	DownIcon,
 	Label,
@@ -18,12 +18,12 @@ interface SelectProps {
 	onChange?: (value: string) => void;
 }
 
-const Select: React.FC<SelectProps> = ({
+const Select = ({
 	label,
 	options,
 	placeholder = "Select",
 	value,
-}) => {
+}: SelectProps) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedValue, setSelectedValue] = useState(value);
 	const selectRef = useRef<HTMLDivElement>(null);

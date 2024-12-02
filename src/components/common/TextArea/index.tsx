@@ -15,14 +15,14 @@ interface TextAreaProps {
 	readOnly?: boolean;
 }
 
-const TextArea: React.FC<TextAreaProps> = ({
+const TextArea = ({
 	label,
 	error,
 	placeholder,
 	value,
 	onChange,
 	readOnly,
-}) => {
+}: TextAreaProps) => {
 	return (
 		<TextAreaContainer>
 			{label && <Label>{label}</Label>}
