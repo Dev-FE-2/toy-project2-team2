@@ -11,6 +11,8 @@ import {
 } from "./Header.styled";
 import profileImage from "@/assets/img/profile.png";
 import logoImage from "@/assets/img/logo.png";
+import Button from "../Button";
+import { auth } from "@/firebase";
 
 interface User {
 	name: string;
@@ -20,6 +22,10 @@ interface User {
 
 const Header = () => {
 	const user: User = { name: "홍길동", team: "디자인팀", position: "사원" };
+	const logOut = () => {
+		auth.signOut();
+		console.log(auth.currentUser);
+	};
 	return (
 		<HeaderContainer>
 			<LeftContainer>
@@ -39,6 +45,9 @@ const Header = () => {
 				<ProfileInfo>
 					<div>{user.name}</div>
 					<div>{`${user.team} / ${user.position}`}</div>
+					<Button size="small" onClick={logOut}>
+						로그아웃
+					</Button>
 				</ProfileInfo>
 
 				<ProfileImageContainer>
