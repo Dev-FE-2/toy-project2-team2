@@ -13,15 +13,17 @@ import profileImage from "@/assets/img/profile.png";
 import logoImage from "@/assets/img/logo.png";
 import Button from "../Button";
 import { auth } from "@/firebase";
+import { useSelector } from "react-redux";
+import { RootState } from "@/types/store";
 
-interface User {
-	name: string;
-	team: string;
-	position: string;
-}
+// interface User {
+// 	name: string;
+// 	team: string;
+// 	position: string;
+// }
 
 const Header = () => {
-	const user: User = { name: "홍길동", team: "디자인팀", position: "사원" };
+	const user = useSelector((state: RootState) => state.auth.user);
 	const logOut = () => {
 		auth.signOut();
 		console.log(auth.currentUser);
@@ -43,8 +45,8 @@ const Header = () => {
 
 			<ProfileContainer>
 				<ProfileInfo>
-					<div>{user.name}</div>
-					<div>{`${user.team} / ${user.position}`}</div>
+					<div>{user ? user.displayName : "정보없음"}</div>
+					<div>{`${user ? user.team : "정보없음"} / ${user ? user.position : "정보없음"}`}</div>
 					<Button size="small" onClick={logOut}>
 						로그아웃
 					</Button>
