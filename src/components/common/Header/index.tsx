@@ -34,7 +34,7 @@ const Header = () => {
 				</NavLink>
 
 				<Nav>
-					<NavLink to="/">내 일정</NavLink>
+					<NavLink to="/schedule">내 일정</NavLink>
 					<NavLink to="/pay">급여내역 조회</NavLink>
 					<NavLink to="/pay-correction">급여 정정 신청</NavLink>
 					<NavLink to="/mypage">마이페이지</NavLink>
