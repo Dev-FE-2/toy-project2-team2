@@ -1,6 +1,6 @@
 import { setLoading, setUserInfo } from "@/store/slices/userInfoSlice";
 import { AppDispatch } from "@/types/store";
-import { getUserData } from "@/services/getUserData";
+import { getUserData } from "@/services/getDatas";
 
 export const listenAuthChanges = async (dispatch: AppDispatch) => {
 	dispatch(setLoading(true));
