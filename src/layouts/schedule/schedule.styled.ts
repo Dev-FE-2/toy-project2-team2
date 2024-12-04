@@ -8,7 +8,7 @@ export const ScheduleWrapper = styled.div`
 `;
 
 export const Main = styled.main`
-	padding-top: 102px;
+	padding: 102px 0 30px;
 	width: 100%;
 `;
 
