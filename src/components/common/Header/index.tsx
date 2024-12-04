@@ -13,12 +13,7 @@ import profileImage from "@/assets/img/profile.png";
 import logoImage from "@/assets/img/logo.png";
 import Button from "../Button";
 import { auth } from "@/firebase";
-
-interface User {
-	name: string;
-	team: string;
-	position: string;
-}
+import { User } from "@/types/components/header";
 
 const Header = () => {
 	const user: User = { name: "홍길동", team: "디자인팀", position: "사원" };

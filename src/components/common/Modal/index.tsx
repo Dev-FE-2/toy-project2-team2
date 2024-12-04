@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { createPortal } from "react-dom";
+import Button from "../Button";
+import { ModalProps } from "@/types/components/modal";
 import {
 	ModalOverlay,
 	ModalContainer,
@@ -8,14 +10,6 @@ import {
 	ModalContent,
 	ButtonContainer,
 } from "./Modal.styled";
-import Button from "../Button";
-
-interface ModalProps {
-	isOpen: boolean;
-	title: string;
-	onClose: () => void;
-	children: React.ReactNode;
-}
 
 const Modal = ({ isOpen, title, onClose, children }: ModalProps) => {
 	useEffect(() => {
@@ -51,7 +45,7 @@ const Modal = ({ isOpen, title, onClose, children }: ModalProps) => {
 				</ModalBox>
 			</ModalContainer>
 		</ModalOverlay>,
-		document.getElementById("modal")!, // 'modal' 컨테이너로 Portal 렌더링
+		document.getElementById("modal")!,
 	);
 };
 
