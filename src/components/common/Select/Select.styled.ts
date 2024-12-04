@@ -7,7 +7,6 @@ import {
 } from "@/styles/theme";
 
 export const SelectContainer = styled.div`
-	width: 350px;
 	padding: 10px;
 	display: flex;
 	flex-direction: column;
@@ -18,6 +17,7 @@ export const Label = styled.label`
 	font-size: ${getFontSize("md")};
 	font-weight: ${getFontWeight("medium")};
 	color: ${getColor("secondaryDark")};
+	text-align: start;
 `;
 export const SelectBox = styled.div<{ $isOpen: boolean }>`
 	position: relative;
@@ -63,6 +63,7 @@ export const Option = styled.li<{ readOnly?: boolean }>`
 	padding: 10px;
 	font-size: ${getFontSize("md")};
 	font-weight: ${getFontWeight("regular")};
+	cursor: pointer;
 
 	&:hover {
 		background-color: ${getColor("grayLight")};

@@ -13,7 +13,6 @@ const getReadOnlyStyles = (readOnly?: boolean) => css`
 `;
 
 export const TextAreaContainer = styled.div`
-	width: 350px;
 	padding: 10px;
 	display: flex;
 	flex-direction: column;
@@ -24,6 +23,7 @@ export const Label = styled.label`
 	font-size: ${getFontSize("md")};
 	font-weight: ${getFontWeight("medium")};
 	color: ${getColor("secondaryDark")};
+	text-align: start;
 `;
 
 export const TextAreaBox = styled.textarea<{ $isError?: boolean }>`
@@ -35,9 +35,8 @@ export const TextAreaBox = styled.textarea<{ $isError?: boolean }>`
 	border-radius: ${getBorderRadius("sm")};
 	outline: none;
 	${({ readOnly }) => getReadOnlyStyles(readOnly)};
-
 	resize: vertical;
-	min-height: 100px;
+	min-height: 150px;
 
 	&:focus {
 		${({ readOnly }) =>
