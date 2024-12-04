@@ -26,12 +26,12 @@ export const Label = styled.label`
 	color: ${getColor("secondaryDark")};
 `;
 
-export const TextAreaBox = styled.textarea<{ isError?: boolean }>`
+export const TextAreaBox = styled.textarea<{ $isError?: boolean }>`
 	padding: 10px;
 	font-size: ${getFontSize("md")};
 	font-family: inherit;
 	border: 1px solid
-		${({ isError }) => getColor(isError ? "danger" : "grayLight")};
+		${({ $isError }) => getColor($isError ? "danger" : "grayLight")};
 	border-radius: ${getBorderRadius("sm")};
 	outline: none;
 	${({ readOnly }) => getReadOnlyStyles(readOnly)};
@@ -40,7 +40,12 @@ export const TextAreaBox = styled.textarea<{ isError?: boolean }>`
 	min-height: 100px;
 
 	&:focus {
-		border: 2px solid ${getColor("primary")};
+		${({ readOnly }) =>
+			readOnly
+				? css`2px solid`
+				: css`
+						border: 2px solid ${getColor("primary")};
+					`}
 	}
 `;
 

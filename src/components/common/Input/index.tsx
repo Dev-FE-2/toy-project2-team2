@@ -10,7 +10,7 @@ interface InputProps {
 	type?: string;
 	readOnly?: boolean;
 }
-const Input: React.FC<InputProps> = ({
+const Input = ({
 	label,
 	error,
 	placeholder,
@@ -18,7 +18,7 @@ const Input: React.FC<InputProps> = ({
 	onChange,
 	type,
 	readOnly,
-}) => {
+}: InputProps) => {
 	return (
 		<InputContainer>
 			{label && <Label>{label}</Label>}
@@ -27,7 +27,7 @@ const Input: React.FC<InputProps> = ({
 				value={value}
 				onChange={onChange}
 				type={type}
-				isError={!!error}
+				$isError={!!error}
 				readOnly={readOnly}
 			/>
 			{error && <ErrorMessage>{error}</ErrorMessage>}

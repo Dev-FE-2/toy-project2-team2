@@ -26,17 +26,22 @@ export const Label = styled.label`
 	color: ${getColor("secondaryDark")};
 `;
 
-export const InputBox = styled.input<{ isError: boolean }>`
+export const InputBox = styled.input<{ $isError: boolean }>`
 	padding: 10px;
 	font-size: ${getFontSize("md")};
 	border: 1px solid
-		${({ isError }) => getColor(isError ? "danger" : "grayLight")};
+		${({ $isError }) => getColor($isError ? "danger" : "grayLight")};
 	border-radius: ${getBorderRadius("sm")};
 	outline: none;
 	${({ readOnly }) => getReadOnlyStyles(readOnly)};
 
 	&:focus {
-		border: 2px solid ${getColor("primary")};
+		${({ readOnly }) =>
+			readOnly
+				? css`2px solid`
+				: css`
+						border: 2px solid ${getColor("primary")};
+					`}
 	}
 `;
 
