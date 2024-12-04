@@ -28,7 +28,7 @@ export const SectionTitle = styled.h2`
 	margin-bottom: 15px;
 `;
 
-export const ActualPayContainer = styled.div`
+export const ActualSalaryContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -45,13 +45,13 @@ export const RightContainer = styled.div`
 	align-items: center;
 `;
 
-export const ActualPayValue = styled.h1`
+export const ActualSalaryValue = styled.h1`
 	font-size: ${getFontSize("xl")};
 	color: #333;
 	padding-right: 30px;
 	font-weight: ${getFontWeight("medium")};
 `;
-export const PayButton = styled.button`
+export const SalaryButton = styled.button`
 	font-family: inherit;
 	padding: 8px 18px;
 	font-size: ${getFontSize("sm")};
