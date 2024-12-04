@@ -11,7 +11,7 @@ const Button = ({
 }: ButtonProps) => {
 	return (
 		<StyledButton
-			buttonType={buttonType}
+			$buttonType={buttonType}
 			size={size}
 			onClick={onClick}
 			disabled={disabled}
