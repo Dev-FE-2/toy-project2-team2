@@ -12,6 +12,7 @@ export const HeaderContainer = styled.header`
 	align-items: center;
 	padding: 15px 40px;
 	border-bottom: 1px solid ${getColor("secondaryDark")};
+	background-color: ${getColor("white")};
 `;
 
 export const LeftContainer = styled.div`
