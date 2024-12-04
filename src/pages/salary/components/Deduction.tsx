@@ -1,5 +1,6 @@
-import { Label, ListItem, Value } from "./Pay.styled";
-import Dot from "../../assets/img/dot_icon.svg?react";
+import { Label, ListItem, Value } from "../Salay.styled";
+import Dot from "@/assets/img/dot_icon.svg?react";
+
 const DeductionItem = ({ label, value }: { label: string; value: string }) => {
 	return (
 		<ListItem>
