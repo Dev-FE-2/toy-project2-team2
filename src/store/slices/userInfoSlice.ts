@@ -1,16 +1,6 @@
+import { AuthState, UserInfoState } from "@/types/store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface UserInfoState {
-	uid: string;
-	email: string | null;
-	displayName: string | null;
-	photoURL: string | null;
-}
-
-interface AuthState {
-	user: UserInfoState | null;
-	isLoading: boolean;
-}
 const initialState: AuthState = {
 	user: null,
 	isLoading: false,

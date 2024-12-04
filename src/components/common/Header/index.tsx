@@ -16,18 +16,13 @@ import { auth } from "@/firebase";
 import { useSelector } from "react-redux";
 import { RootState } from "@/types/store";
 
-// interface User {
-// 	name: string;
-// 	team: string;
-// 	position: string;
-// }
-
 const Header = () => {
 	const user = useSelector((state: RootState) => state.auth.user);
 	const logOut = () => {
 		auth.signOut();
 		console.log(auth.currentUser);
 	};
+
 	return (
 		<HeaderContainer>
 			<LeftContainer>
@@ -45,8 +40,10 @@ const Header = () => {
 
 			<ProfileContainer>
 				<ProfileInfo>
-					<div>{user ? user.displayName : "정보없음"}</div>
-					<div>{`${user ? user.team : "정보없음"} / ${user ? user.position : "정보없음"}`}</div>
+					<div>{user?.name}</div>
+					<div>
+						{user?.team} / {user?.grade}
+					</div>
 					<Button size="small" onClick={logOut}>
 						로그아웃
 					</Button>
