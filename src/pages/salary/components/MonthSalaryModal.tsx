@@ -2,7 +2,7 @@ import { useState } from "react";
 import CustomSelect from "@/components/common/Select";
 import Modal from "@/components/common/Modal";
 import { yearlySalaryData } from "./mockdata";
-import { ListContainer, ListItem, Month, Salary } from "./monthSalary.styled";
+import { ListContainer, ListItem, Month, Salary } from "./MonthSalaryModal.styled";
 
 const MonthlySalaryModal = ({ isOpen, onClose }: any) => {
 	const data = yearlySalaryData;
