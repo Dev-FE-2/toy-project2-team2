@@ -1,10 +1,11 @@
-import React from "react";
+import Title from "@/components/Title";
 
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-type Props = {};
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const SalaryCorrectionPage = (props: Props) => {
-	return <div>SalaryCorrection</div>;
+const SalaryCorrectionPage = () => {
+	return (
+		<>
+			<Title title={"급여 정정 신청 내역"} />
+		</>
+	);
 };
 
 export default SalaryCorrectionPage;

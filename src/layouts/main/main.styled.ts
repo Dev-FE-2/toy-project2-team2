@@ -10,6 +10,7 @@ export const MainWrapper = styled.div`
 export const Main = styled.main`
 	padding: 102px 0 0;
 	width: 100%;
+	margin-top: 20px;
 `;
 
 export const MainContainer = styled.div`
