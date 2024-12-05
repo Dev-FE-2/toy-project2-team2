@@ -1,7 +1,7 @@
 import { useState } from "react";
-import CustomSelect from "@/components/common/Select";
-import Modal from "@/components/common/Modal";
-import { TextArea } from "@/components/common";
+import CustomSelect from "@/components/Select";
+import Modal from "@/components/Modal";
+import { TextArea } from "@/components";
 
 const CorrectionRequestModal = ({ isOpen, onClose }: any) => {
 	const correctionOptions = [

@@ -1,8 +1,13 @@
 import { useState } from "react";
-import CustomSelect from "@/components/common/Select";
-import Modal from "@/components/common/Modal";
+import CustomSelect from "@/components/Select";
+import Modal from "@/components/Modal";
 import { yearlySalaryData } from "./mockdata";
-import { ListContainer, ListItem, Month, Salary } from "./MonthSalaryModal.styled";
+import {
+	ListContainer,
+	ListItem,
+	Month,
+	Salary,
+} from "./MonthSalaryModal.styled";
 
 const MonthlySalaryModal = ({ isOpen, onClose }: any) => {
 	const data = yearlySalaryData;
@@ -12,20 +17,19 @@ const MonthlySalaryModal = ({ isOpen, onClose }: any) => {
 
 	return (
 		<Modal isOpen={isOpen} title="월별 급여" onClose={onClose}>
-
-				<CustomSelect
-					options={years.map((year) => ({ value: year, label: year }))}
-					value={selectedYear}
-					onChange={(value) => setSelectedYear(value)}
-				/>
-				<ListContainer>
-					{selectedYearData.map((data) => (
-						<ListItem key={data.month}>
-							<Month>{data.month}</Month>
-							<Salary>{data.salary.toLocaleString()}원</Salary>
-						</ListItem>
-					))}
-				</ListContainer>
+			<CustomSelect
+				options={years.map((year) => ({ value: year, label: year }))}
+				value={selectedYear}
+				onChange={(value) => setSelectedYear(value)}
+			/>
+			<ListContainer>
+				{selectedYearData.map((data) => (
+					<ListItem key={data.month}>
+						<Month>{data.month}</Month>
+						<Salary>{data.salary.toLocaleString()}원</Salary>
+					</ListItem>
+				))}
+			</ListContainer>
 		</Modal>
 	);
 };
