@@ -1,19 +1,10 @@
-import React from "react";
+import type { TextAreaProps } from "@/types/components/textarea";
 import {
 	TextAreaContainer,
 	Label,
 	ErrorMessage,
 	TextAreaBox,
 } from "./TextArea.styled";
-
-interface TextAreaProps {
-	label?: string;
-	error?: string;
-	placeholder?: string;
-	value?: string;
-	onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-	readOnly?: boolean;
-}
 
 const TextArea = ({
 	label,

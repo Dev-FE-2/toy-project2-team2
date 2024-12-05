@@ -18,6 +18,7 @@ import { RootState } from "@/types/store";
 
 const Header = () => {
 	const user = useSelector((state: RootState) => state.auth.user);
+
 	const logOut = () => {
 		auth.signOut();
 		console.log(auth.currentUser);
@@ -32,8 +33,8 @@ const Header = () => {
 
 				<Nav>
 					<NavLink to="/schedule">내 일정</NavLink>
-					<NavLink to="/pay">급여내역 조회</NavLink>
-					<NavLink to="/pay-correction">급여 정정 신청</NavLink>
+					<NavLink to="/salary">급여내역 조회</NavLink>
+					<NavLink to="/salary-correction">급여 정정 신청</NavLink>
 					<NavLink to="/mypage">마이페이지</NavLink>
 				</Nav>
 			</LeftContainer>

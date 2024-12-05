@@ -14,8 +14,8 @@ export const Main = styled.main`
 
 export const MainContainer = styled.div`
 	width: 100%;
-	max-width: 1480px;
-	padding: 0 20px;
-	margin: 0 auto;
+	max-width: 1200px;
+	padding: 0 30px;
+	margin: 20px auto 20px auto;
 	overflow: hidden;
 `;

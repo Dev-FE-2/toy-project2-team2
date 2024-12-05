@@ -1,6 +1,6 @@
 import React from "react";
 import { StyledButton } from "./Button.styled";
-import { ButtonProps } from "@/types/components/button";
+import type { ButtonProps } from "@/types/components/button";
 
 const Button = ({
 	children,
@@ -11,7 +11,7 @@ const Button = ({
 }: ButtonProps) => {
 	return (
 		<StyledButton
-			buttonType={buttonType}
+			$buttonType={buttonType}
 			size={size}
 			onClick={onClick}
 			disabled={disabled}
