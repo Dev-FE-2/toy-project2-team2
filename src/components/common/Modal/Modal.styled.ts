@@ -5,6 +5,7 @@ import {
 	getFontWeight,
 	getBorderRadius,
 } from "@/styles/theme";
+
 export const ModalOverlay = styled.div`
 	position: fixed;
 	top: 0;
@@ -12,7 +13,7 @@ export const ModalOverlay = styled.div`
 	width: 100%;
 	height: 100%;
 	background: ${getColor("dim")};
-	z-index: 999;
+	z-index: 1050;
 	display: flex;
 	justify-content: center;
 	align-items: center;

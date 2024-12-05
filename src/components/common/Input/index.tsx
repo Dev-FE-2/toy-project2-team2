@@ -1,15 +1,6 @@
-import React from "react";
 import { InputContainer, Label, InputBox, ErrorMessage } from "./Input.style";
+import type { InputProps } from "@/types/components/input";
 
-interface InputProps {
-	label?: string;
-	error?: string;
-	placeholder?: string;
-	value?: string;
-	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	type?: string;
-	readOnly?: boolean;
-}
 const Input = ({
 	label,
 	error,

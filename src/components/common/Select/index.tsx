@@ -1,4 +1,6 @@
 import { useState, useRef, useEffect } from "react";
+import DownArrow from "@/assets/img/down_arrow_icon.svg?react";
+import type { SelectProps } from "@/types/components/select";
 import {
 	DownIcon,
 	Label,
@@ -8,14 +10,6 @@ import {
 	SelectContainer,
 	SelectedValue,
 } from "./Select.styled";
-import DownArrow from "@/assets/img/down_arrow_icon.svg?react";
-
-interface SelectProps {
-	label?: string;
-	options: { value: string; label: string }[];
-	value?: string;
-	onChange?: (value: string) => void;
-}
 
 const Select = ({ label, options, value, onChange }: SelectProps) => {
 	const [isOpen, setIsOpen] = useState(false);
