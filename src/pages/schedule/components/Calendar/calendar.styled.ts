@@ -1,8 +1,8 @@
-import { flexCenter } from "@/styles/commonStyles";
+import { flexCenter } from "@/styles";
 import styled from "styled-components";
 import { getColor, getFontSize, getFontWeight } from "@styles/theme";
 
-const CalendarContainer = styled.div``;
+const CalendarContainer = styled.section``;
 
 const CalHeader = styled.div`
 	${flexCenter}
@@ -12,8 +12,6 @@ const CalHeader = styled.div`
 const CalButton = styled.button`
 	${flexCenter}
 	background: none;
-	border: none;
-	cursor: pointer;
 
 	&:hover > svg {
 		fill: ${getColor("primary_hover")};

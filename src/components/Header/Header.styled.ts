@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { NavLink as RouterNavLink } from "react-router-dom";
-import { getColor, getFontWeight, getFontSize } from "../../../styles/theme";
+import { getColor, getFontWeight, getFontSize } from "../../styles/theme";
 
 export const HeaderContainer = styled.header`
 	position: fixed;
