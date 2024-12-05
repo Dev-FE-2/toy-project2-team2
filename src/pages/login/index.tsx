@@ -7,7 +7,7 @@ import {
 	LoginHeader,
 	SignUpGuide,
 } from "./Login.styled";
-import { Button, Input } from "@/components/common";
+import { Button, Input } from "@/components";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase";
 import { useNavigate } from "react-router";
