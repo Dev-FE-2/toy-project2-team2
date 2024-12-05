@@ -1,4 +1,4 @@
-import { Button } from "@/components/common";
+import { Button } from "@/components";
 import { ImageBoxContianer, ImageCircle, UserImage } from "./ImageBox.styled";
 import profileImage from "@/assets/img/profile.png";
 
