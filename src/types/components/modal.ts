@@ -3,4 +3,6 @@ export interface ModalProps {
 	title: string;
 	onClose: () => void;
 	children: React.ReactNode;
+	confirmLabel?: string;
+	onConfirm?: () => void;
 }

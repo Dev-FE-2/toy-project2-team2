@@ -2,7 +2,7 @@ import { getBorderRadius, getColor, getFontSize } from "@/styles/theme";
 import styled from "styled-components";
 
 export const GraphWrapper = styled.div`
-	border: 1px solid #ddd;
+	border: 1px solid ${getColor("grayLight")};
 	border-radius: ${getBorderRadius("md")};
 	padding: 25px;
 	margin: 20px 0;
@@ -34,6 +34,5 @@ export const GraphLabel = styled.div`
 	display: flex;
 	justify-content: space-between;
 	font-size: ${getFontSize("sm")};
-	color: #888;
 	margin-top: 10px;
 `;

@@ -24,7 +24,7 @@ export const Section = styled.section`
 `;
 
 export const SectionTitle = styled.h2`
-	font-size: ${getFontSize("xl")};
+	font-size: 28px;
 	margin-bottom: 20px;
 `;
 
@@ -38,6 +38,8 @@ export const ActualSalaryContainer = styled.div`
 export const LeftContainer = styled.div`
 	display: flex;
 	align-items: center;
+	font-size: ${getFontSize("lg")};
+	color: ${getColor("secondary")};
 `;
 
 export const RightContainer = styled.div`
@@ -47,13 +49,12 @@ export const RightContainer = styled.div`
 
 export const ActualSalaryValue = styled.h1`
 	font-size: ${getFontSize("xl")};
-	color: #333;
 	padding-right: 30px;
-	font-weight: ${getFontWeight("medium")};
+	font-weight: ${getFontWeight("bold")};
 `;
 export const SalaryButton = styled.button`
 	font-family: inherit;
-	padding: 8px 18px;
+	padding: 10px 18px;
 	font-size: ${getFontSize("sm")};
 	color: white;
 	background-color: ${getColor("primary")};
@@ -84,7 +85,7 @@ export const TimeButton = styled.button`
 	cursor: pointer;
 
 	&:hover {
-		background-color: #dfe4ea;
+		background-color: ${getColor("grayLight")};
 	}
 `;
 export const Tooltip = styled.div`
@@ -95,14 +96,15 @@ export const Tooltip = styled.div`
 	background: white;
 	border: 1px solid #ddd;
 	border-radius: ${getBorderRadius("sm")};
-	font-size: ${getFontSize("xs")};
+	font-size: ${getFontSize("sm")};
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-	padding: 8px 16px;
-	width: 220px;
+	padding: 10px 16px;
+	width: 250px;
 	z-index: 10;
 	visibility: hidden;
 	opacity: 0;
 	transition: opacity 0.3s ease-in-out;
+
 	&::after {
 		position: absolute;
 		bottom: -5px;
@@ -110,7 +112,7 @@ export const Tooltip = styled.div`
 		transform: translateX(-50%);
 		border-width: 5px;
 		border-style: solid;
-		border-color: white transparent transparent transparent;
+		border-color: white transparent;
 	}
 `;
 export const TooltipRow = styled.div`
@@ -160,14 +162,14 @@ export const ListItem = styled.li`
 
 export const Label = styled.p`
 	margin: 0;
-	font-size: ${getFontSize("md")};
+	font-size: ${getFontSize("lg")};
 	color: ${getColor("secondary")};
 	padding-bottom: 5px;
 `;
 
 export const Value = styled.p`
 	margin: 0;
-	font-size: ${getFontSize("md")};
+	font-size: ${getFontSize("lg")};
 	margin-right: 10px;
 `;
 

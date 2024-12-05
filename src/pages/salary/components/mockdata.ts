@@ -1,4 +1,3 @@
-// 데이터 타입 정의
 export type SalaryData = {
 	month: string;
 	salary: number;
@@ -8,7 +7,6 @@ export type YearlySalaryData = {
 	[year: string]: SalaryData[];
 };
 
-// 데이터 정의
 export const yearlySalaryData: YearlySalaryData = {
 	"2024": [
 		{ month: "1월", salary: 3100000 },
