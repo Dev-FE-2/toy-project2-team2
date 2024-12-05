@@ -1,6 +1,6 @@
 import Dot from "@/assets/img/dot_icon.svg?react";
 import DeductionItem from "./Deduction";
-import { SalaryDetailsSectionProps } from "../types/SalaryDetailSection";
+import type { SalaryDetailsSectionProps } from "../types/SalaryDetailSection";
 import {
 	Section,
 	SectionHeader,

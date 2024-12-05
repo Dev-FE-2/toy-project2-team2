@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import Button from "../Button";
-import { ModalProps } from "@/types/components/modal";
+import type { ModalProps } from "@/types/components/modal";
 import {
 	ModalOverlay,
 	ModalContainer,

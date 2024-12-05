@@ -1,6 +1,6 @@
 import { Modal } from "@/components/common";
 import Dot from "@/assets/img/dot_icon.svg?react";
-import { SalarySectionProps } from "../types/SalarySection";
+import type { SalarySectionProps } from "../types/SalarySection";
 import {
 	Section,
 	SectionTitle,

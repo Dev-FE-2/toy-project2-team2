@@ -1,4 +1,4 @@
-import { TextAreaProps } from "@/types/components/textarea";
+import type { TextAreaProps } from "@/types/components/textarea";
 import {
 	TextAreaContainer,
 	Label,

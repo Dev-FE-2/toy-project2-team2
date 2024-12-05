@@ -1,5 +1,5 @@
 import { InputContainer, Label, InputBox, ErrorMessage } from "./Input.style";
-import { InputProps } from "@/types/components/input";
+import type { InputProps } from "@/types/components/input";
 
 const Input = ({
 	label,

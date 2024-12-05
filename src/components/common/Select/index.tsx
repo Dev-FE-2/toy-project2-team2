@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import DownArrow from "@/assets/img/down_arrow_icon.svg?react";
-import { SelectProps } from "@/types/components/select";
+import type { SelectProps } from "@/types/components/select";
 import {
 	DownIcon,
 	Label,
