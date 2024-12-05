@@ -183,7 +183,7 @@ export const SectionRow = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
-	gap: 20px;
+	gap: 50px;
 	margin-top: 20px;
 `;
 

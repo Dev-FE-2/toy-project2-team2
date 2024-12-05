@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const GraphWrapper = styled.div`
 	border: 1px solid ${getColor("grayLight")};
 	border-radius: ${getBorderRadius("md")};
-	padding: 25px;
+	padding: 20px 40px;
 	margin: 20px 0;
 `;
 
