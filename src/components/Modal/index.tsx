@@ -11,7 +11,14 @@ import {
 	ButtonContainer,
 } from "./Modal.styled";
 
-const Modal = ({ isOpen, title, onClose, children }: ModalProps) => {
+const Modal = ({
+	isOpen,
+	title,
+	onClose,
+	children,
+	confirmLabel = "확인",
+	onConfirm,
+}: ModalProps) => {
 	useEffect(() => {
 		const preventGoBack = () => {
 			history.go(1);
@@ -38,8 +45,8 @@ const Modal = ({ isOpen, title, onClose, children }: ModalProps) => {
 						<Button buttonType={"white"} size={"small"} onClick={onClose}>
 							취소
 						</Button>
-						<Button size={"small"} onClick={onClose}>
-							확인
+						<Button size={"small"} onClick={onConfirm || onClose}>
+							{confirmLabel}
 						</Button>
 					</ButtonContainer>
 				</ModalBox>

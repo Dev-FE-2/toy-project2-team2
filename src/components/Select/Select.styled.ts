@@ -7,7 +7,6 @@ import {
 } from "@/styles/theme";
 
 export const SelectContainer = styled.div`
-	width: 350px;
 	padding: 10px;
 	display: flex;
 	flex-direction: column;
@@ -18,6 +17,7 @@ export const Label = styled.label`
 	font-size: ${getFontSize("md")};
 	font-weight: ${getFontWeight("medium")};
 	color: ${getColor("secondaryDark")};
+	text-align: left;
 `;
 export const SelectBox = styled.div<{ $isOpen: boolean }>`
 	position: relative;
@@ -34,6 +34,8 @@ export const SelectBox = styled.div<{ $isOpen: boolean }>`
 export const SelectedValue = styled.div`
 	font-size: ${getFontSize("md")};
 	font-weight: ${getFontWeight("regular")};
+
+	text-align: left;
 `;
 
 export const DownIcon = styled.span<{ $isOpen: boolean }>`
@@ -57,12 +59,14 @@ export const Options = styled.ul`
 	list-style: none;
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	z-index: 1000;
+	text-align: left;
 `;
 
 export const Option = styled.li<{ readOnly?: boolean }>`
 	padding: 10px;
 	font-size: ${getFontSize("md")};
 	font-weight: ${getFontWeight("regular")};
+	cursor: pointer;
 
 	&:hover {
 		background-color: ${getColor("grayLight")};
