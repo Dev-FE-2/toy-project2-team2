@@ -11,12 +11,7 @@ import {
 	SelectedValue,
 } from "./Select.styled";
 
-const Select = ({
-	label,
-	options,
-	placeholder = "Select",
-	value,
-}: SelectProps) => {
+const Select = ({ label, options, value, onChange }: SelectProps) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedValue, setSelectedValue] = useState(value);
 	const selectRef = useRef<HTMLDivElement>(null);
@@ -40,6 +35,7 @@ const Select = ({
 
 	const handleOptionClick = (value: string) => {
 		setSelectedValue(value);
+		onChange?.(value);
 		setIsOpen(false);
 	};
 
@@ -47,7 +43,7 @@ const Select = ({
 		<SelectContainer ref={selectRef}>
 			{label && <Label>{label}</Label>}
 			<SelectBox $isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
-				<SelectedValue>{selectedValue || placeholder}</SelectedValue>
+				<SelectedValue>{selectedValue}</SelectedValue>
 				<DownIcon $isOpen={isOpen}>
 					<DownArrow width="16" height="16" fill="#000" />
 				</DownIcon>
