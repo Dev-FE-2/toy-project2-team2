@@ -1,5 +1,5 @@
 import CalendarContext from "@/context/CalendarContext";
-import { CalendarProps } from "@/types/components/calendar";
+import type { CalendarProps } from "../../types/calendar";
 import CalendarHeader from "./CalendarHeader";
 import Days from "./Days";
 import Dates from "./Dates";

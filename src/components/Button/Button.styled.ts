@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ButtonSize, ButtonType } from "@/types/components/button";
+import { ButtonSize, ButtonType } from "@/types";
 import {
 	getBorderRadius,
 	getColor,

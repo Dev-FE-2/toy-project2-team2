@@ -24,6 +24,11 @@ const GlobalStyle = createGlobalStyle`
     color: ${getColor("secondaryDark")};
   }
 
+  button {
+    border: none;
+    cursor: pointer;
+  }
+
   // === 폰트 설정 === //
   @font-face {
     font-family: 'Pretendard';
