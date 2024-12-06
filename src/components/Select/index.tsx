@@ -16,10 +16,19 @@ const Select = ({
 	options,
 	placeholder = "Select",
 	value,
+	width = "350px",
 }: SelectProps) => {
 	const [isOpen, setIsOpen] = useState(false);
-	const [selectedValue, setSelectedValue] = useState(value);
+	const [selectedValue, setSelectedValue] = useState(
+		value || options[0]?.value,
+	);
 	const selectRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		if (!value && options.length > 0) {
+			setSelectedValue(options[0]?.value);
+		}
+	}, [value, options]);
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
@@ -44,7 +53,7 @@ const Select = ({
 	};
 
 	return (
-		<SelectContainer ref={selectRef}>
+		<SelectContainer ref={selectRef} width={width}>
 			{label && <Label>{label}</Label>}
 			<SelectBox $isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
 				<SelectedValue>{selectedValue || placeholder}</SelectedValue>

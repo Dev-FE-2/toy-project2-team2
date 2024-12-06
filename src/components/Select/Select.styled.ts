@@ -6,8 +6,8 @@ import {
 	getFontWeight,
 } from "@/styles/theme";
 
-export const SelectContainer = styled.div`
-	width: 350px;
+export const SelectContainer = styled.div<{ width?: string }>`
+	width: ${(props) => props.width || "350px"};
 	padding: 10px;
 	display: flex;
 	flex-direction: column;
