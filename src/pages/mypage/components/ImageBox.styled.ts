@@ -1,7 +1,7 @@
 import { flexCenter } from "@/styles/commonStyles";
 import styled from "styled-components";
 
-export const ImageBoxContianer = styled.div`
+export const ImageBoxContainer = styled.div`
 	${flexCenter}
 	flex-direction: column;
 	button {
