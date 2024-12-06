@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Graph from "./components/Graph";
 import Header from "./components/Header";
 import SalarySection from "./components/SalarySection";
@@ -6,7 +5,6 @@ import SalaryDetailsSection from "./components/SalaryDetailSection";
 import { UserInfo, Text, Divider } from "./Salay.styled";
 
 const SalaryPage = () => {
-	const [isModalOpen, setIsModalOpen] = useState(false);
 	const deductionItems = [
 		{ label: " 국민연금", value: "157,500 원" },
 		{ label: " 건강보험", value: "124,100 원" },
@@ -25,10 +23,7 @@ const SalaryPage = () => {
 				<Text>급여 지급일 : 2024-11-15</Text>
 			</UserInfo>
 			<Divider />
-			<SalarySection
-				isModalOpen={isModalOpen}
-				setIsModalOpen={setIsModalOpen}
-			/>
+			<SalarySection />
 			<Graph salaryPercent={85} deductionPercent={15} />
 			<SalaryDetailsSection deductionItems={deductionItems} />
 		</>

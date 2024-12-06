@@ -27,7 +27,7 @@ export const ModalBox = styled.div`
 	background: ${getColor("white")};
 	border-radius: ${getBorderRadius("lg")};
 
-	padding: 40px;
+	padding: 30px;
 	height: auto;
 	max-height: 90vh;
 	box-shadow: 0 2px 10px ${getColor("grayDark")};
