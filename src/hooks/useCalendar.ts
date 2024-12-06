@@ -1,7 +1,6 @@
-import CalendarContext, {
-	CalendarContextProps,
-} from "@/context/CalendarContext";
 import { useContext } from "react";
+import CalendarContext from "@/contexts/CalendarContext";
+import { CalendarContextProps } from "@/types";
 
 const useCalendar = (): CalendarContextProps => {
 	const context = useContext(CalendarContext);

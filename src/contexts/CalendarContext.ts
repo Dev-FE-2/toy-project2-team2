@@ -1,10 +1,5 @@
 import { createContext } from "react";
-
-export interface CalendarContextProps {
-	currentDate: Date;
-	onPrevMonth: () => void;
-	onNextMonth: () => void;
-}
+import { CalendarContextProps } from "@/types";
 
 const CalendarContext = createContext<CalendarContextProps>({
 	currentDate: new Date(),
