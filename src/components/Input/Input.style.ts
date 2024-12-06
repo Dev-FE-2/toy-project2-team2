@@ -13,7 +13,6 @@ const getReadOnlyStyles = (readOnly?: boolean) => css`
 `;
 
 export const InputContainer = styled.div`
-	width: 350px;
 	padding: 10px;
 	display: flex;
 	flex-direction: column;
@@ -24,6 +23,7 @@ export const Label = styled.label`
 	font-size: ${getFontSize("md")};
 	font-weight: ${getFontWeight("medium")};
 	color: ${getColor("secondaryDark")};
+	text-align: left;
 `;
 
 export const InputBox = styled.input<{ $isError: boolean }>`
@@ -42,6 +42,28 @@ export const InputBox = styled.input<{ $isError: boolean }>`
 				: css`
 						border: 2px solid ${getColor("primary")};
 					`}
+	}
+
+	&[type="color"] {
+		padding: 0;
+		width: 34px;
+		height: 38px;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		background-color: transparent;
+		border: none;
+
+		cursor: pointer;
+
+		&:read-only {
+			pointer-events: none;
+		}
+
+		&::-webkit-color-swatch {
+			border-radius: 50%;
+			border: none;
+		}
 	}
 `;
 

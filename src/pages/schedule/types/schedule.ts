@@ -13,4 +13,5 @@ export interface DetailPanelProps {
 
 export interface DetailItemProps {
 	detailData: ScheduleData;
+	onItemClick: (isOpen: boolean) => void;
 }

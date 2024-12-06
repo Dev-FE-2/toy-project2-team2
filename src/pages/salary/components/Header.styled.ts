@@ -1,5 +1,10 @@
 import styled from "styled-components";
-import { getFontSize, getFontWeight, getBorderRadius } from "@/styles/theme";
+import {
+	getFontSize,
+	getFontWeight,
+	getBorderRadius,
+	getColor,
+} from "@/styles/theme";
 
 export const HeaderContainer = styled.div`
 	display: flex;
@@ -41,7 +46,7 @@ export const MonthButton = styled.button`
 	cursor: pointer;
 
 	&:hover {
-		background-color: #dfe4ea;
+		background-color: ${getColor("grayLight")};
 	}
 `;
 
@@ -49,14 +54,14 @@ export const TimeButton = styled.button`
 	font-family: inherit;
 	padding: 8px 16px;
 	font-size: ${getFontSize("sm")};
-	background-color: #f3f4f6;
 	color: black;
 	border: 1px solid;
 	border-radius: ${getBorderRadius("sm")};
+	background-color: transparent;
 	cursor: pointer;
 
 	&:hover {
-		background-color: #dfe4ea;
+		background-color: ${getColor("grayLight")};
 	}
 `;
 

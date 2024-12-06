@@ -14,7 +14,6 @@ import {
 const Select = ({
 	label,
 	options,
-	placeholder = "Select",
 	value,
 	width = "350px",
 }: SelectProps) => {
@@ -56,7 +55,7 @@ const Select = ({
 		<SelectContainer ref={selectRef} width={width}>
 			{label && <Label>{label}</Label>}
 			<SelectBox $isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
-				<SelectedValue>{selectedValue || placeholder}</SelectedValue>
+				<SelectedValue>{selectedValue}</SelectedValue>
 				<DownIcon $isOpen={isOpen}>
 					<DownArrow width="16" height="16" fill="#000" />
 				</DownIcon>

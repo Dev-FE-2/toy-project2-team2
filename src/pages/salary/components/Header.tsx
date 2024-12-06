@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
 	HeaderContainer,
 	DateContainer,
@@ -10,11 +11,13 @@ import {
 	MonthChangeButton,
 } from "./Header.styled";
 import LeftArrow from "@/assets/img/left_arrow_icon.svg?react";
+import MonthlySalaryModal from "./MonthSalaryModal";
 
 const Header = () => {
 	const today = new Date();
 	const year = today.getFullYear();
 	const month = String(today.getMonth() + 1).padStart(2, "0");
+	const [isMonthlySalaryOpen, setIsMonthlySalaryOpen] = useState(false);
 
 	return (
 		<HeaderContainer>
@@ -36,7 +39,13 @@ const Header = () => {
 						/>
 					</MonthChangeButton>
 				</TopButtons>
-				<TimeButton>월별 급여</TimeButton>
+				<TimeButton onClick={() => setIsMonthlySalaryOpen(true)}>
+					월별 급여
+				</TimeButton>
+				<MonthlySalaryModal
+					isOpen={isMonthlySalaryOpen}
+					onClose={() => setIsMonthlySalaryOpen(false)}
+				/>
 			</ButtonGroup>
 		</HeaderContainer>
 	);

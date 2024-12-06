@@ -27,6 +27,17 @@ const ItemBox = styled.li`
 	position: relative;
 	display: flex;
 	background-color: ${getColor("white")};
+	border: 1px solid transparent;
+	cursor: pointer;
+	transition: 0.2s;
+
+	&:hover {
+		border-color: ${getColor("gray")};
+	}
+
+	&:hover > button {
+		visibility: visible;
+	}
 `;
 
 const Color = styled.div<{ color: string }>`
@@ -66,6 +77,7 @@ const DeleteBtn = styled.button`
 	height: 20px;
 	padding: 0;
 	background: transparent;
+	visibility: hidden;
 `;
 
 export {

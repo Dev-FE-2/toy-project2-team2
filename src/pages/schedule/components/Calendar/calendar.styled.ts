@@ -66,6 +66,13 @@ const DateBox = styled.div<{ $isToday: boolean; $isThisMonth: boolean }>`
 		getDateBoxColor($isToday, $isThisMonth)};
 	font-weight: ${({ $isToday }) =>
 		getFontWeight($isToday ? "bold" : "regular")};
+	cursor: pointer;
+	transition: 0.2s;
+
+	&:hover {
+		border-color: ${({ $isThisMonth }) =>
+			$isThisMonth ? getColor("primary") : getColor("secondaryLight")};
+	}
 `;
 
 const DateNum = styled.span`
