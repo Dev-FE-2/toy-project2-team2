@@ -10,7 +10,6 @@ export const ScheduleWrapper = styled.div`
 export const Main = styled.main`
 	padding: 102px 0 30px;
 	width: 100%;
-	margin-top: 25px;
 `;
 
 export const ScheduleContainer = styled.div`
