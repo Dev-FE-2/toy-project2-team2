@@ -1,16 +1,7 @@
 import { getFontWeight } from "@/styles/theme";
 import styled from "styled-components";
 
-interface BadgeProps {
-	status: string;
-}
-const StatusBadge = ({ status }: BadgeProps) => {
-	return <Badge $status={status}>{status}</Badge>;
-};
-
-export default StatusBadge;
-
-const Badge = styled.span<{ $status: string }>`
+export const Badge = styled.span<{ $status: string }>`
 	display: inline-block;
 	padding: 5px 10px;
 	font-size: 14px;

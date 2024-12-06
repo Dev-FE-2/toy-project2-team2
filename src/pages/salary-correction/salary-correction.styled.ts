@@ -1,65 +1,58 @@
+import { getBorderRadius, getColor } from "@/styles/theme";
 import styled from "styled-components";
-export const Container = styled.div`
-	width: 100%;
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 20px;
-`;
 
 export const Header = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 20px;
-`;
-
-export const Title = styled.h1`
-	font-size: 24px;
-	font-weight: bold;
-`;
-
-export const Dropdown = styled.select`
-	padding: 8px 12px;
-	font-size: 16px;
-	border: 1px solid #ddd;
-	border-radius: 4px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid ${getColor("grayLight")};
 `;
 
 export const CardContainer = styled.div`
 	display: flex;
-	gap: 20px;
-	flex-wrap: wrap;
+	flex-direction: column;
+	gap: 16px;
 `;
 
-export const Card = styled.div`
-	width: 300px;
-	padding: 20px;
-	border: 1px solid #ddd;
-	border-radius: 10px;
+export const Card = styled.button`
+	font-family: inherit;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 30px;
+	border: 1px solid ${getColor("grayLight")};
+	border-radius: ${getBorderRadius("lg")};
 	box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-	text-align: center;
-	background-color: #fff;
+	background-color: ${getColor("white")};
+`;
+
+export const CardLeft = styled.div`
+	display: flex;
+	flex-direction: row;
+	gap: 60px;
+	align-items: center;
 `;
 
 export const Month = styled.div`
 	font-size: 18px;
 	font-weight: bold;
-	margin-bottom: 8px;
+	color: ${getColor("secondaryDark")};
 `;
 
-export const Status = styled.span`
-	display: inline-block;
-	padding: 5px 10px;
-	font-size: 14px;
-	font-weight: bold;
-	color: #fff;
-	border-radius: 20px;
-	background-color: ${(props) => props.color || "gray"};
-	margin-bottom: 8px;
+export const CardRight = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 50px;
 `;
 
-export const Amount = styled.div`
+export const DateTime = styled.div`
+	font-size: 18px;
+	color: ${getColor("grayDark")};
+`;
+
+export const Arrow = styled.div`
 	font-size: 16px;
-	font-weight: normal;
-	color: #333;
+	color: ${getColor("grayDark")};
 `;
