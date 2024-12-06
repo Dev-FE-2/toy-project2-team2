@@ -9,9 +9,9 @@ import {
 } from "./detail.styled";
 import DeleteIcon from "@/assets/img/close_icon.svg?react";
 
-const DetailItem = ({ detailData }: DetailItemProps) => {
+const DetailItem = ({ detailData, onItemClick }: DetailItemProps) => {
 	return (
-		<ItemBox>
+		<ItemBox onClick={() => onItemClick(true)}>
 			<Color color={detailData.color} />
 			<ItemInfo>
 				<ItemTitle>{detailData.title}</ItemTitle>
