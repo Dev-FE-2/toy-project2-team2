@@ -15,7 +15,8 @@ const Select = ({
 	label,
 	options,
 	value,
-	width = "350px",
+	width = "auto",
+	onChange,
 }: SelectProps) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [selectedValue, setSelectedValue] = useState(
@@ -49,6 +50,9 @@ const Select = ({
 	const handleOptionClick = (value: string) => {
 		setSelectedValue(value);
 		setIsOpen(false);
+		if (onChange) {
+			onChange(value);
+		}
 	};
 
 	return (
