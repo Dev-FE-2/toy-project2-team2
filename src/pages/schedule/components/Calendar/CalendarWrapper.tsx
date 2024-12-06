@@ -1,4 +1,4 @@
-import CalendarContext from "@/context/CalendarContext";
+import CalendarContext from "@/contexts/CalendarContext";
 import type { CalendarProps } from "../../types/calendar";
 import CalendarHeader from "./CalendarHeader";
 import Days from "./Days";
