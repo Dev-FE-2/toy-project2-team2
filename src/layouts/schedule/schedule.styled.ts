@@ -16,6 +16,6 @@ export const ScheduleContainer = styled.div`
 	width: 100%;
 	max-width: 1500px;
 	padding: 0 30px;
-	margin: 0 auto;
+	margin: 20px auto;
 	overflow: hidden;
 `;
