@@ -1,7 +1,9 @@
 import StatusBadge from "./components/StatusBadge";
-import { Modal, Select } from "@/components";
+import { Select } from "@/components";
 import LeftArrow from "@/assets/img/left_arrow_icon.svg?react";
 import { useState } from "react";
+import { StyledTitle } from "@/components/Title/Title.styled";
+import CorrectionRequestModaled from "./components/HistoryModal";
 import {
 	CardContainer,
 	Header,
@@ -12,16 +14,44 @@ import {
 	Arrow,
 	DateTime,
 } from "./salary-correction.styled";
-import { StyledTitle } from "@/components/Title/Title.styled";
 
 const SalaryCorrectionPage = () => {
-	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isHistoryModalOpen, setHistoryModalOpen] = useState(false);
+	const [selectedData, setSelectedData] = useState<any>(null);
 
-	const salaryData = [
-		{ month: "11월", date: "2024.11.25", status: "반려" },
-		{ month: "10월", date: "2024.10.25", status: "검토중" },
-		{ month: "9월", date: "2024.9.25", status: "확인완료" },
-		{ month: "8월", date: "2024.8.25", status: "확인완료" },
+	const ModalMockData = [
+		{
+			month: "11월",
+			date: "2024.11.25",
+			status: "반려",
+			amount: "추가 근무 증빙 불가로 반려",
+			correctionType: "공제 내역",
+			reason: "공제 내역에서 ~",
+		},
+		{
+			month: "10월",
+			date: "2024.10.25",
+			status: "검토중",
+			amount: "2,150,000 원",
+			correctionType: "공제 내역",
+			reason: "공제 내역에서 ~",
+		},
+		{
+			month: "9월",
+			date: "2024.9.25",
+			status: "확인완료",
+			amount: "2,150,000 원",
+			correctionType: "공제 내역",
+			reason: "공제 내역에서 ~",
+		},
+		{
+			month: "8월",
+			date: "2024.8.25",
+			status: "확인완료",
+			amount: "2,150,000 원",
+			correctionType: "공제 내역",
+			reason: "공제 내역에서 ~",
+		},
 	];
 
 	return (
@@ -38,11 +68,12 @@ const SalaryCorrectionPage = () => {
 				/>
 			</Header>
 			<CardContainer>
-				{salaryData.map((item, index) => (
+				{ModalMockData.map((item, index) => (
 					<Card
 						key={index}
 						onClick={() => {
-							setIsModalOpen(true);
+							setSelectedData(item);
+							setHistoryModalOpen(true);
 						}}
 					>
 						<CardLeft>
@@ -61,13 +92,17 @@ const SalaryCorrectionPage = () => {
 						</CardRight>
 					</Card>
 				))}
-				<Modal
-					isOpen={isModalOpen}
-					title="정정 신청"
-					onClose={() => setIsModalOpen(false)}
-				>
-					<p>여기에 원하는 내용을 추가</p>
-				</Modal>
+
+				{selectedData && (
+					<CorrectionRequestModaled
+						isOpen={isHistoryModalOpen}
+						onClose={() => setHistoryModalOpen(false)}
+						status={selectedData.status}
+						amount={selectedData.amount}
+						correctionType={selectedData.correctionType}
+						reason={selectedData.reason}
+					/>
+				)}
 			</CardContainer>
 		</>
 	);
