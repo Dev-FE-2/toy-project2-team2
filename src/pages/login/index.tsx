@@ -11,6 +11,8 @@ import { Button, Input } from "@/components";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase";
 import { useNavigate } from "react-router";
+import { listenAuthChanges } from "@/store/authListener";
+import { store } from "@/store";
 
 const LoginPage = () => {
 	const [email, setEmail] = useState("");
@@ -34,6 +36,7 @@ const LoginPage = () => {
 			.then(() => {
 				setIsIdError(false);
 				setIsPasswordError(false);
+				listenAuthChanges(store.dispatch);
 				navigate("/");
 			})
 			.catch((e) => {
