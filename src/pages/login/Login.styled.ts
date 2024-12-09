@@ -42,15 +42,15 @@ export const LoginForm = styled.form`
 	}
 `;
 export const HelperText = styled.p<{
-	isIdError?: boolean;
-	isPasswordError?: boolean;
+	$isIdError?: boolean;
+	$isPasswordError?: boolean;
 }>`
 	width: 100%;
 	margin: 10px 0;
 	padding: 0 10px;
 	color: ${getColor("danger")};
 	display: ${(props) =>
-		props.isIdError ? "block" : props.isPasswordError ? "block " : "none"};
+		props.$isIdError ? "block" : props.$isPasswordError ? "block " : "none"};
 `;
 export const SignUpGuide = styled.div`
 	margin-top: 30px;
