@@ -8,9 +8,17 @@ import {
 	SignUpGuide,
 } from "./Login.styled";
 import { Button, Input } from "@/components";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+	browserLocalPersistence,
+	setPersistence,
+	signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "@/firebase";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { setIsLogined } from "@/store/slices/loginAuthSlice";
+import { listenAuthChanges } from "@/store/userInfoListener";
+import { store } from "@/store";
 
 const LoginPage = () => {
 	const [email, setEmail] = useState("");
@@ -19,6 +27,7 @@ const LoginPage = () => {
 	const [isPasswordError, setIsPasswordError] = useState(false);
 
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
 		setEmail(e.target.value);
@@ -28,43 +37,47 @@ const LoginPage = () => {
 		e.preventDefault();
 		setPassword(e.target.value);
 	};
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		signInWithEmailAndPassword(auth, email, password)
-			.then(() => {
-				setIsIdError(false);
-				setIsPasswordError(false);
-				navigate("/");
-			})
-			.catch((e) => {
-				switch (e.code) {
-					case "auth/user-not-found":
-						console.log(e.code);
-						setIsIdError(true);
-						console.log(isIdError);
-						break;
-					case "auth/invalid-email":
-						console.log(e.code);
-						setIsIdError(true);
-						console.log(isIdError);
-						break;
-					case "auth/invalid-credential":
-						console.log(e.code);
-						setIsPasswordError(true);
-						console.log(isPasswordError);
-						break;
-					case "auth/missing-password":
-						console.log(e.code);
-						setIsPasswordError(true);
-						console.log(isPasswordError);
-						break;
-					case "auth/too-many-requests":
-						alert("너무 많은 요청을 보내셨습니다 잠시 후 다시 시도해주세요.");
-						break;
-					default:
-						console.log(e.code);
-				}
-			});
+		await setPersistence(auth, browserLocalPersistence).then(() => {
+			signInWithEmailAndPassword(auth, email, password)
+				.then(() => {
+					setIsIdError(false);
+					setIsPasswordError(false);
+					dispatch(setIsLogined(true));
+					listenAuthChanges(store.dispatch);
+					navigate("/");
+				})
+				.catch((e) => {
+					switch (e.code) {
+						case "auth/user-not-found":
+							console.log(e.code);
+							setIsIdError(true);
+							console.log(isIdError);
+							break;
+						case "auth/invalid-email":
+							console.log(e.code);
+							setIsIdError(true);
+							console.log(isIdError);
+							break;
+						case "auth/invalid-credential":
+							console.log(e.code);
+							setIsPasswordError(true);
+							console.log(isPasswordError);
+							break;
+						case "auth/missing-password":
+							console.log(e.code);
+							setIsPasswordError(true);
+							console.log(isPasswordError);
+							break;
+						case "auth/too-many-requests":
+							alert("너무 많은 요청을 보내셨습니다 잠시 후 다시 시도해주세요.");
+							break;
+						default:
+							console.log(e.code);
+					}
+				});
+		});
 	};
 	return (
 		<LoginContainer>
@@ -72,7 +85,7 @@ const LoginPage = () => {
 				<LoginHeader>로그인</LoginHeader>
 				<LoginForm onSubmit={handleSubmit}>
 					<Input label={"Email"} value={email} onChange={handleEmail} />
-					<HelperText isIdError={isIdError}>
+					<HelperText $isIdError={isIdError}>
 						유효하지 않은 이메일입니다.
 					</HelperText>
 					<Input
@@ -81,7 +94,7 @@ const LoginPage = () => {
 						value={password}
 						onChange={handlePassword}
 					/>
-					<HelperText isPasswordError={isPasswordError}>
+					<HelperText $isPasswordError={isPasswordError}>
 						유효하지 않은 비밀번호입니다.
 					</HelperText>
 					<Button>로그인 하기</Button>
