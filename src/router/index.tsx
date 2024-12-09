@@ -12,7 +12,11 @@ import { ProtectedRoute } from "./ProtectedRoute";
 
 const Router = createBrowserRouter([
 	{
-		element: <MainLayout />,
+		element: (
+			<ProtectedRoute>
+				<MainLayout />
+			</ProtectedRoute>
+		),
 		children: [
 			{ path: "/salary", element: <SalaryPage /> },
 			{ path: "/salary-correction", element: <SalaryCorrectionPage /> },

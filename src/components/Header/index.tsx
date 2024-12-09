@@ -28,7 +28,6 @@ const Header = () => {
 		dispatch(setUserInfo(null));
 		console.log(auth.currentUser);
 	};
-
 	return (
 		<HeaderContainer>
 			<LeftContainer>

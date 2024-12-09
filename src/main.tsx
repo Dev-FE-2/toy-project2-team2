@@ -3,7 +3,9 @@ import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import { store } from "./store/index.ts";
 import { Provider } from "react-redux";
+import { listenAuthChanges } from "./store/userInfoListener.ts";
 
+listenAuthChanges(store.dispatch);
 createRoot(document.getElementById("root")!).render(
 	<StrictMode>
 		<Provider store={store}>

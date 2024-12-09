@@ -8,11 +8,7 @@ import {
 	SignUpGuide,
 } from "./Login.styled";
 import { Button, Input } from "@/components";
-import {
-	browserLocalPersistence,
-	setPersistence,
-	signInWithEmailAndPassword,
-} from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
@@ -25,7 +21,6 @@ const LoginPage = () => {
 	const [password, setPassword] = useState("");
 	const [isIdError, setIsIdError] = useState(false);
 	const [isPasswordError, setIsPasswordError] = useState(false);
-
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,45 +34,43 @@ const LoginPage = () => {
 	};
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		await setPersistence(auth, browserLocalPersistence).then(() => {
-			signInWithEmailAndPassword(auth, email, password)
-				.then(() => {
-					setIsIdError(false);
-					setIsPasswordError(false);
-					dispatch(setIsLogined(true));
-					listenAuthChanges(store.dispatch);
-					navigate("/");
-				})
-				.catch((e) => {
-					switch (e.code) {
-						case "auth/user-not-found":
-							console.log(e.code);
-							setIsIdError(true);
-							console.log(isIdError);
-							break;
-						case "auth/invalid-email":
-							console.log(e.code);
-							setIsIdError(true);
-							console.log(isIdError);
-							break;
-						case "auth/invalid-credential":
-							console.log(e.code);
-							setIsPasswordError(true);
-							console.log(isPasswordError);
-							break;
-						case "auth/missing-password":
-							console.log(e.code);
-							setIsPasswordError(true);
-							console.log(isPasswordError);
-							break;
-						case "auth/too-many-requests":
-							alert("너무 많은 요청을 보내셨습니다 잠시 후 다시 시도해주세요.");
-							break;
-						default:
-							console.log(e.code);
-					}
-				});
-		});
+		signInWithEmailAndPassword(auth, email, password)
+			.then(() => {
+				setIsIdError(false);
+				setIsPasswordError(false);
+				dispatch(setIsLogined(true));
+				listenAuthChanges(store.dispatch);
+				navigate("/");
+			})
+			.catch((e) => {
+				switch (e.code) {
+					case "auth/user-not-found":
+						console.log(e.code);
+						setIsIdError(true);
+						console.log(isIdError);
+						break;
+					case "auth/invalid-email":
+						console.log(e.code);
+						setIsIdError(true);
+						console.log(isIdError);
+						break;
+					case "auth/invalid-credential":
+						console.log(e.code);
+						setIsPasswordError(true);
+						console.log(isPasswordError);
+						break;
+					case "auth/missing-password":
+						console.log(e.code);
+						setIsPasswordError(true);
+						console.log(isPasswordError);
+						break;
+					case "auth/too-many-requests":
+						alert("너무 많은 요청을 보내셨습니다 잠시 후 다시 시도해주세요.");
+						break;
+					default:
+						console.log(e.code);
+				}
+			});
 	};
 	return (
 		<LoginContainer>
