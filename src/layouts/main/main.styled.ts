@@ -8,14 +8,15 @@ export const MainWrapper = styled.div`
 `;
 
 export const Main = styled.main`
-	padding-top: 102px;
+	padding: 102px 0 0;
 	width: 100%;
+	margin-top: 20px;
 `;
 
 export const MainContainer = styled.div`
 	width: 100%;
 	max-width: 1200px;
-	padding: 0 30px;
-	margin: 20px auto 20px auto;
+	margin: 0 auto;
+	box-sizing: border-box;
 	overflow: hidden;
 `;
