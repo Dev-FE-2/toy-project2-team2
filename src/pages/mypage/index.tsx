@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import type { RootState } from "@/types/store";
 
 const MyPage = () => {
-	const userData = useSelector((state: RootState) => state.auth.user);
+	const userData = useSelector((state: RootState) => state.userInfo.user);
 	if (!userData) {
 		return <p>로딩중</p>;
 	}
