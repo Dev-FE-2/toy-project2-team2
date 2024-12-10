@@ -14,14 +14,7 @@ import {
 } from "../components/Header.styled";
 import CustomDatePicker from "../CustomDatePicker";
 import MonthlySalaryModal from "../components/MonthSalaryModal";
-
-interface HeaderProps {
-	selectedDate: Date;
-	setSelectedDate: (date: Date) => void;
-	today: Date;
-	isMonthlySalaryOpen: boolean;
-	setIsMonthlySalaryOpen: (isOpen: boolean) => void;
-}
+import { HeaderProps } from "../types/header";
 
 const Header = ({
 	selectedDate,

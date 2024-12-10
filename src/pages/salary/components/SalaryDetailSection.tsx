@@ -1,4 +1,3 @@
-import React from "react";
 import {
 	Section,
 	SectionRow,
@@ -16,21 +15,7 @@ import {
 	Value,
 } from "../Salay.styled";
 import Dot from "@/assets/img/dot_icon.svg?react";
-
-interface SalaryData {
-	baseSalary: number;
-	nationalPension: number;
-	healthInsurance: number;
-	longTermCareInsurance: number;
-	employmentInsurance: number;
-	incomeTax: number;
-	localIncomeTax: number;
-}
-
-interface SalaryDetailsSectionProps {
-	salaryData: SalaryData | null;
-	formatNumber: any;
-}
+import { SalaryDetailsSectionProps } from "../types/SalaryDetailSection";
 
 const SalaryDetailsSection = ({
 	salaryData,

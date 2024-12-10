@@ -2,8 +2,20 @@ import { useState } from "react";
 import CustomSelect from "@/components/Select";
 import Modal from "@/components/Modal";
 import { TextArea } from "@/components";
+import { saveSalaryCorrection } from "../../../services/salaryCorrection";
+import { useSelector } from "react-redux";
+import { RootState } from "@/types/store";
+import { getSalaryAmount } from "@/services/getSalaryAmount";
 
-const CorrectionRequestModal = ({ isOpen, onClose }: any) => {
+const CorrectionRequestModal = ({
+	isOpen,
+	onClose,
+	salaryId,
+}: {
+	isOpen: boolean;
+	onClose: () => void;
+	salaryId: string;
+}) => {
 	const correctionOptions = [
 		{ value: "지급 내역", label: "지급 내역" },
 		{ value: "공제 내역", label: "공제 내역" },
@@ -13,9 +25,38 @@ const CorrectionRequestModal = ({ isOpen, onClose }: any) => {
 	const [selectedCorrection, setSelectedCorrection] = useState(
 		correctionOptions[0].value,
 	);
-	const handleApply = () => {
-		console.log("정정 신청 요청");
-		onClose();
+	const [reason, setReason] = useState("");
+	const userId = useSelector((state: RootState) => state.userInfo.user?.uid);
+
+	const handleApply = async () => {
+		if (!userId || !salaryId) {
+			console.error("사용자 ID 또는 급여 ID가 없습니다.");
+			return;
+		}
+
+		if (!reason.trim()) {
+			console.error("정정 사유를 입력하세요.");
+			return;
+		}
+
+		try {
+			const amount = await getSalaryAmount(userId, salaryId);
+
+			await saveSalaryCorrection({
+				userId,
+				salaryId,
+				correctionData: {
+					type: selectedCorrection,
+					reason,
+					amount,
+					status: "검토 중",
+				},
+			});
+			console.log("정정 요청이 성공적으로 저장되었습니다.");
+			onClose();
+		} catch (error) {
+			console.error("정정 요청 저장 중 오류 발생:", error);
+		}
 	};
 
 	return (
@@ -32,7 +73,11 @@ const CorrectionRequestModal = ({ isOpen, onClose }: any) => {
 				value={selectedCorrection}
 				onChange={(value) => setSelectedCorrection(value)}
 			/>
-			<TextArea label="정정 사유를 입력하세요 *" />
+			<TextArea
+				label="정정 사유를 입력하세요 *"
+				value={reason}
+				onChange={(e) => setReason(e.target.value)}
+			/>
 		</Modal>
 	);
 };
