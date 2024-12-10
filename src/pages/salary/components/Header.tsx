@@ -1,37 +1,73 @@
-import { useState } from "react";
-import {
-	HeaderContainer,
-	DateContainer,
-	ButtonGroup,
-	TopButtons,
-	Title,
-	MonthButton,
-	TimeButton,
-	MonthDisplay,
-	MonthChangeButton,
-} from "./Header.styled";
+import React from "react";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import LeftArrow from "@/assets/img/left_arrow_icon.svg?react";
-import MonthlySalaryModal from "./MonthSalaryModal";
+import {
+	ButtonGroup,
+	DateContainer,
+	HeaderContainer,
+	MonthButton,
+	MonthChangeButton,
+	TimeButton,
+	Title,
+	TopButtons,
+} from "../components/Header.styled";
+import CustomDatePicker from "../CustomDatePicker";
+import MonthlySalaryModal from "../components/MonthSalaryModal";
 
-const Header = () => {
-	const today = new Date();
-	const year = today.getFullYear();
-	const month = String(today.getMonth() + 1).padStart(2, "0");
-	const [isMonthlySalaryOpen, setIsMonthlySalaryOpen] = useState(false);
+interface HeaderProps {
+	selectedDate: Date;
+	setSelectedDate: (date: Date) => void;
+	today: Date;
+	isMonthlySalaryOpen: boolean;
+	setIsMonthlySalaryOpen: (isOpen: boolean) => void;
+}
 
-	return (
+const Header = ({
+	selectedDate,
+	setSelectedDate,
+	today,
+	isMonthlySalaryOpen,
+	setIsMonthlySalaryOpen,
+}: HeaderProps) => (
+	<LocalizationProvider dateAdapter={AdapterDateFns}>
 		<HeaderContainer>
 			<DateContainer>
-				<Title>{`${year}.${month}`}</Title>
+				<Title>{`${selectedDate.getFullYear()}.${String(
+					selectedDate.getMonth() + 1,
+				).padStart(2, "0")}`}</Title>
 			</DateContainer>
 			<ButtonGroup>
 				<TopButtons>
-					<MonthButton>이번달</MonthButton>
-					<MonthChangeButton>
+					<MonthButton onClick={() => setSelectedDate(today)}>
+						이번달
+					</MonthButton>
+					<MonthChangeButton
+						onClick={() =>
+							setSelectedDate(
+								new Date(
+									selectedDate.getFullYear(),
+									selectedDate.getMonth() - 1,
+								),
+							)
+						}
+					>
 						<LeftArrow width="8" height="10" />
 					</MonthChangeButton>
-					<MonthDisplay>11월</MonthDisplay>
-					<MonthChangeButton>
+					<CustomDatePicker
+						selectedDate={selectedDate}
+						onDateChange={setSelectedDate}
+					/>
+					<MonthChangeButton
+						onClick={() =>
+							setSelectedDate(
+								new Date(
+									selectedDate.getFullYear(),
+									selectedDate.getMonth() + 1,
+								),
+							)
+						}
+					>
 						<LeftArrow
 							width="8"
 							height="10"
@@ -48,7 +84,7 @@ const Header = () => {
 				/>
 			</ButtonGroup>
 		</HeaderContainer>
-	);
-};
+	</LocalizationProvider>
+);
 
 export default Header;
