@@ -6,7 +6,6 @@ import {
 import { UserData } from "../type/UserInfoBox";
 
 export const UserInfoBox = ({ userData }: UserData) => {
-	console.log(userData);
 	return (
 		<UserInfoBoxContainer>
 			<InfoTitle>
