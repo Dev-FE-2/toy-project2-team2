@@ -25,7 +25,7 @@ const SalaryPage = () => {
 	const today = new Date();
 	const [selectedDate, setSelectedDate] = useState<Date>(today);
 	const [salaryData, setSalaryData] = useState<SalaryData | null>(null);
-	const [isLoading, setIsLoading] = useState(false);
+	const [, setIsLoading] = useState(false);
 	const [isCorrectionModalOpen, setIsCorrectionModalOpen] = useState(false);
 	const [isMonthlySalaryOpen, setIsMonthlySalaryOpen] = useState(false);
 	const [userName, setUserName] = useState<string | null>(null);
@@ -75,7 +75,6 @@ const SalaryPage = () => {
 				setUserName(null);
 			}
 
-			// 급여 데이터 가져오기
 			const salaryDocRef = doc(db, salaryDocPath);
 			const salaryDocSnap = await getDoc(salaryDocRef);
 			if (salaryDocSnap.exists()) {
@@ -91,8 +90,10 @@ const SalaryPage = () => {
 	};
 
 	useEffect(() => {
-		fetchUserData(selectedDate);
-	}, [selectedDate]);
+		if (uid) {
+			fetchUserData(selectedDate);
+		}
+	}, [uid, selectedDate, fetchUserData]);
 
 	return (
 		<>
