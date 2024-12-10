@@ -11,10 +11,24 @@ import {
 	SelectedValue,
 } from "./Select.styled";
 
-const Select = ({ label, options, value, onChange }: SelectProps) => {
+const Select = ({
+	label,
+	options,
+	value,
+	width = "auto",
+	onChange,
+}: SelectProps) => {
 	const [isOpen, setIsOpen] = useState(false);
-	const [selectedValue, setSelectedValue] = useState(value);
+	const [selectedValue, setSelectedValue] = useState(
+		value || options[0]?.value,
+	);
 	const selectRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		if (!value && options.length > 0) {
+			setSelectedValue(options[0]?.value);
+		}
+	}, [value, options]);
 
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
@@ -35,12 +49,14 @@ const Select = ({ label, options, value, onChange }: SelectProps) => {
 
 	const handleOptionClick = (value: string) => {
 		setSelectedValue(value);
-		onChange?.(value);
 		setIsOpen(false);
+		if (onChange) {
+			onChange(value);
+		}
 	};
 
 	return (
-		<SelectContainer ref={selectRef}>
+		<SelectContainer ref={selectRef} width={width}>
 			{label && <Label>{label}</Label>}
 			<SelectBox $isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
 				<SelectedValue>{selectedValue}</SelectedValue>

@@ -13,3 +13,7 @@ export interface AuthState {
 	user: UserInfoState | null;
 	isLoading: boolean;
 }
+export interface LoginState {
+	uid: string | null;
+	isLogined: boolean;
+}

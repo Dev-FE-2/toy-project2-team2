@@ -11,7 +11,9 @@ import { Button, Input } from "@/components";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase";
 import { useNavigate } from "react-router";
-import { listenAuthChanges } from "@/store/authListener";
+import { useDispatch } from "react-redux";
+import { setIsLogined } from "@/store/slices/loginAuthSlice";
+import { listenAuthChanges } from "@/store/userInfoListener";
 import { store } from "@/store";
 
 const LoginPage = () => {
@@ -19,8 +21,8 @@ const LoginPage = () => {
 	const [password, setPassword] = useState("");
 	const [isIdError, setIsIdError] = useState(false);
 	const [isPasswordError, setIsPasswordError] = useState(false);
-
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
 		setEmail(e.target.value);
@@ -30,12 +32,13 @@ const LoginPage = () => {
 		e.preventDefault();
 		setPassword(e.target.value);
 	};
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		signInWithEmailAndPassword(auth, email, password)
 			.then(() => {
 				setIsIdError(false);
 				setIsPasswordError(false);
+				dispatch(setIsLogined(true));
 				listenAuthChanges(store.dispatch);
 				navigate("/");
 			})
@@ -75,7 +78,7 @@ const LoginPage = () => {
 				<LoginHeader>로그인</LoginHeader>
 				<LoginForm onSubmit={handleSubmit}>
 					<Input label={"Email"} value={email} onChange={handleEmail} />
-					<HelperText isIdError={isIdError}>
+					<HelperText $isIdError={isIdError}>
 						유효하지 않은 이메일입니다.
 					</HelperText>
 					<Input
@@ -84,7 +87,7 @@ const LoginPage = () => {
 						value={password}
 						onChange={handlePassword}
 					/>
-					<HelperText isPasswordError={isPasswordError}>
+					<HelperText $isPasswordError={isPasswordError}>
 						유효하지 않은 비밀번호입니다.
 					</HelperText>
 					<Button>로그인 하기</Button>
