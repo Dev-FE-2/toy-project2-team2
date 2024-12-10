@@ -6,8 +6,8 @@ const initialState: AuthState = {
 	isLoading: false,
 };
 
-const authSlice = createSlice({
-	name: "auth",
+const userInfoSlice = createSlice({
+	name: "userInfoSlice",
 	initialState,
 	reducers: {
 		setUserInfo: (state, action: PayloadAction<UserInfoState | null>) => {
@@ -20,5 +20,5 @@ const authSlice = createSlice({
 	},
 });
 
-export const { setUserInfo, setLoading } = authSlice.actions;
-export default authSlice.reducer;
+export const { setUserInfo, setLoading } = userInfoSlice.actions;
+export default userInfoSlice.reducer;
