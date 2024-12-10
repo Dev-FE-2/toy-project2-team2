@@ -8,18 +8,7 @@ import { RootState } from "@/types/store";
 import Header from "./components/Header";
 import SalarySection from "./components/SalarySection";
 import SalaryDetailsSection from "./components/SalaryDetailSection";
-
-type SalaryData = {
-	payday: string;
-	actualPayment: number;
-	baseSalary: number;
-	nationalPension: number;
-	healthInsurance: number;
-	longTermCareInsurance: number;
-	employmentInsurance: number;
-	incomeTax: number;
-	localIncomeTax: number;
-};
+import { SalaryData } from "./types/Salary";
 
 const SalaryPage = () => {
 	const today = new Date();
@@ -50,13 +39,6 @@ const SalaryPage = () => {
 		return total > 0 ? Math.round((value / total) * 100) : 0;
 	};
 	const uid = useSelector((state: RootState) => state.userInfo.user?.uid);
-
-	useEffect(() => {
-		console.log("UID:", uid);
-		if (uid) {
-			fetchUserData(selectedDate);
-		}
-	}, [uid, selectedDate]);
 
 	const fetchUserData = async (date: Date) => {
 		setIsLoading(true);

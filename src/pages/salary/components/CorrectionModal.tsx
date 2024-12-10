@@ -6,8 +6,9 @@ import { saveSalaryCorrection } from "../../../services/salaryCorrection";
 import { useSelector } from "react-redux";
 import { RootState } from "@/types/store";
 import { getSalaryAmount } from "@/services/getSalaryAmount";
+import { ErrorMessage } from "../Salay.styled";
 
-const CorrectionRequestModal = ({
+const CorrectionModal = ({
 	isOpen,
 	onClose,
 	salaryId,
@@ -26,6 +27,7 @@ const CorrectionRequestModal = ({
 		correctionOptions[0].value,
 	);
 	const [reason, setReason] = useState("");
+	const [error, setError] = useState(false);
 	const userId = useSelector((state: RootState) => state.userInfo.user?.uid);
 
 	const handleApply = async () => {
@@ -35,11 +37,13 @@ const CorrectionRequestModal = ({
 		}
 
 		if (!reason.trim()) {
+			setError(true);
 			console.error("정정 사유를 입력하세요.");
 			return;
 		}
 
 		try {
+			setError(false);
 			const amount = await getSalaryAmount(userId, salaryId);
 
 			await saveSalaryCorrection({
@@ -76,10 +80,14 @@ const CorrectionRequestModal = ({
 			<TextArea
 				label="정정 사유를 입력하세요 *"
 				value={reason}
-				onChange={(e) => setReason(e.target.value)}
+				onChange={(e) => {
+					setReason(e.target.value);
+					if (error) setError(false); 
+				}}
 			/>
+			{error && <ErrorMessage>정정 사유를 입력하세요.</ErrorMessage>}
 		</Modal>
 	);
 };
 
-export default CorrectionRequestModal;
+export default CorrectionModal;

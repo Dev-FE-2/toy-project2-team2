@@ -1,7 +1,7 @@
-import React from "react";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import LeftArrow from "@/assets/img/left_arrow_icon.svg?react";
+import CustomDatePicker from "../CustomDatePicker";
+import MonthlySalaryModal from "../components/MonthSalaryModal";
+import { HeaderProps } from "../types/header";
 import {
 	ButtonGroup,
 	DateContainer,
@@ -12,9 +12,6 @@ import {
 	Title,
 	TopButtons,
 } from "../components/Header.styled";
-import CustomDatePicker from "../CustomDatePicker";
-import MonthlySalaryModal from "../components/MonthSalaryModal";
-import { HeaderProps } from "../types/header";
 
 const Header = ({
 	selectedDate,
@@ -23,7 +20,6 @@ const Header = ({
 	isMonthlySalaryOpen,
 	setIsMonthlySalaryOpen,
 }: HeaderProps) => (
-	<LocalizationProvider dateAdapter={AdapterDateFns}>
 		<HeaderContainer>
 			<DateContainer>
 				<Title>{`${selectedDate.getFullYear()}.${String(
@@ -77,7 +73,6 @@ const Header = ({
 				/>
 			</ButtonGroup>
 		</HeaderContainer>
-	</LocalizationProvider>
 );
 
 export default Header;

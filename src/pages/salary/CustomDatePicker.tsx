@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 interface CustomDatePickerProps {
 	selectedDate: Date;
-	// onDateChange: (newDate: Date) => void;
 	onDateChange: any;
 }
 

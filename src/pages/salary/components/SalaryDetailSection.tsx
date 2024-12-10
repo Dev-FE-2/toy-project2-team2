@@ -27,7 +27,7 @@ const SalaryDetailsSection = ({
 				<Section>
 					<SectionHeader>
 						<SectionTitle>지급 내역</SectionTitle>
-						<TimeButtonWrapper>
+						{/* <TimeButtonWrapper>
 							<TimeButton>근무시간</TimeButton>
 							<Tooltip>
 								<TooltipRow>
@@ -44,7 +44,7 @@ const SalaryDetailsSection = ({
 									<strong>43시간 30분</strong>
 								</TooltipRow>
 							</Tooltip>
-						</TimeButtonWrapper>
+						</TimeButtonWrapper> */}
 					</SectionHeader>
 					<List>
 						<ListItem>
@@ -58,18 +58,16 @@ const SalaryDetailsSection = ({
 						</ListItem>
 						<ListItem>
 							<Label>
-								<Dot style={{ margin: "0 4px 3px 4px" }} />
-								국민연금
+								<Dot style={{ margin: "0 4px 3px 4px" }} />총 지급액
 							</Label>
 							<Value>
-								{salaryData ? formatNumber(salaryData.nationalPension) : "0"} 원
+								{salaryData ? formatNumber(salaryData.baseSalary) : "0"} 원
 							</Value>
 						</ListItem>
 					</List>
 				</Section>
 			</SectionHalf>
 
-			{/* 공제 내역 */}
 			<SectionHalf>
 				<Section>
 					<SectionTitle>공제 내역</SectionTitle>
