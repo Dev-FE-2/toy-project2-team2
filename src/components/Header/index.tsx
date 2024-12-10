@@ -13,17 +13,21 @@ import profileImage from "@/assets/img/profile.png";
 import logoImage from "@/assets/img/logo.png";
 import Button from "../Button";
 import { auth } from "@/firebase";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/types/store";
+import { setIsLogined } from "@/store/slices/loginAuthSlice";
+import { setUserInfo } from "@/store/slices/userInfoSlice";
 
 const Header = () => {
-	const user = useSelector((state: RootState) => state.auth.user);
-
+	const user = useSelector((state: RootState) => state.userInfo.user);
+	console.log(user);
+	const dispatch = useDispatch();
 	const logOut = () => {
 		auth.signOut();
+		dispatch(setIsLogined(false));
+		dispatch(setUserInfo(null));
 		console.log(auth.currentUser);
 	};
-
 	return (
 		<HeaderContainer>
 			<LeftContainer>
@@ -51,7 +55,10 @@ const Header = () => {
 				</ProfileInfo>
 
 				<ProfileImageContainer>
-					<Profile src={profileImage} alt="프로필 이미지" />
+					<Profile
+						src={user ? user.photoURL : profileImage}
+						alt="프로필 이미지"
+					/>
 				</ProfileImageContainer>
 			</ProfileContainer>
 		</HeaderContainer>

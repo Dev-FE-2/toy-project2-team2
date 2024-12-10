@@ -8,10 +8,15 @@ import SalaryCorrectionPage from "@/pages/salary-correction";
 import MyPage from "@/pages/mypage";
 import NotFoundPage from "@/pages/notFound";
 import ComponentExample from "@/pages/componentExample";
+import { ProtectedRoute } from "./ProtectedRoute";
 
 const Router = createBrowserRouter([
 	{
-		element: <MainLayout />,
+		element: (
+			<ProtectedRoute>
+				<MainLayout />
+			</ProtectedRoute>
+		),
 		children: [
 			{ path: "/salary", element: <SalaryPage /> },
 			{ path: "/salary-correction", element: <SalaryCorrectionPage /> },
@@ -20,7 +25,11 @@ const Router = createBrowserRouter([
 		],
 	},
 	{
-		element: <ScheduleLayout />,
+		element: (
+			<ProtectedRoute>
+				<ScheduleLayout />
+			</ProtectedRoute>
+		),
 		children: [{ path: "/", element: <Schedule /> }],
 	},
 	{
