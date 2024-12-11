@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import { Divider, UserInfo, Text } from "./Salay.styled";
@@ -39,40 +39,44 @@ const SalaryPage = () => {
 		return total > 0 ? Math.round((value / total) * 100) : 0;
 	};
 	const uid = useSelector((state: RootState) => state.userInfo.user?.uid);
+	const fetchUserData = useCallback(
+		async (date: Date) => {
+			if (!uid) return;
 
-	const fetchUserData = async (date: Date) => {
-		setIsLoading(true);
+			setIsLoading(true);
 
-		const year = date.getFullYear();
-		const month = String(date.getMonth() + 1).padStart(2, "0");
-		const salaryDocPath = `user/${uid}/salaries/salaries_${year}_${month}`;
-		const userDocPath = `user/${uid}`;
+			const year = date.getFullYear();
+			const month = String(date.getMonth() + 1).padStart(2, "0");
+			const salaryDocPath = `user/${uid}/salaries/salaries_${year}_${month}`;
+			const userDocPath = `user/${uid}`;
 
-		try {
-			const userDocRef = doc(db, userDocPath);
-			const userDocSnap = await getDoc(userDocRef);
-			if (userDocSnap.exists()) {
-				setUserName(userDocSnap.data().name || null);
-			} else {
-				setUserName(null);
+			try {
+				const userDocRef = doc(db, userDocPath);
+				const userDocSnap = await getDoc(userDocRef);
+				if (userDocSnap.exists()) {
+					setUserName(userDocSnap.data().name || null);
+				} else {
+					setUserName(null);
+				}
+
+				const salaryDocRef = doc(db, salaryDocPath);
+				const salaryDocSnap = await getDoc(salaryDocRef);
+				if (salaryDocSnap.exists()) {
+					setSalaryData(salaryDocSnap.data() as SalaryData);
+				} else {
+					setSalaryData(null);
+				}
+			} catch (error) {
+				console.error("Error fetching data:", error);
+			} finally {
+				setIsLoading(false);
 			}
-
-			const salaryDocRef = doc(db, salaryDocPath);
-			const salaryDocSnap = await getDoc(salaryDocRef);
-			if (salaryDocSnap.exists()) {
-				setSalaryData(salaryDocSnap.data() as SalaryData);
-			} else {
-				setSalaryData(null);
-			}
-		} catch (error) {
-			console.error("Error fetching data:", error);
-		} finally {
-			setIsLoading(false);
-		}
-	};
+		},
+		[uid],
+	);
 
 	useEffect(() => {
-		if (uid) {
+		if (uid && selectedDate) {
 			fetchUserData(selectedDate);
 		}
 	}, [uid, selectedDate, fetchUserData]);
