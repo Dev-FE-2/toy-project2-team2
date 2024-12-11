@@ -7,9 +7,9 @@ import {
 	Month,
 	Salary,
 } from "./MonthSalaryModal.styled";
-import { getYearlySalaryData } from "@/services/getYearlySalaryData";
 import { useSelector } from "react-redux";
 import { RootState } from "@/types/store";
+import { getYearlySalaryData } from "@/services/SalaryService";
 
 const MonthlySalaryModal = ({ isOpen, onClose }: any) => {
 	const userId = useSelector((state: RootState) => state.userInfo.user?.uid);
@@ -30,7 +30,7 @@ const MonthlySalaryModal = ({ isOpen, onClose }: any) => {
 			const data = await getYearlySalaryData(userId, parseInt(year));
 			setYearlySalaryData(data);
 		} catch (error) {
-			console.error( error);
+			console.error(error);
 		}
 	};
 

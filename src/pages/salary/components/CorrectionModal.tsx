@@ -2,11 +2,13 @@ import { useState } from "react";
 import CustomSelect from "@/components/Select";
 import Modal from "@/components/Modal";
 import { TextArea } from "@/components";
-import { saveSalaryCorrection } from "../../../services/salaryCorrection";
 import { useSelector } from "react-redux";
 import { RootState } from "@/types/store";
-import { getSalaryAmount } from "@/services/getSalaryAmount";
 import { ErrorMessage } from "../Salay.styled";
+import {
+	getSalaryAmount,
+	saveSalaryCorrection,
+} from "@/services/SalaryService";
 
 const CorrectionModal = ({
 	isOpen,
@@ -82,7 +84,7 @@ const CorrectionModal = ({
 				value={reason}
 				onChange={(e) => {
 					setReason(e.target.value);
-					if (error) setError(false); 
+					if (error) setError(false);
 				}}
 			/>
 			{error && <ErrorMessage>정정 사유를 입력하세요.</ErrorMessage>}
