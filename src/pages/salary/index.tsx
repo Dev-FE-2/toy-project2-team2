@@ -19,8 +19,8 @@ const SalaryPage = () => {
 	const [isMonthlySalaryOpen, setIsMonthlySalaryOpen] = useState(false);
 	const [userName, setUserName] = useState<string | null>(null);
 
-	const formatNumber = (value: number): string => {
-		return value.toLocaleString();
+	const formatNumber = (value?: number): string => {
+		return value !== undefined ? value.toLocaleString() : "0";
 	};
 
 	const getTotalDeductions = (data: SalaryData): number => {
