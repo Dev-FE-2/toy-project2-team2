@@ -3,25 +3,32 @@ import { AppDispatch } from "@/types/store";
 import { getUserData } from "@/services/getDatas";
 import { auth } from "@/firebase";
 import { onAuthStateChanged } from "firebase/auth";
-
+import { setUid } from "@/store/slices/loginAuthSlice";
 export const listenAuthChanges = async (dispatch: AppDispatch) => {
 	dispatch(setLoading(true));
 	onAuthStateChanged(auth, async (user) => {
-		const userAuth = user;
-		const userData = await getUserData(userAuth.uid);
-		console.log(userData);
-		if (userData) {
-			dispatch(
-				setUserInfo({
-					email: userData.email,
-					name: userData.name,
-					team: userData.team,
-					grade: userData.grade,
-					photoURL: userData.photoURL,
-				}),
-			);
-		} else {
-			dispatch(setUserInfo(null));
+		if (user) {
+			const userUid = user.uid;
+			console.log("User UID:", userUid);
+			dispatch(setUid(userUid));
+
+			const userData = await getUserData(userUid);
+			console.log(userData);
+
+			if (userData) {
+				dispatch(
+					setUserInfo({
+						uid: userUid,
+						email: userData.email,
+						name: userData.name,
+						team: userData.team,
+						grade: userData.grade,
+						photoURL: userData.photoURL,
+					}),
+				);
+			} else {
+				dispatch(setUserInfo(null));
+			}
 		}
 	});
 	dispatch(setLoading(false));

@@ -1,4 +1,6 @@
 export interface SalaryData {
+	payday: string;
+	actualPayment: number;
 	baseSalary: number;
 	nationalPension: number;
 	healthInsurance: number;
@@ -6,9 +8,4 @@ export interface SalaryData {
 	employmentInsurance: number;
 	incomeTax: number;
 	localIncomeTax: number;
-}
-
-export interface SalaryDetailsSectionProps {
-	salaryData: SalaryData | null;
-	formatNumber: any;
 }

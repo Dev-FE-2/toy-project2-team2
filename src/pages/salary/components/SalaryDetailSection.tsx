@@ -1,10 +1,10 @@
-import Dot from "@/assets/img/dot_icon.svg?react";
-import DeductionItem from "./Deduction";
-import type { SalaryDetailsSectionProps } from "../types/SalaryDetailSection";
 import {
 	Section,
+	SectionRow,
+	SectionHalf,
 	SectionHeader,
 	SectionTitle,
+	TimeButtonWrapper,
 	TimeButton,
 	Tooltip,
 	TooltipRow,
@@ -13,21 +13,21 @@ import {
 	ListItem,
 	Label,
 	Value,
-	SectionRow,
-	SectionHalf,
-	TimeButtonWrapper,
 } from "../Salay.styled";
+import Dot from "@/assets/img/dot_icon.svg?react";
+import { SalaryDetailsSectionProps } from "../types/SalaryDetailSection";
 
 const SalaryDetailsSection = ({
-	deductionItems,
+	salaryData,
+	formatNumber,
 }: SalaryDetailsSectionProps) => (
-	<>
+	<Section>
 		<SectionRow>
 			<SectionHalf>
 				<Section>
 					<SectionHeader>
 						<SectionTitle>지급 내역</SectionTitle>
-						<TimeButtonWrapper>
+						{/* <TimeButtonWrapper>
 							<TimeButton>근무시간</TimeButton>
 							<Tooltip>
 								<TooltipRow>
@@ -44,20 +44,25 @@ const SalaryDetailsSection = ({
 									<strong>43시간 30분</strong>
 								</TooltipRow>
 							</Tooltip>
-						</TimeButtonWrapper>
+						</TimeButtonWrapper> */}
 					</SectionHeader>
 					<List>
 						<ListItem>
 							<Label>
-								<Dot style={{ margin: "0 4px 3px 4px" }} /> 기본급
+								<Dot style={{ margin: "0 4px 3px 4px" }} />
+								기본급
 							</Label>
-							<Value>3,500,000 원</Value>
+							<Value>
+								{salaryData ? formatNumber(salaryData.baseSalary) : "0"} 원
+							</Value>
 						</ListItem>
 						<ListItem>
 							<Label>
-								<Dot style={{ margin: "0 4px 3px 4px" }} /> 총 지급액
+								<Dot style={{ margin: "0 4px 3px 4px" }} />총 지급액
 							</Label>
-							<Value>3,500,000 원</Value>
+							<Value>
+								{salaryData ? formatNumber(salaryData.baseSalary) : "0"} 원
+							</Value>
 						</ListItem>
 					</List>
 				</Section>
@@ -67,18 +72,63 @@ const SalaryDetailsSection = ({
 				<Section>
 					<SectionTitle>공제 내역</SectionTitle>
 					<List>
-						{deductionItems.map((item, index) => (
-							<DeductionItem
-								key={index}
-								label={item.label}
-								value={item.value}
-							/>
-						))}
+						{salaryData ? (
+							<>
+								<ListItem>
+									<Label>
+										<Dot style={{ margin: "0 4px 3px 4px" }} />
+										국민연금
+									</Label>
+									<Value>{formatNumber(salaryData.nationalPension)} 원</Value>
+								</ListItem>
+								<ListItem>
+									<Label>
+										<Dot style={{ margin: "0 4px 3px 4px" }} />
+										건강보험
+									</Label>
+									<Value>{formatNumber(salaryData.healthInsurance)} 원</Value>
+								</ListItem>
+								<ListItem>
+									<Label>
+										<Dot style={{ margin: "0 4px 3px 4px" }} />
+										장기요양보험
+									</Label>
+									<Value>
+										{formatNumber(salaryData.longTermCareInsurance)} 원
+									</Value>
+								</ListItem>
+								<ListItem>
+									<Label>
+										<Dot style={{ margin: "0 4px 3px 4px" }} />
+										고용보험
+									</Label>
+									<Value>
+										{formatNumber(salaryData.employmentInsurance)} 원
+									</Value>
+								</ListItem>
+								<ListItem>
+									<Label>
+										<Dot style={{ margin: "0 4px 3px 4px" }} />
+										소득세
+									</Label>
+									<Value>{formatNumber(salaryData.incomeTax)} 원</Value>
+								</ListItem>
+								<ListItem>
+									<Label>
+										<Dot style={{ margin: "0 4px 3px 4px" }} />
+										지방소득세
+									</Label>
+									<Value>{formatNumber(salaryData.localIncomeTax)} 원</Value>
+								</ListItem>
+							</>
+						) : (
+							<p>공제 내역 데이터가 없습니다.</p>
+						)}
 					</List>
 				</Section>
 			</SectionHalf>
 		</SectionRow>
-	</>
+	</Section>
 );
 
 export default SalaryDetailsSection;

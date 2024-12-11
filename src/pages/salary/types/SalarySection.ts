@@ -1,4 +1,6 @@
 export interface SalarySectionProps {
-	isModalOpen: any;
-	setIsModalOpen: any;
+	actualPayment: number;
+	isCorrectionModalOpen: boolean;
+	setIsCorrectionModalOpen: (isOpen: boolean) => void;
+	formatNumber: (value: number) => string;
 }
