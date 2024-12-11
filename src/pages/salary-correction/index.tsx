@@ -1,7 +1,7 @@
 import StatusBadge from "./components/StatusBadge";
 import { Select } from "@/components";
 import LeftArrow from "@/assets/img/left_arrow_icon.svg?react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StyledTitle } from "@/components/Title/Title.styled";
 import CorrectionRequestModaled from "./components/HistoryModal";
 import {
@@ -14,45 +14,73 @@ import {
 	Arrow,
 	DateTime,
 } from "./salary-correction.styled";
+import { collection, getDocs, QueryDocumentSnapshot } from "firebase/firestore";
+import { db } from "@/firebase";
 
-const SalaryCorrectionPage = () => {
+interface CorrectionData {
+	month: string;
+	date: string;
+	status: string;
+	amount: string;
+	correctionType: string;
+	reason: string;
+}
+
+const SalaryCorrectionPage: React.FC = () => {
 	const [isHistoryModalOpen, setHistoryModalOpen] = useState(false);
-	const [selectedData, setSelectedData] = useState<any>(null);
+	const [selectedData, setSelectedData] = useState<CorrectionData | null>(null);
+	const [salaryData, setSalaryData] = useState<CorrectionData[]>([]);
 
-	const ModalMockData = [
-		{
-			month: "11월",
-			date: "2024.11.25",
-			status: "반려",
-			amount: "추가 근무 증빙 불가로 반려",
-			correctionType: "공제 내역",
-			reason: "공제 내역에서 ~",
-		},
-		{
-			month: "10월",
-			date: "2024.10.25",
-			status: "검토중",
-			amount: "2,150,000 원",
-			correctionType: "공제 내역",
-			reason: "공제 내역에서 ~",
-		},
-		{
-			month: "9월",
-			date: "2024.9.25",
-			status: "확인완료",
-			amount: "2,150,000 원",
-			correctionType: "공제 내역",
-			reason: "공제 내역에서 ~",
-		},
-		{
-			month: "8월",
-			date: "2024.8.25",
-			status: "확인완료",
-			amount: "2,150,000 원",
-			correctionType: "공제 내역",
-			reason: "공제 내역에서 ~",
-		},
-	];
+	const fetchSalaryCorrections = async () => {
+		try {
+			const userRef = collection(
+				db,
+				"user",
+				"ol7Am3QUxLe8Lm9b4N05UcPUvmJ3",
+				"salaries",
+			);
+			const salarySnapshots = await getDocs(userRef);
+
+			const corrections: CorrectionData[] = [];
+
+			for (const doc of salarySnapshots.docs) {
+				const match = doc.id.match(/salaries_(\d{4})_(\d{1,2})/);
+				const salaryMonth = match
+					? `${match[1]}년 ${parseInt(match[2], 10)}월`
+					: "알 수 없음";
+
+				const correctionRef = collection(
+					db,
+					"user",
+					"ol7Am3QUxLe8Lm9b4N05UcPUvmJ3",
+					"salaries",
+					doc.id,
+					"salaryCorrection",
+				);
+				const correctionSnapshots = await getDocs(correctionRef);
+
+				correctionSnapshots.forEach((correctionDoc: QueryDocumentSnapshot) => {
+					const data = {
+						...correctionDoc.data(),
+						month: salaryMonth,
+					} as CorrectionData;
+
+					console.log("Fetched Data:", data);
+
+					corrections.push(data);
+				});
+			}
+
+			setSalaryData(corrections);
+			console.log("All Salary Corrections:", corrections);
+		} catch (error) {
+			console.error("Error fetching salary correction data:", error);
+		}
+	};
+
+	useEffect(() => {
+		fetchSalaryCorrections();
+	}, []);
 
 	return (
 		<>
@@ -68,7 +96,7 @@ const SalaryCorrectionPage = () => {
 				/>
 			</Header>
 			<CardContainer>
-				{ModalMockData.map((item, index) => (
+				{salaryData.map((item, index) => (
 					<Card
 						key={index}
 						onClick={() => {
