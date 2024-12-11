@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import {
+	Button,
+	Dropdown,
+	Row,
+	SelectBox,
+	Wrapper,
+} from "./CustomDatePicker.styled";
 
 interface CustomDatePickerProps {
 	selectedDate: Date;
@@ -25,9 +31,9 @@ const CustomDatePicker = ({
 
 	return (
 		<Wrapper>
-			<Trigger onClick={() => setIsPickerOpen(!isPickerOpen)}>
+			<Button onClick={() => setIsPickerOpen(!isPickerOpen)}>
 				{`${selectedDate.getFullYear()}년 ${selectedDate.getMonth() + 1}월`}
-			</Trigger>
+			</Button>
 			{isPickerOpen && (
 				<Dropdown>
 					<Row>
@@ -67,46 +73,3 @@ const CustomDatePicker = ({
 };
 
 export default CustomDatePicker;
-
-const Wrapper = styled.div`
-	position: relative;
-	display: inline-block;
-`;
-
-const Trigger = styled.div`
-	cursor: pointer;
-	display: inline-block;
-	padding: 10px 15px;
-	background-color: #f1f1f1;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-`;
-
-const Dropdown = styled.div`
-	position: absolute;
-	top: 100%;
-	left: 0;
-	background-color: #fff;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-	padding: 10px;
-	margin-top: 5px;
-	z-index: 10;
-`;
-
-const Row = styled.div`
-	margin-bottom: 10px;
-
-	&:last-child {
-		margin-bottom: 0;
-	}
-`;
-
-
-const SelectBox = styled.select`
-	padding: 5px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	width: 100px;
-`;
