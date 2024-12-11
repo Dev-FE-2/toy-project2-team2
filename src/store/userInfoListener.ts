@@ -8,11 +8,10 @@ import { setUid } from "./slices/loginAuthSlice";
 export const listenAuthChanges = async (dispatch: AppDispatch) => {
 	dispatch(setLoading(true));
 	onAuthStateChanged(auth, async (user) => {
-		const userAuth = user;
-		if (userAuth) {
-			dispatch(setUid({ userId: userAuth.uid }));
+		if (user) {
+			dispatch(setUid({ userId: user.uid }));
 		}
-		const userData = await getUserData(userAuth.uid);
+		const userData = await getUserData(user.uid);
 		if (userData) {
 			dispatch(
 				setUserInfo({
