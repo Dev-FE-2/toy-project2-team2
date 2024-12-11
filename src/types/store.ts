@@ -11,7 +11,6 @@ export interface UserInfoState {
 	photoURL: string | null;
 }
 export interface AuthState {
-	uid: any;
 	user: UserInfoState | null;
 	isLoading: boolean;
 }
