@@ -25,7 +25,6 @@ const Header = () => {
 		auth.signOut();
 		dispatch(setIsLogined(false));
 		dispatch(setUserInfo(null));
-		console.log(auth.currentUser);
 	};
 	return (
 		<HeaderContainer>
