@@ -8,12 +8,12 @@ import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-	apiKey: "AIzaSyAZ8tKp8GKFzrQs_mIDymBHujaw1BxlDto",
-	authDomain: "toy-project-goodwork.firebaseapp.com",
-	projectId: "toy-project-goodwork",
-	storageBucket: "toy-project-goodwork.firebasestorage.app",
-	messagingSenderId: "835481820592",
-	appId: "1:835481820592:web:cf1b06ecff2755a7208a75",
+	apiKey: import.meta.env.VITE_APP_FIREBASE_API_KEY,
+	authDomain: import.meta.env.VITE_APP_FIREBASE_AUTH_DOMAIN,
+	projectId: import.meta.env.VITE_APP_FIREBASE_PROJECT_ID,
+	storageBucket: import.meta.env.VITE_APP_FIREBASE_SOTRAGE_BUCKET,
+	messagingSenderId: import.meta.env.VITE_APP_FIREBASE_MESSAGING_SENDER_ID,
+	appId: import.meta.env.VITE_APP_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase
