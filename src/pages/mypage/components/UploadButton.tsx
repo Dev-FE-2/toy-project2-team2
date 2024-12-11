@@ -9,7 +9,7 @@ import {
 	ref,
 	uploadBytes,
 } from "firebase/storage";
-import { updateImageURL } from "@/services/imageUploadService";
+import { updateImageURL } from "@/services/mypageUpdateService";
 import { useSelector } from "react-redux";
 import { RootState } from "@/types/store";
 import { getUserData } from "@/services/getDatas";
