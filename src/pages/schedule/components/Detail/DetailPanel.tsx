@@ -53,13 +53,18 @@ const DetailPanel = () => {
 	const getSchedulesForDate = useCallback(
 		(dateString: string) => {
 			return (
-				Object.entries(schedules)
+				schedules
 					// eslint-disable-next-line @typescript-eslint/no-unused-vars
-					.filter(([_, { start_date }]) =>
+					.filter(({ start_date }) =>
 						isSameDay(new Date(start_date), new Date(dateString)),
 					)
-					// eslint-disable-next-line @typescript-eslint/no-unused-vars
-					.map(([_, value]) => value)
+				// Object.entries(schedules)
+				// 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				// 	.filter(([_, { start_date }]) =>
+				// 		isSameDay(new Date(start_date), new Date(dateString)),
+				// 	)
+				// 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+				// 	.map(([_, value]) => value)
 			);
 		},
 		[schedules],

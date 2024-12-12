@@ -4,7 +4,7 @@ import { convertDateToLocaleString } from "@/utils";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: ScheduleState = {
-	schedules: {},
+	schedules: [],
 	currentDate: convertDateToLocaleString(new Date()),
 	loading: false,
 	error: null,
@@ -14,37 +14,24 @@ const scheduleSlice = createSlice({
 	name: "schedule",
 	initialState,
 	reducers: {
-		addSchedule: (state, action: PayloadAction<ScheduleData>) => {
-			const schedule = action.payload;
-			state.schedules[schedule.schedule_id] = schedule;
-		},
-		updateSchedule: (
-			state,
-			action: PayloadAction<{
-				schedule_id: string;
-				updates: Partial<ScheduleData>;
-			}>,
-		) => {
-			const { schedule_id, updates } = action.payload;
-			if (state.schedules[schedule_id]) {
-				state.schedules[schedule_id] = {
-					...state.schedules[schedule_id],
-					...updates,
-				};
+		upsertSchedule: (state, action: PayloadAction<ScheduleData>) => {
+			const newSchedule = action.payload;
+			const index = state.schedules.findIndex(
+				(schedule) => schedule.schedule_id === newSchedule.schedule_id,
+			);
+
+			if (index !== -1) {
+				// 기존 일정 업데이트
+				state.schedules[index] = { ...state.schedules[index], ...newSchedule };
+			} else {
+				// 새 일정 추가
+				state.schedules.push(newSchedule);
 			}
 		},
 		deleteSchedule: (state, action: PayloadAction<string>) => {
-			delete state.schedules[action.payload];
-		},
-		setSchedules: (state, action: PayloadAction<ScheduleData[]>) => {
-			const schedules = action.payload.reduce<Record<string, ScheduleData>>(
-				(acc, schedule) => {
-					acc[schedule.schedule_id] = schedule;
-					return acc;
-				},
-				{},
+			state.schedules = state.schedules.filter(
+				(schedule) => schedule.schedule_id !== action.payload,
 			);
-			state.schedules = schedules;
 		},
 		setCurrentDate: (state, action: PayloadAction<string>) => {
 			state.currentDate = action.payload;
@@ -57,8 +44,21 @@ const scheduleSlice = createSlice({
 				state.error = null;
 			})
 			.addCase(fetchSchedules.fulfilled, (state, action) => {
-				action.payload.forEach((schedule) => {
-					state.schedules[schedule.schedule_id] = schedule;
+				action.payload.forEach((newSchedule) => {
+					const index = state.schedules.findIndex(
+						(schedule) => schedule.schedule_id === newSchedule.schedule_id,
+					);
+
+					if (index !== -1) {
+						// 기존 일정 업데이트
+						state.schedules[index] = {
+							...state.schedules[index],
+							...newSchedule,
+						};
+					} else {
+						// 새 일정 추가
+						state.schedules.push(newSchedule);
+					}
 				});
 
 				state.loading = false;
@@ -94,13 +94,8 @@ export const fetchSchedules = createAsyncThunk(
 	},
 );
 
-export const {
-	addSchedule,
-	updateSchedule,
-	deleteSchedule,
-	setSchedules,
-	setCurrentDate,
-} = scheduleSlice.actions;
+export const { upsertSchedule, deleteSchedule, setCurrentDate } =
+	scheduleSlice.actions;
 
 // Selectors
 export const selectSchedules = (state: RootState) => state.schedule.schedules;

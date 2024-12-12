@@ -7,10 +7,7 @@ import { getColor } from "@/styles/theme";
 import { useTheme } from "styled-components";
 import type { ScheduleFormModalProps } from "../../types/schedule";
 import { convertDateToLocaleString } from "@/utils/date";
-import {
-	addSchedule,
-	updateSchedule as updateScheduleInStore,
-} from "@/store/slices/scheduleSlice";
+import { upsertSchedule } from "@/store/slices/scheduleSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 
 const ScheduleFormModal = ({
@@ -76,19 +73,14 @@ const ScheduleFormModal = ({
 		try {
 			if (mode === "insert") {
 				const scheduleId = await insertSchedule(uid, scheduleData);
-				dispatch(addSchedule({ ...scheduleData, schedule_id: scheduleId }));
+				dispatch(upsertSchedule({ ...scheduleData, schedule_id: scheduleId }));
 				alert("일정이 등록되었습니다.");
 			} else if (mode === "update" && detailData) {
 				const scheduleId = await updateSchedule(uid, {
 					...scheduleData,
 					schedule_id: detailData.schedule_id,
 				});
-				dispatch(
-					updateScheduleInStore({
-						schedule_id: scheduleId,
-						updates: scheduleData,
-					}),
-				);
+				dispatch(upsertSchedule({ ...scheduleData, schedule_id: scheduleId }));
 				alert("일정이 수정되었습니다.");
 			}
 			onClose();

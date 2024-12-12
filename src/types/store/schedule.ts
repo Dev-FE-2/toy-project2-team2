@@ -8,7 +8,7 @@ export interface ScheduleData {
 }
 
 export interface ScheduleState {
-	schedules: Record<string, ScheduleData>;
+	schedules: ScheduleData[];
 	currentDate: string;
 	loading: boolean;
 	error: string | null;
