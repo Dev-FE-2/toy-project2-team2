@@ -4,7 +4,7 @@ import { convertDateToLocaleString } from "@/utils";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: ScheduleState = {
-	schedules: [],
+	schedules: {},
 	currentDate: convertDateToLocaleString(new Date()),
 	loading: false,
 	error: null,
@@ -15,7 +15,8 @@ const scheduleSlice = createSlice({
 	initialState,
 	reducers: {
 		addSchedule: (state, action: PayloadAction<ScheduleData>) => {
-			state.schedules.push(action.payload);
+			const schedule = action.payload;
+			state.schedules[schedule.schedule_id] = schedule;
 		},
 		updateSchedule: (
 			state,
@@ -25,20 +26,25 @@ const scheduleSlice = createSlice({
 			}>,
 		) => {
 			const { schedule_id, updates } = action.payload;
-			const schedule = state.schedules.find(
-				(s) => s.schedule_id === schedule_id,
-			);
-			if (schedule) {
-				Object.assign(schedule, updates);
+			if (state.schedules[schedule_id]) {
+				state.schedules[schedule_id] = {
+					...state.schedules[schedule_id],
+					...updates,
+				};
 			}
 		},
 		deleteSchedule: (state, action: PayloadAction<string>) => {
-			state.schedules = state.schedules.filter(
-				(s) => s.schedule_id !== action.payload,
-			);
+			delete state.schedules[action.payload];
 		},
 		setSchedules: (state, action: PayloadAction<ScheduleData[]>) => {
-			state.schedules = action.payload;
+			const schedules = action.payload.reduce<Record<string, ScheduleData>>(
+				(acc, schedule) => {
+					acc[schedule.schedule_id] = schedule;
+					return acc;
+				},
+				{},
+			);
+			state.schedules = schedules;
 		},
 		setCurrentDate: (state, action: PayloadAction<string>) => {
 			state.currentDate = action.payload;
@@ -51,7 +57,10 @@ const scheduleSlice = createSlice({
 				state.error = null;
 			})
 			.addCase(fetchSchedules.fulfilled, (state, action) => {
-				state.schedules = action.payload;
+				action.payload.forEach((schedule) => {
+					state.schedules[schedule.schedule_id] = schedule;
+				});
+
 				state.loading = false;
 			})
 			.addCase(fetchSchedules.rejected, (state, action) => {

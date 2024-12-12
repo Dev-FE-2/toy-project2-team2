@@ -10,14 +10,18 @@ export interface CalendarScheduleProps {
 	onMonthChange: (newMonth: string) => void;
 }
 
+export type formModalMode = "insert" | "update";
+
 export interface ScheduleFormModalProps {
-	mode: string;
+	mode: formModalMode;
 	isOpen: boolean;
 	onClose: () => void;
+	detailData: ScheduleData | null;
 }
 
 export interface ScheduleViewModalProps {
 	isOpen: boolean;
 	onClose: () => void;
+	onConfirm: () => void;
 	detailData: ScheduleData | null;
 }

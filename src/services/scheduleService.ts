@@ -9,6 +9,7 @@ import {
 	where,
 	doc,
 	setDoc,
+	updateDoc,
 } from "firebase/firestore";
 
 // 로그인한 유저의 일정 collection 참조 조회 함수
@@ -62,9 +63,9 @@ const getScheduleData = async (
 };
 
 const insertSchedule = async (
+	uid: string,
 	scheduleData: Omit<ScheduleData, "schedule_id">,
 ) => {
-	const uid = "C302bsuWBZdbQkID74j6rTNwEeN2";
 	const colRef = getMyScheduleCollection(uid);
 
 	// 새로운 schedule_id 생성
@@ -89,4 +90,29 @@ const insertSchedule = async (
 	}
 };
 
-export { getScheduleData, insertSchedule };
+const updateSchedule = async (uid: string, scheduleData: ScheduleData) => {
+	// Firestore 컬렉션 참조
+	const colRef = getMyScheduleCollection(uid);
+
+	const scheduleId = scheduleData.schedule_id;
+
+	// 문서 참조 생성
+	const docRef = doc(colRef, scheduleId);
+
+	// 날짜를 Date 객체로 변환
+	const formattedScheduleData = {
+		...scheduleData,
+		start_date: new Date(scheduleData.start_date),
+	};
+
+	try {
+		// Firestore에 문서 업데이트
+		await updateDoc(docRef, formattedScheduleData);
+		return scheduleId;
+	} catch (error) {
+		console.error("Error updating document: ", error);
+		throw error;
+	}
+};
+
+export { getScheduleData, insertSchedule, updateSchedule };

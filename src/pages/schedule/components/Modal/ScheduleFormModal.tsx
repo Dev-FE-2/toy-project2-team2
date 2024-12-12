@@ -2,21 +2,26 @@ import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { Input, Modal, TextArea } from "@/components";
 import useCalendar from "@/hooks/useCalendar";
-import { insertSchedule } from "@/services";
+import { insertSchedule, updateSchedule } from "@/services";
 import { getColor } from "@/styles/theme";
 import { useTheme } from "styled-components";
 import type { ScheduleFormModalProps } from "../../types/schedule";
 import { convertDateToLocaleString } from "@/utils/date";
-import { addSchedule } from "@/store/slices/scheduleSlice";
-import { useAppDispatch } from "@/hooks";
+import {
+	addSchedule,
+	updateSchedule as updateScheduleInStore,
+} from "@/store/slices/scheduleSlice";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 
 const ScheduleFormModal = ({
 	mode,
 	isOpen,
 	onClose,
+	detailData,
 }: ScheduleFormModalProps) => {
 	const theme = useTheme();
 	const { currentDateString } = useCalendar();
+	const uid = useAppSelector((state) => state.loginAuth.uid) as string;
 	const dispatch = useAppDispatch();
 
 	const [title, setTitle] = useState("");
@@ -28,13 +33,19 @@ const ScheduleFormModal = ({
 
 	useEffect(() => {
 		if (isOpen) {
-			setTitle("");
-			setDate(format(new Date(currentDateString), "yyyy-MM-dd"));
-			setColorLabel(getColor("primary")({ theme }));
-			setContent("");
+			if (mode === "insert") {
+				setTitle("");
+				setDate(format(new Date(currentDateString), "yyyy-MM-dd"));
+				setColorLabel(getColor("primary")({ theme }));
+				setContent("");
+			} else if (mode === "update" && detailData) {
+				setTitle(detailData.title);
+				setDate(detailData.start_date);
+				setColorLabel(detailData.color);
+				setContent(detailData.content);
+			}
 		}
-		setDate(currentDateString);
-	}, [isOpen, currentDateString, theme]);
+	}, [isOpen, mode, currentDateString, theme, detailData]);
 
 	const onChangeColor = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setColorLabel(e.target.value);
@@ -63,12 +74,28 @@ const ScheduleFormModal = ({
 		};
 
 		try {
-			const scheduleId = await insertSchedule(scheduleData);
-			dispatch(addSchedule({ ...scheduleData, schedule_id: scheduleId }));
-			alert("일정이 등록되었습니다.");
+			if (mode === "insert") {
+				const scheduleId = await insertSchedule(uid, scheduleData);
+				dispatch(addSchedule({ ...scheduleData, schedule_id: scheduleId }));
+				alert("일정이 등록되었습니다.");
+			} else if (mode === "update" && detailData) {
+				const scheduleId = await updateSchedule(uid, {
+					...scheduleData,
+					schedule_id: detailData.schedule_id,
+				});
+				dispatch(
+					updateScheduleInStore({
+						schedule_id: scheduleId,
+						updates: scheduleData,
+					}),
+				);
+				alert("일정이 수정되었습니다.");
+			}
 			onClose();
 		} catch (error) {
-			alert("일정 등록 중 오류가 발생했습니다.");
+			alert(
+				`일정 ${mode === "insert" ? "등록" : "수정"} 중 오류가 발생했습니다.`,
+			);
 			console.error(error);
 		}
 	};
