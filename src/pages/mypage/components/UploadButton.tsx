@@ -14,13 +14,13 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/types/store";
 import { getUserData } from "@/services/getDatas";
 import { setUserInfo } from "@/store/slices/userInfoSlice";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "@/hooks";
 
 export const UploadButton = ({ children }: { children: string }) => {
 	const fileInput = useRef<HTMLInputElement | null>(null);
 	const uploadStorage = storage;
 	const uid = useSelector((state: RootState) => state.loginAuth.uid);
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 	const maxSizeMB = 5;
 	const maxSizeBytes = maxSizeMB * 1024 * 1024;
 	const allowedExtentions = ["jpg", "jpeg", "png", "webp"];
