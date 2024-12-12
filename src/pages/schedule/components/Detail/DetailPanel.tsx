@@ -7,12 +7,22 @@ import { InsertBtn } from "../../schedule.styled";
 import InsertIcon from "@/assets/img/plus_icon.svg?react";
 import ScheduleFormModal from "../Modal/ScheduleFormModal";
 import ScheduleDetailModal from "../Modal/ScheduleDetailModal";
+import { ScheduleData } from "@/types";
 
 const DetailPanel = () => {
 	const { schedules, currentDate } = useCalendar();
 
+	const [selectedDetail, setSelectedDetail] = useState<ScheduleData | null>(
+		null,
+	); // 현재 선택된 detailData
 	const [isFormModalOpen, setIsFormModalOpen] = useState(false);
 	const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+
+	// DetailItem 클릭 핸들러
+	const handleDetailClick = (data: ScheduleData) => {
+		setSelectedDetail(data);
+		setIsDetailModalOpen(true);
+	};
 
 	return (
 		<Panel>
@@ -23,7 +33,7 @@ const DetailPanel = () => {
 						<DetailItem
 							key={data.schedule_id}
 							detailData={data}
-							onItemClick={setIsDetailModalOpen}
+							onItemClick={() => handleDetailClick(data)}
 						/>
 					))
 				) : (
@@ -41,6 +51,7 @@ const DetailPanel = () => {
 			<ScheduleDetailModal
 				isOpen={isDetailModalOpen}
 				onClose={() => setIsDetailModalOpen(false)}
+				detailData={selectedDetail}
 			/>
 		</Panel>
 	);

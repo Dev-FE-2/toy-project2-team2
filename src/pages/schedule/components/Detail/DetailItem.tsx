@@ -11,7 +11,7 @@ import DeleteIcon from "@/assets/img/close_icon.svg?react";
 
 const DetailItem = ({ detailData, onItemClick }: DetailItemProps) => {
 	return (
-		<ItemBox onClick={() => onItemClick(true)}>
+		<ItemBox onClick={() => onItemClick(detailData)}>
 			<Color color={detailData.color} />
 			<ItemInfo>
 				<ItemTitle>{detailData.title}</ItemTitle>

@@ -1,8 +1,17 @@
-import { Input, Modal } from "@/components";
-import { DetailLabel, FieldValue } from "./scheduleModal.styled";
-import { InputContainer } from "@/components/Input/Input.style";
+import { Modal } from "@/components";
+import {
+	ColorField,
+	DetailLabel,
+	FieldValue,
+	DetailInputContainer,
+} from "./scheduleModal.styled";
+import { ScheduleViewModalProps } from "../../types/schedule";
 
-const ScheduleDetailModal = ({ isOpen, onClose }: any) => {
+const ScheduleDetailModal = ({
+	isOpen,
+	onClose,
+	detailData,
+}: ScheduleViewModalProps) => {
 	return (
 		<Modal
 			isOpen={isOpen}
@@ -10,20 +19,24 @@ const ScheduleDetailModal = ({ isOpen, onClose }: any) => {
 			onClose={onClose}
 			confirmLabel="수정"
 		>
-			<InputContainer>
+			<DetailInputContainer>
 				<DetailLabel>제목</DetailLabel>
-				<FieldValue>제목입니다.</FieldValue>
-			</InputContainer>
-			<InputContainer>
+				<FieldValue>{detailData?.title}</FieldValue>
+			</DetailInputContainer>
+			<DetailInputContainer>
 				<DetailLabel>날짜</DetailLabel>
-				<FieldValue>2024-12-12</FieldValue>
-			</InputContainer>
+				<FieldValue>{detailData?.start_date}</FieldValue>
+			</DetailInputContainer>
 
-			<Input type="color" label="컬러 라벨" value={"#125631"} readOnly />
-			<InputContainer>
-				<DetailLabel>제목</DetailLabel>
-				<FieldValue>메모입니다.</FieldValue>
-			</InputContainer>
+			<DetailInputContainer>
+				<DetailLabel>컬러 라벨</DetailLabel>
+				<ColorField $color={detailData ? detailData.color : "#125631"} />
+			</DetailInputContainer>
+
+			<DetailInputContainer>
+				<DetailLabel>메모</DetailLabel>
+				<FieldValue $isBr={true}>{detailData?.content}</FieldValue>
+			</DetailInputContainer>
 		</Modal>
 	);
 };
