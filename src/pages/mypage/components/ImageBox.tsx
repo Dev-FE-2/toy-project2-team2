@@ -1,14 +1,18 @@
-import { Button } from "@/components";
-import { ImageBoxContianer, ImageCircle, UserImage } from "./ImageBox.styled";
+import { ImageBoxContainer, ImageCircle, UserImage } from "./ImageBox.styled";
 import profileImage from "@/assets/img/profile.png";
+import { userImageData } from "../type/ImageBox";
+import { UploadButton } from "./UploadButton";
 
-export const ImageBox = () => {
+export const ImageBox = ({ userImageData }: userImageData) => {
 	return (
-		<ImageBoxContianer>
+		<ImageBoxContainer>
 			<ImageCircle>
-				<UserImage src={profileImage} alt="프로필이미지" />
+				<UserImage
+					src={userImageData === null ? profileImage : userImageData}
+					alt="프로필이미지"
+				/>
 			</ImageCircle>
-			<Button size="small">프로필 이미지 변경</Button>
-		</ImageBoxContianer>
+			<UploadButton>프로필 이미지 변경</UploadButton>
+		</ImageBoxContainer>
 	);
 };

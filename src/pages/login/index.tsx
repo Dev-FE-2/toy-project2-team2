@@ -11,8 +11,6 @@ import { Button, Input } from "@/components";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase";
 import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
-import { setIsLogined } from "@/store/slices/loginAuthSlice";
 import { listenAuthChanges } from "@/store/userInfoListener";
 import { store } from "@/store";
 
@@ -22,7 +20,6 @@ const LoginPage = () => {
 	const [isIdError, setIsIdError] = useState(false);
 	const [isPasswordError, setIsPasswordError] = useState(false);
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
 	const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
 		e.preventDefault();
 		setEmail(e.target.value);
@@ -38,7 +35,6 @@ const LoginPage = () => {
 			.then(() => {
 				setIsIdError(false);
 				setIsPasswordError(false);
-				dispatch(setIsLogined(true));
 				listenAuthChanges(store.dispatch);
 				navigate("/");
 			})
