@@ -12,6 +12,7 @@ export const SelectContainer = styled.div<{ width?: string }>`
 	display: flex;
 	flex-direction: column;
 	gap: 8px;
+	overflow: visible;
 `;
 
 export const Label = styled.label`

@@ -15,7 +15,7 @@ import {
 	Value,
 } from "../Salay.styled";
 import Dot from "@/assets/img/dot_icon.svg?react";
-import { SalaryDetailsSectionProps } from "../types/SalaryDetailSection";
+import type { SalaryDetailsSectionProps } from "../types/salaryPage";
 
 const SalaryDetailsSection = ({
 	salaryData,

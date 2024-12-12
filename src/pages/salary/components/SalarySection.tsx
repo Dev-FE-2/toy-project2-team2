@@ -8,7 +8,7 @@ import {
 	SalaryButton,
 } from "../Salay.styled";
 import CorrectionRequestModal from "../components/CorrectionModal";
-import { SalarySectionProps } from "../types/SalarySection";
+import type { SalarySectionProps } from "../types/salaryPage";
 import Dot from "@/assets/img/dot_icon.svg?react";
 
 const SalarySection = ({
@@ -18,11 +18,6 @@ const SalarySection = ({
 	formatNumber,
 	selectedDate,
 }: SalarySectionProps) => {
-	const today = new Date();
-	const salaryId = `salaries_${today.getFullYear()}_${String(
-		today.getMonth() + 1,
-	).padStart(2, "0")}`;
-
 	return (
 		<Section>
 			<SectionTitle>급여</SectionTitle>

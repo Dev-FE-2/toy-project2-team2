@@ -60,4 +60,9 @@ export const NoDataMessage = styled.p`
 	margin: 0;
 	padding: 0;
 	text-align: center;
+	z-index: 1;
+`;
+export const NoDataWrapper = styled.div`
+	margin-bottom: 140px;
+	text-align: center; 
 `;

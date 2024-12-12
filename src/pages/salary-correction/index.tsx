@@ -14,20 +14,13 @@ import {
 	Arrow,
 	DateTime,
 	NoDataMessage,
+	NoDataWrapper,
 } from "./salary-correction.styled";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/firebase";
 import { useSelector } from "react-redux";
 import { RootState } from "@/types/store";
-
-interface CorrectionData {
-	month: string;
-	date: string;
-	status: string;
-	history: string | number;
-	correctionType: string;
-	reason: string;
-}
+import type { CorrectionData } from "./types/correctionData";
 
 const SalaryCorrectionPage = () => {
 	const [isHistoryModalOpen, setHistoryModalOpen] = useState(false);
@@ -142,9 +135,11 @@ const SalaryCorrectionPage = () => {
 						</Card>
 					))
 				) : (
-					<NoDataMessage>
-						해당 년도의 정정 신청 내역 데이터가 없습니다.
-					</NoDataMessage>
+					<NoDataWrapper>
+						<NoDataMessage>
+							해당 년도의 정정 신청 내역 데이터가 없습니다.
+						</NoDataMessage>
+					</NoDataWrapper>
 				)}
 
 				{selectedData && (
