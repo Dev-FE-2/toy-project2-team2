@@ -3,4 +3,5 @@ export interface SalarySectionProps {
 	isCorrectionModalOpen: boolean;
 	setIsCorrectionModalOpen: (isOpen: boolean) => void;
 	formatNumber: (value: number) => string;
+	selectedDate: any;
 }

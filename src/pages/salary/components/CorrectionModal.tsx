@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomSelect from "@/components/Select";
 import Modal from "@/components/Modal";
 import { TextArea } from "@/components";
@@ -13,11 +13,11 @@ import {
 const CorrectionModal = ({
 	isOpen,
 	onClose,
-	salaryId,
+	selectedDate,
 }: {
 	isOpen: boolean;
 	onClose: () => void;
-	salaryId: string;
+	selectedDate: Date;
 }) => {
 	const correctionOptions = [
 		{ value: "지급 내역", label: "지급 내역" },
@@ -30,11 +30,25 @@ const CorrectionModal = ({
 	);
 	const [reason, setReason] = useState("");
 	const [error, setError] = useState(false);
-	const userId = useSelector((state: RootState) => state.userInfo.user?.uid);
+	const uid = useSelector((state: RootState) => state.loginAuth.uid?.userId);
+	console.log("UID:", uid);
+
+	useEffect(() => {
+		if (isOpen) {
+			setSelectedCorrection(correctionOptions[0].value);
+			setReason("");
+			setError(false);
+		}
+	}, [isOpen]);
+	const getSalaryId = () => {
+		const year = selectedDate.getFullYear();
+		const month = String(selectedDate.getMonth() + 1).padStart(2, "0");
+		return `salaries_${year}_${month}`;
+	};
 
 	const handleApply = async () => {
-		if (!userId || !salaryId) {
-			console.error("사용자 ID 또는 급여 ID가 없습니다.");
+		if (!uid) {
+			console.error("사용자 ID가 없습니다.");
 			return;
 		}
 
@@ -44,12 +58,13 @@ const CorrectionModal = ({
 			return;
 		}
 
+		const salaryId = getSalaryId();
 		try {
 			setError(false);
-			const amount = await getSalaryAmount(userId, salaryId);
+			const amount = await getSalaryAmount(uid, salaryId);
 
 			await saveSalaryCorrection({
-				userId,
+				uid,
 				salaryId,
 				correctionData: {
 					type: selectedCorrection,

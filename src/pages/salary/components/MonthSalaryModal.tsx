@@ -12,12 +12,17 @@ import { RootState } from "@/types/store";
 import { getYearlySalaryData } from "@/services/SalaryService";
 
 const MonthlySalaryModal = ({ isOpen, onClose }: any) => {
-	const userId = useSelector((state: RootState) => state.userInfo.user?.uid);
+	const userId = useSelector((state: RootState) => state.loginAuth.uid?.userId);
+
 	const currentYear = new Date().getFullYear().toString();
 	const [selectedYear, setSelectedYear] = useState(currentYear);
 	const [yearlySalaryData, setYearlySalaryData] = useState<
 		{ month: string; salary: number }[]
 	>([]);
+
+	const years = Array.from({ length: 5 }, (_, i) =>
+		(Number(currentYear) - i).toString(),
+	);
 
 	useEffect(() => {
 		if (userId && selectedYear) {
@@ -33,10 +38,6 @@ const MonthlySalaryModal = ({ isOpen, onClose }: any) => {
 			console.error(error);
 		}
 	};
-
-	const years = Array.from({ length: 5 }, (_, i) =>
-		(Number(currentYear) - i).toString(),
-	);
 
 	return (
 		<Modal isOpen={isOpen} title="월별 급여" onClose={onClose}>

@@ -58,11 +58,11 @@ export const getYearlySalaryData = async (userId: string, year: number) => {
 };
 
 export const saveSalaryCorrection = async ({
-	userId,
+	uid,
 	salaryId,
 	correctionData,
 }: {
-	userId: string;
+	uid: any;
 	salaryId: string;
 	correctionData: {
 		type: string;
@@ -74,7 +74,7 @@ export const saveSalaryCorrection = async ({
 	try {
 		const correctionRef = doc(
 			db,
-			`user/${userId}/salaries/${salaryId}/salaryCorrection/${salaryId}`,
+			`user/${uid}/salaries/${salaryId}/salaryCorrection/${salaryId}`,
 		);
 
 		await setDoc(correctionRef, {

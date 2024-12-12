@@ -16,6 +16,7 @@ const SalarySection = ({
 	isCorrectionModalOpen,
 	setIsCorrectionModalOpen,
 	formatNumber,
+	selectedDate,
 }: SalarySectionProps) => {
 	const today = new Date();
 	const salaryId = `salaries_${today.getFullYear()}_${String(
@@ -40,7 +41,7 @@ const SalarySection = ({
 					<CorrectionRequestModal
 						isOpen={isCorrectionModalOpen}
 						onClose={() => setIsCorrectionModalOpen(false)}
-						salaryId={salaryId}
+						selectedDate={selectedDate}
 					/>
 				</RightContainer>
 			</ActualSalaryContainer>

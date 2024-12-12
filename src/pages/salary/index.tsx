@@ -38,7 +38,8 @@ const SalaryPage = () => {
 		const total = data.actualPayment + getTotalDeductions(data);
 		return total > 0 ? Math.round((value / total) * 100) : 0;
 	};
-	const uid = useSelector((state: RootState) => state.loginAuth.uid);
+	const uid = useSelector((state: RootState) => state.loginAuth.uid?.userId);
+	console.log("UID:", uid);
 	const fetchUserData = useCallback(
 		async (date: Date) => {
 			if (!uid) return;
@@ -104,6 +105,7 @@ const SalaryPage = () => {
 						isCorrectionModalOpen={isCorrectionModalOpen}
 						setIsCorrectionModalOpen={setIsCorrectionModalOpen}
 						formatNumber={formatNumber}
+						selectedDate={selectedDate}
 					/>
 
 					<Graph

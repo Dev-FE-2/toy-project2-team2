@@ -3,7 +3,6 @@ import { store } from "@/store";
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export interface UserInfoState {
-	uid: string | null;
 	email: string | null;
 	name: string | null;
 	grade: string | null;
@@ -15,6 +14,6 @@ export interface AuthState {
 	isLoading: boolean;
 }
 export interface LoginState {
-	uid: string | null;
+	uid: { userId: string } | null;
 	isLogined: boolean;
 }

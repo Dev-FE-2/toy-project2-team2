@@ -10,9 +10,8 @@ const loginAuthSlice = createSlice({
 	name: "loginAuth",
 	initialState,
 	reducers: {
-		setUid: (state, action: PayloadAction<string | null>) => {
+		setUid: (state, action: PayloadAction<{ userId: string } | null>) => {
 			state.uid = action.payload;
-			state.isLogined = false;
 		},
 		clearUid: (state) => {
 			state.uid = null;
@@ -22,6 +21,5 @@ const loginAuthSlice = createSlice({
 		},
 	},
 });
-
 export const { setUid, clearUid, setIsLogined } = loginAuthSlice.actions;
 export default loginAuthSlice.reducer;
