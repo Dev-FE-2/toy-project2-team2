@@ -61,7 +61,7 @@ const CorrectionModal = ({
 		const salaryId = getSalaryId();
 		try {
 			setError(false);
-			const amount = await getSalaryAmount(uid, salaryId);
+			const history = await getSalaryAmount(uid, salaryId);
 
 			await saveSalaryCorrection({
 				uid,
@@ -69,9 +69,9 @@ const CorrectionModal = ({
 				correctionData: {
 					correctionType: selectedCorrection,
 					reason,
-					amount,
+					history,
 					status: "검토중",
-					date: new Date().toISOString(), // 요청 날짜 추가
+					date: new Date().toISOString(), 
 				},
 			});
 			console.log("정정 요청이 성공적으로 저장되었습니다.");

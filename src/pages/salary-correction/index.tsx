@@ -3,7 +3,7 @@ import { Select } from "@/components";
 import LeftArrow from "@/assets/img/left_arrow_icon.svg?react";
 import { useState, useEffect } from "react";
 import { StyledTitle } from "@/components/Title/Title.styled";
-import CorrectionRequestModaled from "./components/HistoryModal";
+import HistoryModal from "./components/HistoryModal";
 import {
 	CardContainer,
 	Header,
@@ -24,7 +24,7 @@ interface CorrectionData {
 	month: string;
 	date: string;
 	status: string;
-	amount: string;
+	history: string | number;
 	correctionType: string;
 	reason: string;
 }
@@ -47,10 +47,10 @@ const SalaryCorrectionPage = () => {
 			const corrections: CorrectionData[] = [];
 
 			for (const salaryDoc of salaryDocs.docs) {
-				const [_, docYear, docMonth] = salaryDoc.id.split("_"); 
-				if (docYear !== year) continue; 
+				const [_, docYear, docMonth] = salaryDoc.id.split("_");
+				if (docYear !== year) continue;
 
-				const salaryMonth = `${docYear}년 ${parseInt(docMonth, 10)}월`; 
+				const salaryMonth = `${docYear}년 ${parseInt(docMonth, 10)}월`;
 				const correctionPath = `${basePath}/${salaryDoc.id}/salaryCorrection`;
 
 				const correctionSnapshots = await getDocs(
@@ -120,7 +120,7 @@ const SalaryCorrectionPage = () => {
 						>
 							<CardLeft>
 								<StatusBadge status={item.status} />
-								<Month>{item.month} 급여 내역</Month>
+								<Month>{item.month} 정정 내역</Month>
 							</CardLeft>
 							<CardRight>
 								<DateTime>
@@ -148,11 +148,11 @@ const SalaryCorrectionPage = () => {
 				)}
 
 				{selectedData && (
-					<CorrectionRequestModaled
+					<HistoryModal
 						isOpen={isHistoryModalOpen}
 						onClose={() => setHistoryModalOpen(false)}
 						status={selectedData.status}
-						amount={selectedData.amount}
+						history={selectedData.history}
 						correctionType={selectedData.correctionType}
 						reason={selectedData.reason}
 					/>

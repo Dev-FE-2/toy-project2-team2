@@ -9,10 +9,9 @@ const HistoryModal = ({
 	status,
 	correctionType,
 	reason,
-	amount,
+	history,
 }: any) => {
 	const handleApply = () => {
-		console.log("정정 확인 요청");
 		onClose();
 	};
 
@@ -27,7 +26,11 @@ const HistoryModal = ({
 			<Container>
 				<Label>정정 내역</Label>
 				<Row>
-					<Amount>{amount}</Amount>
+					<Amount>
+						{typeof history === "number"
+							? history.toLocaleString("en-US")
+							: history}
+					</Amount>
 					<StatusBadge status={status} />
 				</Row>
 			</Container>

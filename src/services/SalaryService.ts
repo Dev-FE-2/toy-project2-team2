@@ -66,7 +66,7 @@ export const saveSalaryCorrection = async ({
 	correctionData: {
 		correctionType: string;
 		reason: string;
-		amount: number;
+		history: number | string;
 		status: string;
 		date: any;
 	};
