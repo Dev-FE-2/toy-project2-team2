@@ -11,10 +11,16 @@ const Panel = styled.section`
 	border-top-right-radius: 10px;
 `;
 
-const Date = styled.div`
+const DateStr = styled.div`
 	font-size: ${getFontSize("md")};
 	font-weight: ${getFontWeight("bold")};
 	margin-bottom: 20px;
+`;
+
+const NoDataStr = styled.p`
+	font-size: ${getFontSize("sm")};
+	font-weight: ${getFontWeight("regular")};
+	color: ${getColor("grayDark")};
 `;
 
 const DetailList = styled.ul`
@@ -65,6 +71,7 @@ const ItemContent = styled.p`
 	-webkit-line-clamp: 2;
 	text-overflow: ellipsis;
 	overflow: hidden;
+	word-break: break-word;
 `;
 
 const DeleteBtn = styled.button`
@@ -82,7 +89,8 @@ const DeleteBtn = styled.button`
 
 export {
 	Panel,
-	Date,
+	DateStr,
+	NoDataStr,
 	DetailList,
 	ItemBox,
 	Color,
