@@ -76,7 +76,7 @@ export const UserInfoBox = ({ userData }: UserData) => {
 					<div>소속</div>
 					<div>직급</div>
 				</InfoTitle>
-				<InfoValue>
+				<InfoValue readOnly={!isEditing}>
 					<Input value={userInfoData.email} readOnly />
 					<Input
 						value={userInfoData.name}

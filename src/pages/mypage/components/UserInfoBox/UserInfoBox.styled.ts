@@ -14,7 +14,7 @@ export const InfoTitle = styled.div`
 		padding: 10px 0;
 	}
 `;
-export const InfoValue = styled.div`
+export const InfoValue = styled.div<{ readOnly: boolean }>`
 	font-size: ${getFontSize("lg")};
 	margin-left: 10px;
 	flex-direction: column;
@@ -27,5 +27,7 @@ export const InfoValue = styled.div`
 		cursor: default;
 		color: ${getColor("secondaryDark")};
 		font-size: ${getFontSize("lg")};
+		border: ${(props) =>
+			props.readOnly ? "none" : `1px solid ${getColor("grayLight")}`};
 	}
 `;
