@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import SalarySection from "./components/SalarySection";
 import SalaryDetailsSection from "./components/SalaryDetailSection";
 import type { SalaryData } from "./types/salaryData";
+import { calculateActualPayment } from "@/utils/calculateSalary";
 
 const SalaryPage = () => {
 	const today = new Date();
@@ -33,9 +34,7 @@ const SalaryPage = () => {
 			data.localIncomeTax
 		);
 	};
-	const calculateActualPayment = (data: SalaryData): number => {
-		return data.baseSalary - getTotalDeductions(data);
-	};
+	const actualPayment = salaryData ? calculateActualPayment(salaryData) : 0;
 
 	const uid = useSelector((state: RootState) => state.loginAuth.uid);
 	console.log("UID:", uid);
@@ -101,7 +100,7 @@ const SalaryPage = () => {
 			{salaryData ? (
 				<>
 					<SalarySection
-						actualPayment={calculateActualPayment(salaryData)}
+						actualPayment={actualPayment}
 						isCorrectionModalOpen={isCorrectionModalOpen}
 						setIsCorrectionModalOpen={setIsCorrectionModalOpen}
 						formatNumber={formatNumber}

@@ -1,4 +1,5 @@
 import { db } from "@/firebase";
+import { calculateActualPayment } from "@/utils/calculateSalary";
 import {
 	doc,
 	setDoc,
@@ -38,16 +39,27 @@ export const getYearlySalaryData = async (userId: string, year: number) => {
 		const snapshot = await getDocs(q);
 
 		if (snapshot.empty) {
-			console.warn(` ${year}년의 정보를 찾을 수 없습니다.`);
 			return [];
 		}
 
 		return snapshot.docs.map((doc) => {
 			const data = doc.data();
+
 			const month = new Date(data.payday).getMonth() + 1;
+
+			const actualPayment = calculateActualPayment({
+				baseSalary: data.baseSalary || 0,
+				nationalPension: data.nationalPension || 0,
+				healthInsurance: data.healthInsurance || 0,
+				longTermCareInsurance: data.longTermCareInsurance || 0,
+				employmentInsurance: data.employmentInsurance || 0,
+				incomeTax: data.incomeTax || 0,
+				localIncomeTax: data.localIncomeTax || 0,
+			});
+
 			return {
 				month: `${month}월`,
-				salary: data.actualPayment,
+				salary: actualPayment,
 			};
 		});
 	} catch (error) {
