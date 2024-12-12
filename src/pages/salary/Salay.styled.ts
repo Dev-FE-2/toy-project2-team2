@@ -124,7 +124,7 @@ export const TooltipRow = styled.div`
 export const TooltipDivider = styled.div`
 	width: 100%;
 	height: 1px;
-	background-color: #ccc;
+	background-color: ${getColor("secondaryLight")};
 	margin: 10px 0;
 `;
 
@@ -176,7 +176,7 @@ export const Value = styled.p`
 export const Divider = styled.div`
 	width: 100%;
 	height: 1px;
-	background-color: #ddd;
+	background-color: ${getColor("secondaryLight")};
 	margin: 15px 0;
 `;
 export const SectionRow = styled.div`
@@ -192,4 +192,9 @@ export const SectionHalf = styled.div`
 	max-width: 50%;
 	display: flex;
 	flex-direction: column;
+`;
+
+export const ErrorMessage = styled.p`
+	color: red;
+	font-size: 14px;
 `;

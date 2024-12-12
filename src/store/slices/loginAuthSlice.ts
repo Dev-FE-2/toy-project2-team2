@@ -21,6 +21,5 @@ const loginAuthSlice = createSlice({
 		},
 	},
 });
-
 export const { setUid, clearUid, setIsLogined } = loginAuthSlice.actions;
 export default loginAuthSlice.reducer;
