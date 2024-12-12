@@ -53,8 +53,8 @@ export const UploadButton = ({ children }: { children: string }) => {
 			e.target.value = "";
 			return;
 		}
-		const imageRef = ref(uploadStorage, `images/${uid.userId}/` + file.name);
-		const deleteFilePath = ref(uploadStorage, `images/${uid?.userId}`);
+		const imageRef = ref(uploadStorage, `images/${uid}/` + file.name);
+		const deleteFilePath = ref(uploadStorage, `images/${uid}`);
 		try {
 			const result = await listAll(deleteFilePath);
 			for (const item of result.items) {
@@ -69,7 +69,7 @@ export const UploadButton = ({ children }: { children: string }) => {
 
 		await updateImageURL(uid, imgUrl);
 		if (uid !== null) {
-			const userData = await getUserData(uid.userId);
+			const userData = await getUserData(uid);
 			if (userData) {
 				dispatch(
 					setUserInfo({

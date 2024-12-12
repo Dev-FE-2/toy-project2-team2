@@ -9,7 +9,7 @@ export const listenAuthChanges = async (dispatch: AppDispatch) => {
 	dispatch(setLoading(true));
 	onAuthStateChanged(auth, async (user) => {
 		if (user) {
-			dispatch(setUid({ userId: user.uid }));
+			dispatch(setUid(user.uid));
 
 			// user가 null이 아닐 때만 getUserData 호출
 			const userData = await getUserData(user.uid);
