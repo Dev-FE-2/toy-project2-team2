@@ -20,6 +20,7 @@ import { SalaryDetailsSectionProps } from "../types/SalaryDetailSection";
 const SalaryDetailsSection = ({
 	salaryData,
 	formatNumber,
+	totalDeductions,
 }: SalaryDetailsSectionProps) => (
 	<Section>
 		<SectionRow>
@@ -119,6 +120,12 @@ const SalaryDetailsSection = ({
 										지방소득세
 									</Label>
 									<Value>{formatNumber(salaryData.localIncomeTax)} 원</Value>
+								</ListItem>
+								<ListItem>
+									<Label>
+										<Dot style={{ margin: "0 4px 3px 4px" }} />총 공제액
+									</Label>
+									<Value> {formatNumber(totalDeductions)} 원</Value>
 								</ListItem>
 							</>
 						) : (

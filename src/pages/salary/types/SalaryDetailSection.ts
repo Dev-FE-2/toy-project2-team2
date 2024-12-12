@@ -11,4 +11,5 @@ export interface SalaryData {
 export interface SalaryDetailsSectionProps {
 	salaryData: SalaryData | null;
 	formatNumber: any;
+	totalDeductions: any;
 }
