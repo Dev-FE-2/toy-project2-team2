@@ -14,6 +14,6 @@ export interface AuthState {
 	isLoading: boolean;
 }
 export interface LoginState {
-	uid: string | null;
+	uid: { userId: string } | null;
 	isLogined: boolean;
 }

@@ -3,13 +3,15 @@ import { AppDispatch } from "@/types/store";
 import { getUserData } from "@/services/getDatas";
 import { auth } from "@/firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import { setUid } from "./slices/loginAuthSlice";
 
 export const listenAuthChanges = async (dispatch: AppDispatch) => {
 	dispatch(setLoading(true));
 	onAuthStateChanged(auth, async (user) => {
-		const userAuth = user;
-		const userData = await getUserData(userAuth.uid);
-		console.log(userData);
+		if (user) {
+			dispatch(setUid({ userId: user.uid }));
+		}
+		const userData = await getUserData(user.uid);
 		if (userData) {
 			dispatch(
 				setUserInfo({

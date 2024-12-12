@@ -20,13 +20,11 @@ import { setUserInfo } from "@/store/slices/userInfoSlice";
 
 const Header = () => {
 	const user = useSelector((state: RootState) => state.userInfo.user);
-	console.log(user);
 	const dispatch = useDispatch();
 	const logOut = () => {
 		auth.signOut();
 		dispatch(setIsLogined(false));
 		dispatch(setUserInfo(null));
-		console.log(auth.currentUser);
 	};
 	return (
 		<HeaderContainer>

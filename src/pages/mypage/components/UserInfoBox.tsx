@@ -3,8 +3,9 @@ import {
 	InfoValue,
 	UserInfoBoxContainer,
 } from "./UserInfoBox.styled";
+import { UserData } from "../type/UserInfoBox";
 
-export const UserInfoBox = () => {
+export const UserInfoBox = ({ userData }: UserData) => {
 	return (
 		<UserInfoBoxContainer>
 			<InfoTitle>
@@ -14,10 +15,10 @@ export const UserInfoBox = () => {
 				<div>직급</div>
 			</InfoTitle>
 			<InfoValue>
-				<div>email@email.ocm</div>
-				<div>홍길동</div>
-				<div>디자인팀</div>
-				<div>사원</div>
+				<div>{userData.email}</div>
+				<div>{userData.name}</div>
+				<div>{userData.team}</div>
+				<div>{userData.grade}</div>
 			</InfoValue>
 		</UserInfoBoxContainer>
 	);
