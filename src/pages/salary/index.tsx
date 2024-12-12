@@ -33,11 +33,10 @@ const SalaryPage = () => {
 			data.localIncomeTax
 		);
 	};
-
-	const getPercentage = (value: number, data: SalaryData): number => {
-		const total = data.actualPayment + getTotalDeductions(data);
-		return total > 0 ? Math.round((value / total) * 100) : 0;
+	const calculateActualPayment = (data: SalaryData): number => {
+		return data.baseSalary - getTotalDeductions(data);
 	};
+
 	const uid = useSelector((state: RootState) => state.loginAuth.uid);
 	console.log("UID:", uid);
 
@@ -102,20 +101,15 @@ const SalaryPage = () => {
 			{salaryData ? (
 				<>
 					<SalarySection
-						actualPayment={salaryData.actualPayment}
+						actualPayment={calculateActualPayment(salaryData)}
 						isCorrectionModalOpen={isCorrectionModalOpen}
 						setIsCorrectionModalOpen={setIsCorrectionModalOpen}
 						formatNumber={formatNumber}
 						selectedDate={selectedDate}
 					/>
 
-					<Graph
-						salaryPercent={getPercentage(salaryData.actualPayment, salaryData)}
-						deductionPercent={getPercentage(
-							getTotalDeductions(salaryData),
-							salaryData,
-						)}
-					/>
+					<Graph salaryData={salaryData} />
+
 					<SalaryDetailsSection
 						salaryData={salaryData}
 						formatNumber={formatNumber}
