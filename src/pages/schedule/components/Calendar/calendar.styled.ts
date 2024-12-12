@@ -73,6 +73,10 @@ const DateBox = styled.div<{ $isToday: boolean; $isThisMonth: boolean }>`
 		border-color: ${({ $isThisMonth }) =>
 			$isThisMonth ? getColor("primary") : getColor("secondaryLight")};
 	}
+
+	&.selected {
+		border-color: ${getColor("primary")};
+	}
 `;
 
 const DateNum = styled.span`

@@ -1,14 +1,45 @@
-import { useContext } from "react";
-import CalendarContext from "@/contexts/CalendarContext";
-import { CalendarContextProps } from "@/types";
+import { useAppDispatch, useAppSelector } from "./useRedux";
+import {
+	fetchSchedules,
+	selectCurrentDateString,
+	selectSchedules,
+	setCurrentDate,
+} from "@/store/slices/scheduleSlice";
+import { convertDateToLocaleString } from "@/utils";
+import { addMonths, startOfMonth, subMonths } from "date-fns";
 
-const useCalendar = (): CalendarContextProps => {
-	const context = useContext(CalendarContext);
-	if (!context) {
-		throw new Error("useCalendar must be used within a CalendarProvider");
-	}
+const useCalendar = () => {
+	const dispatch = useAppDispatch();
+	const schedules = useAppSelector(selectSchedules);
+	const currentDateString = useAppSelector(selectCurrentDateString);
 
-	return context;
+	const currentDate = new Date(currentDateString);
+
+	const onPrevMonth = () => {
+		const newDate = startOfMonth(subMonths(currentDate, 1));
+		dispatch(setCurrentDate(convertDateToLocaleString(newDate)));
+		dispatch(fetchSchedules({ startDate: newDate }));
+	};
+
+	const onNextMonth = () => {
+		const newDate = startOfMonth(addMonths(currentDate, 1));
+		dispatch(setCurrentDate(convertDateToLocaleString(newDate)));
+		dispatch(fetchSchedules({ startDate: newDate }));
+	};
+
+	const setDate = (date: Date) => {
+		dispatch(setCurrentDate(convertDateToLocaleString(date)));
+		dispatch(fetchSchedules({ startDate: date }));
+	};
+
+	return {
+		currentDate,
+		currentDateString,
+		setDate,
+		onPrevMonth,
+		onNextMonth,
+		schedules,
+	};
 };
 
 export default useCalendar;

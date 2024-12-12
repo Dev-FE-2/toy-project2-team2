@@ -13,14 +13,13 @@ import profileImage from "@/assets/img/profile.png";
 import logoImage from "@/assets/img/logo.png";
 import Button from "../Button";
 import { auth } from "@/firebase";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/types/store";
 import { setIsLogined } from "@/store/slices/loginAuthSlice";
 import { setUserInfo } from "@/store/slices/userInfoSlice";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 
 const Header = () => {
-	const user = useSelector((state: RootState) => state.userInfo.user);
-	const dispatch = useDispatch();
+	const user = useAppSelector((state) => state.userInfo.user);
+	const dispatch = useAppDispatch();
 	const logOut = () => {
 		auth.signOut();
 		dispatch(setIsLogined(false));

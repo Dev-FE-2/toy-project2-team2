@@ -14,18 +14,6 @@ export const getUserData = async (uid: string) => {
 	}
 };
 
-export const getScheduleData = async () => {
-	const docRef = doc(db, "user", "user1", "schedule", "rUsdwhdmhzbtcvO4iRsI");
-	const docSnap = await getDoc(docRef);
-	const scheduleData = docSnap.data();
-	if (docSnap.exists()) {
-		return scheduleData;
-	} else {
-		// doc.data()가 undefined일 경우
-		console.log("No such document!");
-	}
-};
-
 export const getSalariesData = async () => {
 	const docRef = doc(db, "user", "user1", "salaries", "8WtOEWQak2wun80XvWOr");
 	const docSnap = await getDoc(docRef);
