@@ -2,7 +2,7 @@ import { ScheduleData } from "@/types";
 
 export interface DetailItemProps {
 	detailData: ScheduleData;
-	onItemClick: (isOpen: boolean) => void;
+	onItemClick: (detailData: ScheduleData) => void;
 }
 
 export interface CalendarScheduleProps {
@@ -14,4 +14,10 @@ export interface ScheduleFormModalProps {
 	mode: string;
 	isOpen: boolean;
 	onClose: () => void;
+}
+
+export interface ScheduleViewModalProps {
+	isOpen: boolean;
+	onClose: () => void;
+	detailData: ScheduleData | null;
 }
