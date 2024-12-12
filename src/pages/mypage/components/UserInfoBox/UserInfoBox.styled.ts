@@ -1,8 +1,9 @@
 import { flexCenter } from "@/styles/commonStyles";
-import { getFontSize, getFontWeight } from "@/styles/theme";
+import { getColor, getFontSize, getFontWeight } from "@/styles/theme";
 import styled from "styled-components";
 
-export const UserInfoBoxContainer = styled.div`
+export const UserInfoBoxContainer = styled.div``;
+export const UserInfoContent = styled.div`
 	${flexCenter}
 `;
 export const InfoTitle = styled.div`
@@ -18,6 +19,13 @@ export const InfoValue = styled.div`
 	margin-left: 10px;
 	flex-direction: column;
 	div {
-		padding: 10px 0;
+		height: 40px;
+	}
+	input {
+		padding: 0;
+		background-color: ${getColor("white")};
+		cursor: default;
+		color: ${getColor("secondaryDark")};
+		font-size: ${getFontSize("lg")};
 	}
 `;

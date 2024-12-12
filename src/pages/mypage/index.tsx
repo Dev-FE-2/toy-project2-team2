@@ -1,6 +1,6 @@
 import { MyPageContainer, MyPageHeader, ProfileBox } from "./MyPage.styled";
-import { UserInfoBox } from "./components/UserInfoBox";
-import { ImageBox } from "./components/ImageBox";
+import { UserInfoBox } from "./components/UserInfoBox/UserInfoBox";
+import { ImageBox } from "./components/ImageBox/ImageBox";
 import Title from "@/components/Title";
 import { useSelector } from "react-redux";
 import type { RootState } from "@/types/store";

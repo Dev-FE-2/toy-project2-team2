@@ -1,6 +1,6 @@
 import { ImageBoxContainer, ImageCircle, UserImage } from "./ImageBox.styled";
 import profileImage from "@/assets/img/profile.png";
-import { userImageData } from "../type/ImageBox";
+import { userImageData } from "../../type/ImageBox";
 import { UploadButton } from "./UploadButton";
 
 export const ImageBox = ({ userImageData }: userImageData) => {
