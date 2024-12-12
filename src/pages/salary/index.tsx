@@ -40,6 +40,7 @@ const SalaryPage = () => {
 	};
 	const uid = useSelector((state: RootState) => state.loginAuth.uid?.userId);
 	console.log("UID:", uid);
+	
 	const fetchUserData = useCallback(
 		async (date: Date) => {
 			if (!uid) return;

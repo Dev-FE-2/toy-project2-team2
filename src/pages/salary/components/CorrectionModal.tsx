@@ -67,10 +67,11 @@ const CorrectionModal = ({
 				uid,
 				salaryId,
 				correctionData: {
-					type: selectedCorrection,
+					correctionType: selectedCorrection,
 					reason,
 					amount,
-					status: "검토 중",
+					status: "검토중",
+					date: new Date().toISOString(), // 요청 날짜 추가
 				},
 			});
 			console.log("정정 요청이 성공적으로 저장되었습니다.");

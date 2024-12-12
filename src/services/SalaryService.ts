@@ -2,7 +2,6 @@ import { db } from "@/firebase";
 import {
 	doc,
 	setDoc,
-	Timestamp,
 	getDoc,
 	collection,
 	getDocs,
@@ -65,10 +64,11 @@ export const saveSalaryCorrection = async ({
 	uid: any;
 	salaryId: string;
 	correctionData: {
-		type: string;
+		correctionType: string;
 		reason: string;
 		amount: number;
 		status: string;
+		date: any;
 	};
 }) => {
 	try {
@@ -79,7 +79,6 @@ export const saveSalaryCorrection = async ({
 
 		await setDoc(correctionRef, {
 			...correctionData,
-			createdAt: Timestamp.now(),
 		});
 
 		console.log("정정 요청이 성공적으로 저장되었습니다.");

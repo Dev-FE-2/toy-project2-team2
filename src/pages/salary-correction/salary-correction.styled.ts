@@ -56,3 +56,8 @@ export const Arrow = styled.div`
 	font-size: 16px;
 	color: ${getColor("grayDark")};
 `;
+export const NoDataMessage = styled.p`
+	margin: 0;
+	padding: 0;
+	text-align: center;
+`;
