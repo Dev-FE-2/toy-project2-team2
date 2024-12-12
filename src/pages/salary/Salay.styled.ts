@@ -193,8 +193,12 @@ export const SectionHalf = styled.div`
 	display: flex;
 	flex-direction: column;
 `;
-
 export const ErrorMessage = styled.p`
 	color: red;
 	font-size: 14px;
+`;
+export const NoDataMessage = styled.p`
+	margin: 0;
+	padding: 0;
+	text-align: center;
 `;

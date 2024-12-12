@@ -27,6 +27,7 @@ export const Label = styled.label`
 `;
 
 export const InputBox = styled.input<{ $isError: boolean }>`
+	font-family: inherit;
 	padding: 10px;
 	font-size: ${getFontSize("md")};
 	border: 1px solid

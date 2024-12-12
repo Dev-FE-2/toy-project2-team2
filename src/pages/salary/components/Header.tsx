@@ -1,7 +1,7 @@
 import LeftArrow from "@/assets/img/left_arrow_icon.svg?react";
 import CustomDatePicker from "./CustomDatePicker";
 import MonthlySalaryModal from "../components/MonthSalaryModal";
-import { HeaderProps } from "../types/header";
+import type { HeaderProps } from "../types/salaryPage";
 import {
 	ButtonGroup,
 	DateContainer,

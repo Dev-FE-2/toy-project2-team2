@@ -1,14 +1,14 @@
 import { useState, useEffect, useCallback } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/firebase";
-import { Divider, UserInfo, Text } from "./Salay.styled";
+import { Divider, UserInfo, Text, NoDataMessage } from "./Salay.styled";
 import Graph from "./components/Graph";
 import { useSelector } from "react-redux";
 import { RootState } from "@/types/store";
 import Header from "./components/Header";
 import SalarySection from "./components/SalarySection";
 import SalaryDetailsSection from "./components/SalaryDetailSection";
-import { SalaryData } from "./types/Salary";
+import type { SalaryData } from "./types/salaryData";
 
 const SalaryPage = () => {
 	const today = new Date();
@@ -38,8 +38,9 @@ const SalaryPage = () => {
 		const total = data.actualPayment + getTotalDeductions(data);
 		return total > 0 ? Math.round((value / total) * 100) : 0;
 	};
-	const uid = useSelector((state: RootState) => state.loginAuth.uid?.userId);
+	const uid = useSelector((state: RootState) => state.loginAuth.uid);
 	console.log("UID:", uid);
+
 	const fetchUserData = useCallback(
 		async (date: Date) => {
 			if (!uid) return;
@@ -118,10 +119,11 @@ const SalaryPage = () => {
 					<SalaryDetailsSection
 						salaryData={salaryData}
 						formatNumber={formatNumber}
+						totalDeductions={getTotalDeductions(salaryData)}
 					/>
 				</>
 			) : (
-				<p>해당 월의 급여 데이터가 없습니다.</p>
+				<NoDataMessage>해당 월의 급여 데이터가 없습니다.</NoDataMessage>
 			)}
 		</>
 	);

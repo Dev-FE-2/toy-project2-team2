@@ -30,7 +30,7 @@ const CorrectionModal = ({
 	);
 	const [reason, setReason] = useState("");
 	const [error, setError] = useState(false);
-	const uid = useSelector((state: RootState) => state.loginAuth.uid?.userId);
+	const uid = useSelector((state: RootState) => state.loginAuth.uid);
 	console.log("UID:", uid);
 
 	useEffect(() => {
@@ -61,16 +61,17 @@ const CorrectionModal = ({
 		const salaryId = getSalaryId();
 		try {
 			setError(false);
-			const amount = await getSalaryAmount(uid, salaryId);
+			const history = await getSalaryAmount(uid, salaryId);
 
 			await saveSalaryCorrection({
 				uid,
 				salaryId,
 				correctionData: {
-					type: selectedCorrection,
+					correctionType: selectedCorrection,
 					reason,
-					amount,
-					status: "검토 중",
+					history,
+					status: "검토중",
+					date: new Date().toISOString(),
 				},
 			});
 			console.log("정정 요청이 성공적으로 저장되었습니다.");

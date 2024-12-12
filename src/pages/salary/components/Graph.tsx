@@ -1,4 +1,4 @@
-import type { GraphProps } from "../types/Graph";
+import type { GraphProps } from "../types/salaryPage";
 import {
 	GraphContainer,
 	GraphDeduction,
