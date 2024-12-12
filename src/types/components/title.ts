@@ -1,3 +1,3 @@
-export default interface PageTitleProps {
+export interface PageTitleProps {
 	title: string;
 }
