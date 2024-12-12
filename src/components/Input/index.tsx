@@ -9,6 +9,7 @@ const Input = ({
 	onChange,
 	type,
 	readOnly,
+	name,
 }: InputProps) => {
 	return (
 		<InputContainer>
@@ -20,6 +21,7 @@ const Input = ({
 				type={type}
 				$isError={!!error}
 				readOnly={readOnly}
+				name={name}
 			/>
 			{error && <ErrorMessage>{error}</ErrorMessage>}
 		</InputContainer>
