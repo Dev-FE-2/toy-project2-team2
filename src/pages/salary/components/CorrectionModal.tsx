@@ -30,7 +30,7 @@ const CorrectionModal = ({
 	);
 	const [reason, setReason] = useState("");
 	const [error, setError] = useState(false);
-	const uid = useSelector((state: RootState) => state.loginAuth.uid?.userId);
+	const uid = useSelector((state: RootState) => state.loginAuth.uid);
 	console.log("UID:", uid);
 
 	useEffect(() => {
@@ -71,7 +71,7 @@ const CorrectionModal = ({
 					reason,
 					history,
 					status: "검토중",
-					date: new Date().toISOString(), 
+					date: new Date().toISOString(),
 				},
 			});
 			console.log("정정 요청이 성공적으로 저장되었습니다.");

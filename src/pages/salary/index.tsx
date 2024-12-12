@@ -38,7 +38,7 @@ const SalaryPage = () => {
 		const total = data.actualPayment + getTotalDeductions(data);
 		return total > 0 ? Math.round((value / total) * 100) : 0;
 	};
-	const uid = useSelector((state: RootState) => state.loginAuth.uid?.userId);
+	const uid = useSelector((state: RootState) => state.loginAuth.uid);
 	console.log("UID:", uid);
 
 	const fetchUserData = useCallback(

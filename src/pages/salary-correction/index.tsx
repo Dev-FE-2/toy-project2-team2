@@ -28,7 +28,7 @@ const SalaryCorrectionPage = () => {
 	const [salaryData, setSalaryData] = useState<CorrectionData[]>([]);
 	const [selectedYear, setSelectedYear] = useState("2024");
 
-	const uid = useSelector((state: RootState) => state.loginAuth.uid?.userId);
+	const uid = useSelector((state: RootState) => state.loginAuth.uid);
 
 	const fetchSalaryCorrections = async (year: string) => {
 		if (!uid) return;

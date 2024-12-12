@@ -12,7 +12,7 @@ import { RootState } from "@/types/store";
 import { getYearlySalaryData } from "@/services/SalaryService";
 
 const MonthlySalaryModal = ({ isOpen, onClose }: any) => {
-	const userId = useSelector((state: RootState) => state.loginAuth.uid?.userId);
+	const userId = useSelector((state: RootState) => state.loginAuth.uid);
 
 	const currentYear = new Date().getFullYear().toString();
 	const [selectedYear, setSelectedYear] = useState(currentYear);
