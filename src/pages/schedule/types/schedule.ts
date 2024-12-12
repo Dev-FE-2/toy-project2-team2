@@ -1,17 +1,17 @@
-export interface ScheduleData {
-	schedule_id: string;
-	title: string;
-	content: string;
-	start_date: string;
-	end_date: string | null;
-	color: string;
-}
-
-export interface DetailPanelProps {
-	date: string;
-}
+import { ScheduleData } from "@/types";
 
 export interface DetailItemProps {
 	detailData: ScheduleData;
 	onItemClick: (isOpen: boolean) => void;
+}
+
+export interface CalendarScheduleProps {
+	schedules: ScheduleData[];
+	onMonthChange: (newMonth: string) => void;
+}
+
+export interface ScheduleFormModalProps {
+	mode: string;
+	isOpen: boolean;
+	onClose: () => void;
 }

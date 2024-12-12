@@ -10,20 +10,25 @@ export const listenAuthChanges = async (dispatch: AppDispatch) => {
 	onAuthStateChanged(auth, async (user) => {
 		if (user) {
 			dispatch(setUid(user.uid));
-		}
-		const userData = await getUserData(user.uid);
-		if (userData) {
-			dispatch(
-				setUserInfo({
-					email: userData.email,
-					name: userData.name,
-					team: userData.team,
-					grade: userData.grade,
-					photoURL: userData.photoURL,
-				}),
-			);
+
+			// user가 null이 아닐 때만 getUserData 호출
+			const userData = await getUserData(user.uid);
+			if (userData) {
+				dispatch(
+					setUserInfo({
+						email: userData.email,
+						name: userData.name,
+						team: userData.team,
+						grade: userData.grade,
+						photoURL: userData.photoURL,
+					}),
+				);
+			} else {
+				dispatch(setUserInfo(null));
+			}
 		} else {
 			dispatch(setUserInfo(null));
+			dispatch(setUid(null));
 		}
 	});
 	dispatch(setLoading(false));

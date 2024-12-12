@@ -1,4 +1,4 @@
-import { LoginState } from "@/types/store";
+import { LoginState, uidType } from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: LoginState = {
@@ -10,7 +10,7 @@ const loginAuthSlice = createSlice({
 	name: "loginAuth",
 	initialState,
 	reducers: {
-		setUid: (state, action: PayloadAction<string | null>) => {
+		setUid: (state, action: PayloadAction<uidType>) => {
 			state.uid = action.payload;
 		},
 		clearUid: (state) => {
@@ -21,6 +21,5 @@ const loginAuthSlice = createSlice({
 		},
 	},
 });
-
 export const { setUid, clearUid, setIsLogined } = loginAuthSlice.actions;
 export default loginAuthSlice.reducer;

@@ -56,7 +56,7 @@ export const InputBox = styled.input<{ $isError: boolean }>`
 
 		cursor: pointer;
 
-		&:read-only {
+		&[readonly] {
 			pointer-events: none;
 		}
 

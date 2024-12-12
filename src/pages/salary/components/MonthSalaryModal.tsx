@@ -1,19 +1,43 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CustomSelect from "@/components/Select";
 import Modal from "@/components/Modal";
-import { yearlySalaryData } from "./mockdata";
 import {
 	ListContainer,
 	ListItem,
 	Month,
 	Salary,
 } from "./MonthSalaryModal.styled";
+import { useSelector } from "react-redux";
+import { RootState } from "@/types/store";
+import { getYearlySalaryData } from "@/services/SalaryService";
 
 const MonthlySalaryModal = ({ isOpen, onClose }: any) => {
-	const data = yearlySalaryData;
-	const years = Object.keys(data);
-	const [selectedYear, setSelectedYear] = useState(years[0]);
-	const selectedYearData = data[selectedYear];
+	const userId = useSelector((state: RootState) => state.loginAuth.uid?.userId);
+
+	const currentYear = new Date().getFullYear().toString();
+	const [selectedYear, setSelectedYear] = useState(currentYear);
+	const [yearlySalaryData, setYearlySalaryData] = useState<
+		{ month: string; salary: number }[]
+	>([]);
+
+	const years = Array.from({ length: 5 }, (_, i) =>
+		(Number(currentYear) - i).toString(),
+	);
+
+	useEffect(() => {
+		if (userId && selectedYear) {
+			fetchYearlySalaryData(userId, selectedYear);
+		}
+	}, [userId, selectedYear]);
+
+	const fetchYearlySalaryData = async (userId: string, year: string) => {
+		try {
+			const data = await getYearlySalaryData(userId, parseInt(year));
+			setYearlySalaryData(data);
+		} catch (error) {
+			console.error(error);
+		}
+	};
 
 	return (
 		<Modal isOpen={isOpen} title="월별 급여" onClose={onClose}>
@@ -23,12 +47,20 @@ const MonthlySalaryModal = ({ isOpen, onClose }: any) => {
 				onChange={(value) => setSelectedYear(value)}
 			/>
 			<ListContainer>
-				{selectedYearData.map((data) => (
-					<ListItem key={data.month}>
-						<Month>{data.month}</Month>
-						<Salary>{data.salary.toLocaleString()}원</Salary>
-					</ListItem>
-				))}
+				{yearlySalaryData.length > 0 ? (
+					yearlySalaryData.map((data, index) => (
+						<ListItem key={index}>
+							<Month>{data?.month || "월 정보 없음"}</Month>
+							<Salary>
+								{typeof data?.salary === "number"
+									? `${data.salary.toLocaleString()}원`
+									: "데이터 없음"}
+							</Salary>
+						</ListItem>
+					))
+				) : (
+					<p>해당 연도의 데이터가 없습니다.</p>
+				)}
 			</ListContainer>
 		</Modal>
 	);

@@ -1,21 +1,15 @@
-import CalendarWrapper from "./CalendarWrapper";
-import useCalendar from "@/hooks/useCalendar";
 import { CalendarContainer } from "./calendar.styled";
+import CalendarHeader from "./CalendarHeader";
+import Days from "./Days";
+import Dates from "./Dates";
 
 const Calendar = () => {
-	const { currentDate, onPrevMonth, onNextMonth } = useCalendar();
 	return (
-		<CalendarWrapper
-			currentDate={currentDate}
-			onPrevMonth={onPrevMonth}
-			onNextMonth={onNextMonth}
-		>
-			<CalendarContainer>
-				<CalendarWrapper.Header />
-				<CalendarWrapper.Days />
-				<CalendarWrapper.Dates />
-			</CalendarContainer>
-		</CalendarWrapper>
+		<CalendarContainer>
+			<CalendarHeader />
+			<Days />
+			<Dates />
+		</CalendarContainer>
 	);
 };
 
