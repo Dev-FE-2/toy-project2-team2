@@ -22,6 +22,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/types/store";
 import type { CorrectionData } from "./types/correctionData";
 
+enum Status {
+	Pending = "검토중",
+	Rejected = "반려",
+	Confirmed = "확인완료",
+}
+
 const SalaryCorrectionPage = () => {
 	const [isHistoryModalOpen, setHistoryModalOpen] = useState(false);
 	const [selectedData, setSelectedData] = useState<CorrectionData | null>(null);
@@ -107,7 +113,14 @@ const SalaryCorrectionPage = () => {
 						<Card
 							key={index}
 							onClick={() => {
-								setSelectedData(item);
+								setSelectedData({
+									...item,
+									history:
+										item.status === Status.Rejected ||
+										item.status === Status.Confirmed
+											? item.history
+											: "",
+								});
 								setHistoryModalOpen(true);
 							}}
 						>

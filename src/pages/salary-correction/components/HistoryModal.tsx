@@ -27,9 +27,9 @@ const HistoryModal = ({
 				<Label>정정 내역</Label>
 				<Row>
 					<Amount>
-						{status !== "검토중" && typeof history === "number"
+						{typeof history === "number"
 							? history.toLocaleString("en-US")
-							: ""}
+							: history}
 					</Amount>
 					<StatusBadge status={status} />
 				</Row>
