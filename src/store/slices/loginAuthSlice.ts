@@ -10,7 +10,7 @@ const loginAuthSlice = createSlice({
 	name: "loginAuth",
 	initialState,
 	reducers: {
-		setUid: (state, action: PayloadAction<{ userId: string } | null>) => {
+		setUid: (state, action: PayloadAction<string | null>) => {
 			state.uid = action.payload;
 		},
 		clearUid: (state) => {

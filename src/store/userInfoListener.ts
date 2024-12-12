@@ -9,7 +9,7 @@ export const listenAuthChanges = async (dispatch: AppDispatch) => {
 	dispatch(setLoading(true));
 	onAuthStateChanged(auth, async (user) => {
 		if (user) {
-			dispatch(setUid({ userId: user.uid }));
+			dispatch(setUid(user.uid));
 		}
 		const userData = await getUserData(user.uid);
 		if (userData) {
