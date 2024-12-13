@@ -38,15 +38,19 @@ export const Title = styled.h1`
 
 export const MonthButton = styled.button`
 	font-family: inherit;
-	padding: 8px 16px;
+	padding: 10px 20px;
 	font-size: ${getFontSize("sm")};
+	font-weight: ${getFontWeight("medium")};
 	background-color: transparent;
 	color: black;
-	border: none;
+	border: 1px solid ${getColor("grayLight")};
+	border-radius: 4px;
 	cursor: pointer;
 
 	&:hover {
-		background-color: ${getColor("grayLight")};
+		background-color: ${getColor("grayWhite")};
+		color: ${getColor("primary")};
+		font-weight: ${getFontWeight("bold")};
 	}
 `;
 
