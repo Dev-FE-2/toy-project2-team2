@@ -10,6 +10,7 @@ import SalarySection from "./components/SalarySection";
 import SalaryDetailsSection from "./components/SalaryDetailSection";
 import type { SalaryData } from "./types/salaryData";
 import { calculateActualPayment } from "@/utils/calculateSalary";
+import { toast } from "react-toastify";
 
 const SalaryPage = () => {
 	const today = new Date();
@@ -37,7 +38,6 @@ const SalaryPage = () => {
 	const actualPayment = salaryData ? calculateActualPayment(salaryData) : 0;
 
 	const uid = useSelector((state: RootState) => state.loginAuth.uid);
-	console.log("UID:", uid);
 
 	const fetchUserData = useCallback(
 		async (date: Date) => {
@@ -67,7 +67,8 @@ const SalaryPage = () => {
 					setSalaryData(null);
 				}
 			} catch (error) {
-				console.error("Error fetching data:", error);
+				toast.error("데이터를 불러오는데 실패했습니다.");
+
 			} finally {
 				setIsLoading(false);
 			}
