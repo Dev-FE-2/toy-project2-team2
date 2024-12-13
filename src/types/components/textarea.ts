@@ -4,5 +4,4 @@ export interface TextAreaProps {
 	placeholder?: string;
 	value?: string;
 	onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-	readOnly?: boolean;
 }

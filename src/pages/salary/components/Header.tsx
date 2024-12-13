@@ -28,7 +28,9 @@ const Header = ({
 		</DateContainer>
 		<ButtonGroup>
 			<TopButtons>
-				<MonthButton onClick={() => setSelectedDate(today)}>이번달</MonthButton>
+				<MonthButton onClick={() => setSelectedDate(today)}>
+					이번 달
+				</MonthButton>
 				<MonthChangeButton
 					onClick={() =>
 						setSelectedDate(

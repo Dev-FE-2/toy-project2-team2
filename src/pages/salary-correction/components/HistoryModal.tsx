@@ -1,7 +1,6 @@
 import Modal from "@/components/Modal";
-import { Input, TextArea } from "@/components";
 import StatusBadge from "./StatusBadge";
-import { Amount, Container, Label, Row } from "./HistoryModal.styled";
+import { Amount, Container, Label, Reason, Row } from "./HistoryModal.styled";
 
 const HistoryModal = ({
 	isOpen,
@@ -35,13 +34,18 @@ const HistoryModal = ({
 					<StatusBadge status={status} />
 				</Row>
 			</Container>
-			<Input
-				label="정정 사항 선택 *"
-				value={correctionType}
-				readOnly
-				type="text"
-			/>
-			<TextArea label="정정 사유를 입력하세요 *" value={reason} readOnly />
+			<Container>
+				<Label>정정 사항 선택</Label>
+				<Row>
+					<Amount>{correctionType}</Amount>
+				</Row>
+			</Container>
+			<Container>
+				<Label>정정 사유</Label>
+				<Row>
+					<Reason>{reason}</Reason>
+				</Row>
+			</Container>
 		</Modal>
 	);
 };
