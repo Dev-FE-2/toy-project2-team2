@@ -12,6 +12,7 @@ import { formModalMode } from "../../types/schedule";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { removeSchedule } from "@/store/slices/scheduleSlice";
 import { deleteSchedule } from "@/services";
+import { toast } from 'react-toastify';
 
 const DetailPanel = () => {
 	const { currentDateString, schedules } = useCalendar();
@@ -50,15 +51,14 @@ const DetailPanel = () => {
 				try {
 					const deletedId = await deleteSchedule(uid, scheduleId);
 					dispatch(removeSchedule(deletedId));
-					alert("일정이 삭제되었습니다.");
+					toast.success("일정이 삭제되었습니다.");
 
 					// 선택된 날짜의 일정 데이터들에서 삭제
 					setSelectedSchedules((prev) =>
 						prev.filter((schedule) => schedule.schedule_id !== scheduleId),
 					);
 				} catch (error) {
-					alert(`일정 삭제 중 오류가 발생했습니다.`);
-					console.error(error);
+					toast.error(`일정 삭제 중 오류가 발생했습니다.`);
 				}
 			}
 		},

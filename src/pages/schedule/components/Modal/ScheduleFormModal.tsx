@@ -9,6 +9,7 @@ import type { ScheduleFormModalProps } from "../../types/schedule";
 import { convertDateToLocaleString } from "@/utils/date";
 import { upsertSchedule } from "@/store/slices/scheduleSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks";
+import { toast } from 'react-toastify';
 
 const ScheduleFormModal = ({
 	mode,
@@ -59,7 +60,7 @@ const ScheduleFormModal = ({
 
 	const handleApply = async () => {
 		if (!title || !date) {
-			alert("제목과 날짜를 입력해주세요.");
+			toast.warning("제목과 날짜를 입력해주세요.");
 			return;
 		}
 
@@ -74,21 +75,18 @@ const ScheduleFormModal = ({
 			if (mode === "insert") {
 				const scheduleId = await insertSchedule(uid, scheduleData);
 				dispatch(upsertSchedule({ ...scheduleData, schedule_id: scheduleId }));
-				alert("일정이 등록되었습니다.");
+				toast.success("일정이 등록되었습니다.");
 			} else if (mode === "update" && detailData) {
 				const scheduleId = await updateSchedule(uid, {
 					...scheduleData,
 					schedule_id: detailData.schedule_id,
 				});
 				dispatch(upsertSchedule({ ...scheduleData, schedule_id: scheduleId }));
-				alert("일정이 수정되었습니다.");
+				toast.success("일정이 수정되었습니다.");
 			}
 			onClose();
 		} catch (error) {
-			alert(
-				`일정 ${mode === "insert" ? "등록" : "수정"} 중 오류가 발생했습니다.`,
-			);
-			console.error(error);
+			toast.error(`일정 ${mode === "insert" ? "등록" : "수정"} 중 오류가 발생했습니다.`);
 		}
 	};
 

@@ -58,7 +58,6 @@ const getScheduleData = async (
 			};
 		});
 	} catch (error) {
-		console.error(error);
 		throw error;
 	}
 };
@@ -86,7 +85,6 @@ const insertSchedule = async (
 		await setDoc(docRef, formattedScheduleData);
 		return newScheduleId;
 	} catch (error) {
-		console.error("Error insert document: ", error);
 		throw error;
 	}
 };
@@ -111,7 +109,6 @@ const updateSchedule = async (uid: string, scheduleData: ScheduleData) => {
 		await updateDoc(docRef, formattedScheduleData);
 		return scheduleId;
 	} catch (error) {
-		console.error("Error updating document: ", error);
 		throw error;
 	}
 };
@@ -128,7 +125,6 @@ const deleteSchedule = async (uid: string, scheduleId: string) => {
 		await deleteDoc(docRef);
 		return scheduleId;
 	} catch (error) {
-		console.error("Error deleting document: ", error);
 		throw error;
 	}
 };
