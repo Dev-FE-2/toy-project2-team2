@@ -1,8 +1,7 @@
 import { SalaryData } from "./salaryData";
 
 export interface GraphProps {
-	salaryPercent: number;
-	deductionPercent: number;
+	salaryData: SalaryData;
 }
 export interface HeaderProps {
 	selectedDate: Date;
@@ -23,4 +22,3 @@ export interface SalarySectionProps {
 	formatNumber: (value: number) => string;
 	selectedDate: any;
 }
-

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
 	Button,
 	Dropdown,
@@ -18,6 +18,7 @@ const CustomDatePicker = ({
 }: CustomDatePickerProps) => {
 	const today = new Date();
 	const [isPickerOpen, setIsPickerOpen] = useState(false);
+	const dropdownRef = useRef<HTMLDivElement | null>(null);
 
 	const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		const newYear = parseInt(event.target.value, 10);
@@ -29,8 +30,26 @@ const CustomDatePicker = ({
 		onDateChange(new Date(selectedDate.getFullYear(), newMonth));
 	};
 
+	const handleOutsideClick = (event: MouseEvent) => {
+		if (
+			dropdownRef.current &&
+			!dropdownRef.current.contains(event.target as Node)
+		) {
+			setIsPickerOpen(false);
+		}
+	};
+
+	useEffect(() => {
+		if (isPickerOpen) {
+			document.addEventListener("mousedown", handleOutsideClick);
+			return () => {
+				document.removeEventListener("mousedown", handleOutsideClick);
+			};
+		}
+	}, [isPickerOpen]);
+
 	return (
-		<Wrapper>
+		<Wrapper ref={dropdownRef}>
 			<Button onClick={() => setIsPickerOpen(!isPickerOpen)}>
 				{`${selectedDate.getFullYear()}년 ${selectedDate.getMonth() + 1}월`}
 			</Button>

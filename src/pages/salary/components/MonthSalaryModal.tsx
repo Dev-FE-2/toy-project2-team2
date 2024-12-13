@@ -33,9 +33,14 @@ const MonthlySalaryModal = ({ isOpen, onClose }: any) => {
 	const fetchYearlySalaryData = async (userId: string, year: string) => {
 		try {
 			const data = await getYearlySalaryData(userId, parseInt(year));
-			setYearlySalaryData(data);
+
+			if (Array.isArray(data) && data.length > 0) {
+				setYearlySalaryData(data);
+			} else {
+				setYearlySalaryData([]);
+			}
 		} catch (error) {
-			console.error(error);
+			setYearlySalaryData([]);
 		}
 	};
 
