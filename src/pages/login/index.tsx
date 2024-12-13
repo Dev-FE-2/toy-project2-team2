@@ -41,30 +41,22 @@ const LoginPage = () => {
 			.catch((e) => {
 				switch (e.code) {
 					case "auth/user-not-found":
-						console.log(e.code);
 						setIsIdError(true);
-						console.log(isIdError);
 						break;
 					case "auth/invalid-email":
-						console.log(e.code);
 						setIsIdError(true);
-						console.log(isIdError);
 						break;
 					case "auth/invalid-credential":
-						console.log(e.code);
 						setIsPasswordError(true);
-						console.log(isPasswordError);
 						break;
 					case "auth/missing-password":
-						console.log(e.code);
 						setIsPasswordError(true);
-						console.log(isPasswordError);
 						break;
 					case "auth/too-many-requests":
 						alert("너무 많은 요청을 보내셨습니다 잠시 후 다시 시도해주세요.");
 						break;
 					default:
-						console.log(e.code);
+						alert(e.code);
 				}
 			});
 	};
