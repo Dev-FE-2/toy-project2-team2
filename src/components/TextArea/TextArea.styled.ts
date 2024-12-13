@@ -36,7 +36,7 @@ export const TextAreaBox = styled.textarea<{ $isError?: boolean }>`
 	outline: none;
 	${({ readOnly }) => getReadOnlyStyles(readOnly)};
 	resize: vertical;
-	min-height: 150px;
+	min-height: 180px;
 
 	&:focus {
 		${({ readOnly }) =>
