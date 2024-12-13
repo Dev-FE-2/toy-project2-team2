@@ -70,7 +70,7 @@ const SalaryPage = () => {
 			} catch (error) {
 				toast.error("데이터를 불러오는데 실패했습니다.");
 			} finally {
-				setIsLoading(true);
+				setIsLoading(false);
 			}
 		},
 		[uid],
