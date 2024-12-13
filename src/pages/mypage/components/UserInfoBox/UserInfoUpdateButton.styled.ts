@@ -7,7 +7,7 @@ export const EditingButton = styled.div<{ $isEditing: boolean }>`
 		margin: 10px 5px 0 0;
 		padding: 13px 0;
 	}
-	button:last-child {
+	button:first-child {
 		display: ${(props) => (props.$isEditing ? "block" : "none")};
 	}
 `;
