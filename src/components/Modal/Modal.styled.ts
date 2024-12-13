@@ -60,4 +60,5 @@ export const ButtonContainer = styled.div`
 	justify-content: center;
 	gap: 20px;
 	margin-top: 20px;
+	margin: 0 10px;
 `;

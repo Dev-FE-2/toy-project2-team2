@@ -3,8 +3,8 @@ export type ButtonSize = "regular" | "small";
 
 export interface ButtonProps {
 	children: React.ReactNode;
-	buttonType?: ButtonType;
-	size?: ButtonSize;
+	buttonType?: ButtonType | undefined; 
+	size?: ButtonSize | undefined; 
 	onClick?: () => void;
 	disabled?: boolean;
 }
