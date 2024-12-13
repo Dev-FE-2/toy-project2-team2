@@ -22,8 +22,20 @@ const ScheduleDetailModal = ({
 			isOpen={isOpen}
 			title="일정 상세"
 			onClose={onClose}
-			confirmLabel="수정"
-			onConfirm={onConfirm}
+			buttons={[
+				{
+					label: "취소",
+					onClick: onClose,
+					buttonType: "white",
+					size: "small",
+				},
+				{
+					label: "수정",
+					onClick: onConfirm,
+					size: "small",
+					buttonType: "primary",
+				},
+			]}
 		>
 			<DetailInputContainer>
 				<DetailLabel>제목</DetailLabel>

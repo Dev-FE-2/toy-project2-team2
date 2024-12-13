@@ -53,6 +53,7 @@ const Color = styled.div<{ color: string }>`
 
 const ItemInfo = styled.div`
 	padding: 16px;
+	border-left: 1px dashed ${getColor("grayLight")};
 `;
 
 const ItemTitle = styled.div`

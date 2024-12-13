@@ -12,7 +12,6 @@ const TextArea = ({
 	placeholder,
 	value,
 	onChange,
-	readOnly,
 }: TextAreaProps) => {
 	return (
 		<TextAreaContainer>
@@ -22,7 +21,6 @@ const TextArea = ({
 				value={value}
 				onChange={onChange}
 				$isError={!!error}
-				readOnly={readOnly}
 			/>
 			{error && <ErrorMessage>{error}</ErrorMessage>}
 		</TextAreaContainer>

@@ -8,7 +8,6 @@ const Input = ({
 	value,
 	onChange,
 	type,
-	readOnly,
 	name,
 	autoComplete,
 }: InputProps) => {
@@ -21,7 +20,6 @@ const Input = ({
 				onChange={onChange}
 				type={type}
 				$isError={!!error}
-				readOnly={readOnly}
 				name={name}
 				autoComplete={autoComplete}
 			/>
@@ -29,4 +27,5 @@ const Input = ({
 		</InputContainer>
 	);
 };
+
 export default Input;

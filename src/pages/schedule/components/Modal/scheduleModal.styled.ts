@@ -1,4 +1,5 @@
 import { InputContainer, Label } from "@/components/Input/Input.style";
+import { getColor } from "@/styles/theme";
 import styled from "styled-components";
 
 const DetailInputContainer = styled(InputContainer)`
@@ -21,6 +22,7 @@ const ColorField = styled.div<{ $color: string }>`
 	height: 30px;
 	background-color: ${(props) => props.$color};
 	border-radius: 50%;
+	border: 1px solid ${getColor("grayLight")};
 `;
 
 export { DetailInputContainer, DetailLabel, FieldValue, ColorField };

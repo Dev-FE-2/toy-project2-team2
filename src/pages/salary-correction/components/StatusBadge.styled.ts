@@ -6,8 +6,8 @@ export const Badge = styled.span<{ $status: string }>`
 	padding: 5px 10px;
 	font-size: 14px;
 	font-weight: ${getFontWeight("medium")};
-	border-radius: 20px;
-	margin-bottom: 8px;
+	border-radius: 1120px;
+	margin-bottom: 4px;
 	text-align: center;
 	width: 80px;
 	align-items: center;

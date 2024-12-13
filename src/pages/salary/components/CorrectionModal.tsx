@@ -9,6 +9,7 @@ import {
 	getSalaryAmount,
 	saveSalaryCorrection,
 } from "@/services/SalaryService";
+import { toast } from "react-toastify";
 
 const CorrectionModal = ({
 	isOpen,
@@ -31,7 +32,6 @@ const CorrectionModal = ({
 	const [reason, setReason] = useState("");
 	const [error, setError] = useState(false);
 	const uid = useSelector((state: RootState) => state.loginAuth.uid);
-	console.log("UID:", uid);
 
 	useEffect(() => {
 		if (isOpen) {
@@ -48,13 +48,12 @@ const CorrectionModal = ({
 
 	const handleApply = async () => {
 		if (!uid) {
-			console.error("사용자 ID가 없습니다.");
+			toast.error("사용자 정보를 확인할 수 없습니다.");
 			return;
 		}
 
 		if (!reason.trim()) {
 			setError(true);
-			console.error("정정 사유를 입력하세요.");
 			return;
 		}
 
@@ -74,10 +73,10 @@ const CorrectionModal = ({
 					date: new Date().toISOString(),
 				},
 			});
-			console.log("정정 요청이 성공적으로 저장되었습니다.");
+			toast.success("정정 신청이 완료되었습니다.");
 			onClose();
 		} catch (error) {
-			console.error("정정 요청 저장 중 오류 발생:", error);
+			toast.error("정정 신청이 실패했습니다.");
 		}
 	};
 
@@ -86,8 +85,20 @@ const CorrectionModal = ({
 			isOpen={isOpen}
 			title="정정신청"
 			onClose={onClose}
-			confirmLabel="신청"
-			onConfirm={handleApply}
+			buttons={[
+				{
+					label: "취소",
+					onClick: onClose,
+					buttonType: "white",
+					size: "small",
+				},
+				{
+					label: "신청",
+					onClick: handleApply,
+					size: "small",
+					buttonType: "primary",
+				},
+			]}
 		>
 			<CustomSelect
 				label="정정 사항 선택 * "
