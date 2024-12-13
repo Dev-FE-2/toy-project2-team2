@@ -45,7 +45,18 @@ const MonthlySalaryModal = ({ isOpen, onClose }: any) => {
 	};
 
 	return (
-		<Modal isOpen={isOpen} title="월별 급여" onClose={onClose}>
+		<Modal
+			isOpen={isOpen}
+			title="월별 급여"
+			onClose={onClose}
+			buttons={[
+				{
+					label: "닫기",
+					onClick: onClose,
+					buttonType: "white",
+				},
+			]}
+		>
 			<CustomSelect
 				options={years.map((year) => ({ value: year, label: year }))}
 				value={selectedYear}

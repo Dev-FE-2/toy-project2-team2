@@ -100,8 +100,20 @@ const ScheduleFormModal = ({
 			isOpen={isOpen}
 			title={modalTitle}
 			onClose={onClose}
-			confirmLabel={confirmLabel}
-			onConfirm={handleApply}
+			buttons={[
+				{
+					label: "취소",
+					onClick: onClose,
+					buttonType: "white",
+					size: "small",
+				},
+				{
+					label: confirmLabel,
+					onClick: handleApply,
+					buttonType: "primary",
+					size: "small",
+				},
+			]}
 		>
 			<Input
 				type="text"

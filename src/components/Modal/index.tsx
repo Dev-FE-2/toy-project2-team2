@@ -16,8 +16,7 @@ const Modal = ({
 	title,
 	onClose,
 	children,
-	confirmLabel = "확인",
-	onConfirm,
+	buttons = [],
 }: ModalProps) => {
 	useEffect(() => {
 		const preventGoBack = () => {
@@ -42,12 +41,16 @@ const Modal = ({
 					</ModalHeader>
 					<ModalContent>{children}</ModalContent>
 					<ButtonContainer>
-						<Button buttonType={"white"} size={"small"} onClick={onClose}>
-							취소
-						</Button>
-						<Button size={"small"} onClick={onConfirm || onClose}>
-							{confirmLabel}
-						</Button>
+						{buttons.map(({ label, size, onClick, buttonType }, idx) => (
+							<Button
+								key={idx}
+								buttonType={buttonType} 
+								size={size} 
+								onClick={onClick}
+							>
+								{label}
+							</Button>
+						))}
 					</ButtonContainer>
 				</ModalBox>
 			</ModalContainer>
