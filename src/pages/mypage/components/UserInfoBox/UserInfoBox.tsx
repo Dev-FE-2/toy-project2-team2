@@ -33,13 +33,11 @@ export const UserInfoBox = ({
 		if (!$isEditing) {
 			$setIsEditing(true);
 		} else {
-			console.log(userInfoData);
 			if (
 				userInfoData.grade === "" ||
 				userInfoData.name === "" ||
 				userInfoData.team === ""
 			) {
-				console.log("hi");
 				alert("이름 또는 소속 또는 직급이 비어있습니다.");
 				setUserInfoData({
 					email: userData.email,
@@ -62,9 +60,7 @@ export const UserInfoBox = ({
 					);
 					$setIsEditing(false);
 				} else {
-					console.log(
-						"데이터를 가져오는 중 문제가 발생했습니다. 다시 시도해주세요",
-					);
+					alert("데이터를 가져오는 중 문제가 발생했습니다. 다시 시도해주세요");
 				}
 			}
 		}
