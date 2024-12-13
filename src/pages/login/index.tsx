@@ -5,7 +5,7 @@ import {
 	LoginContainer,
 	LoginForm,
 	LoginHeader,
-	SignUpGuide,
+	// SignUpGuide,
 } from "./Login.styled";
 import { Button, Input } from "@/components";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -80,9 +80,9 @@ const LoginPage = () => {
 					</HelperText>
 					<Button>로그인 하기</Button>
 				</LoginForm>
-				<SignUpGuide>
+				{/* <SignUpGuide>
 					계정이 없으신가요? <a href="/signup">회원가입 하기</a>
-				</SignUpGuide>
+				</SignUpGuide> */}
 			</LoginBox>
 		</LoginContainer>
 	);
