@@ -5,7 +5,7 @@ import {
 	LoginContainer,
 	LoginForm,
 	LoginHeader,
-	SignUpGuide,
+	// SignUpGuide,
 } from "./Login.styled";
 import { Button, Input } from "@/components";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -31,40 +31,32 @@ const LoginPage = () => {
 	};
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+		setIsIdError(false);
+		setIsPasswordError(false);
 		signInWithEmailAndPassword(auth, email, password)
 			.then(() => {
-				setIsIdError(false);
-				setIsPasswordError(false);
 				listenAuthChanges(store.dispatch);
 				navigate("/");
 			})
 			.catch((e) => {
 				switch (e.code) {
 					case "auth/user-not-found":
-						console.log(e.code);
 						setIsIdError(true);
-						console.log(isIdError);
 						break;
 					case "auth/invalid-email":
-						console.log(e.code);
 						setIsIdError(true);
-						console.log(isIdError);
 						break;
 					case "auth/invalid-credential":
-						console.log(e.code);
 						setIsPasswordError(true);
-						console.log(isPasswordError);
 						break;
 					case "auth/missing-password":
-						console.log(e.code);
 						setIsPasswordError(true);
-						console.log(isPasswordError);
 						break;
 					case "auth/too-many-requests":
 						alert("너무 많은 요청을 보내셨습니다 잠시 후 다시 시도해주세요.");
 						break;
 					default:
-						console.log(e.code);
+						alert(e.code);
 				}
 			});
 	};
@@ -88,9 +80,9 @@ const LoginPage = () => {
 					</HelperText>
 					<Button>로그인 하기</Button>
 				</LoginForm>
-				<SignUpGuide>
+				{/* <SignUpGuide>
 					계정이 없으신가요? <a href="/signup">회원가입 하기</a>
-				</SignUpGuide>
+				</SignUpGuide> */}
 			</LoginBox>
 		</LoginContainer>
 	);
