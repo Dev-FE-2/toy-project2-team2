@@ -21,6 +21,9 @@ declare module "styled-components" {
 
 			white: string;
 
+			saturday: string;
+			sunday: string;
+
 			dim: string;
 
 			primary_hover: string;

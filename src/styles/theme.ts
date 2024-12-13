@@ -21,6 +21,9 @@ export const theme: DefaultTheme = {
 
 		white: "#FFFFFF",
 
+		saturday: "#3c54ed",
+		sunday: "#f54e4e",
+
 		dim: "rgba(0,0,0,0.7)",
 
 		primary_hover: "#027056",
@@ -74,7 +77,7 @@ export const getThemeValue =
 
 /**
  * theme의 colors 부분 가져오는 함수
- * @param key "primary" | "secondaryDark" | "secondary" | "secondaryLight" | "danger" | "warning" | "orange" | "success" | "grayDark" | "gray" | "grayLight" | "grayWhite" | "white" | "dim" | "primary_hover" | "white_hover"
+ * @param key "primary" | "secondaryDark" | "secondary" | "secondaryLight" | "danger" | "warning" | "orange" | "success" | "grayDark" | "gray" | "grayLight" | "grayWhite" | "white" | "saturday" | "sunday" | "dim" | "primary_hover" | "white_hover"
  * @returns ({ theme }: { theme: DefaultTheme }) => theme["colors"][key]
  *
  * @example
