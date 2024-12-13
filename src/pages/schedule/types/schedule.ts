@@ -2,7 +2,8 @@ import { ScheduleData } from "@/types";
 
 export interface DetailItemProps {
 	detailData: ScheduleData;
-	onItemClick: (detailData: ScheduleData) => void;
+	onClickItem: (detailData: ScheduleData) => void;
+	onClickDelete: (e: React.MouseEvent, scheduleId: string) => void;
 }
 
 export interface CalendarScheduleProps {

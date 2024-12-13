@@ -28,7 +28,7 @@ const scheduleSlice = createSlice({
 				state.schedules.push(newSchedule);
 			}
 		},
-		deleteSchedule: (state, action: PayloadAction<string>) => {
+		removeSchedule: (state, action: PayloadAction<string>) => {
 			state.schedules = state.schedules.filter(
 				(schedule) => schedule.schedule_id !== action.payload,
 			);
@@ -94,7 +94,7 @@ export const fetchSchedules = createAsyncThunk(
 	},
 );
 
-export const { upsertSchedule, deleteSchedule, setCurrentDate } =
+export const { upsertSchedule, removeSchedule, setCurrentDate } =
 	scheduleSlice.actions;
 
 // Selectors

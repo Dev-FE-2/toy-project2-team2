@@ -10,6 +10,7 @@ import {
 	doc,
 	setDoc,
 	updateDoc,
+	deleteDoc,
 } from "firebase/firestore";
 
 // 로그인한 유저의 일정 collection 참조 조회 함수
@@ -115,4 +116,21 @@ const updateSchedule = async (uid: string, scheduleData: ScheduleData) => {
 	}
 };
 
-export { getScheduleData, insertSchedule, updateSchedule };
+const deleteSchedule = async (uid: string, scheduleId: string) => {
+	// Firestore 컬렉션 참조
+	const colRef = collection(db, "user", uid, "schedule");
+
+	// 삭제할 문서 참조 생성
+	const docRef = doc(colRef, scheduleId);
+
+	try {
+		// Firestore에서 문서 삭제
+		await deleteDoc(docRef);
+		return scheduleId;
+	} catch (error) {
+		console.error("Error deleting document: ", error);
+		throw error;
+	}
+};
+
+export { getScheduleData, insertSchedule, updateSchedule, deleteSchedule };
