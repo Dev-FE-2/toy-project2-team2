@@ -86,8 +86,20 @@ const CorrectionModal = ({
 			isOpen={isOpen}
 			title="정정신청"
 			onClose={onClose}
-			confirmLabel="신청"
-			onConfirm={handleApply}
+			buttons={[
+				{
+					label: "취소",
+					onClick: onClose,
+					buttonType: "white",
+					size: "small",
+				},
+				{
+					label: "신청",
+					onClick: handleApply,
+					size: "small",
+					buttonType: "primary",
+				},
+			]}
 		>
 			<CustomSelect
 				label="정정 사항 선택 * "

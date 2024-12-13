@@ -29,10 +29,7 @@ export const TextAreaBox = styled.textarea<{ $isError?: boolean }>`
 	border-radius: ${getBorderRadius("sm")};
 	outline: none;
 	resize: vertical;
-	min-height: 150px;
-	background-color: ${getColor("white")};
-	color: ${getColor("secondaryDark")};
-	cursor: text;
+	min-height: 180px;
 
 	&:focus {
 		border: 2px solid ${getColor("primary")};

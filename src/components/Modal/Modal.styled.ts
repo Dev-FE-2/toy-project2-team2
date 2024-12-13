@@ -41,7 +41,7 @@ export const ModalHeader = styled.header`
 	position: relative;
 
 	h2 {
-		margin: 0;
+		margin: 5px 0;
 		font-size: ${getFontSize("xl")};
 		font-weight: ${getFontWeight("bold")};
 		text-align: center;
@@ -60,4 +60,5 @@ export const ButtonContainer = styled.div`
 	justify-content: center;
 	gap: 20px;
 	margin-top: 20px;
+	margin: 0 10px;
 `;
