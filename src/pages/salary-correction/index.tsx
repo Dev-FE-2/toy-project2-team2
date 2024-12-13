@@ -22,6 +22,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/types/store";
 import type { CorrectionData } from "./types/correctionData";
 import { toast } from "react-toastify";
+import LoaderWrapper from "@/components/Loader/LoaderWrapper";
 
 enum Status {
 	Pending = "검토중",
@@ -34,11 +35,14 @@ const SalaryCorrectionPage = () => {
 	const [selectedData, setSelectedData] = useState<CorrectionData | null>(null);
 	const [salaryData, setSalaryData] = useState<CorrectionData[]>([]);
 	const [selectedYear, setSelectedYear] = useState("2024");
+	const [isLoading, setIsLoading] = useState(true);
 
 	const uid = useSelector((state: RootState) => state.loginAuth.uid);
 
 	const fetchSalaryCorrections = async (year: string) => {
 		if (!uid) return;
+
+		setIsLoading(true);
 
 		try {
 			const basePath = `user/${uid}/salaries`;
@@ -81,6 +85,8 @@ const SalaryCorrectionPage = () => {
 		} catch (error) {
 			toast.error("정정 내역 데이터를 불러오는데 실패했습니다.");
 			setSalaryData([]);
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
@@ -107,65 +113,67 @@ const SalaryCorrectionPage = () => {
 					onChange={(value) => setSelectedYear(value)}
 				/>
 			</Header>
-			<CardContainer>
-				{salaryData.length > 0 ? (
-					salaryData.map((item, index) => (
-						<Card
-							key={index}
-							onClick={() => {
-								setSelectedData({
-									...item,
-									history:
-										item.status === Status.Rejected ||
-										item.status === Status.Confirmed
-											? item.history
-											: "",
-								});
-								setHistoryModalOpen(true);
-							}}
-						>
-							<CardLeft>
-								<StatusBadge status={item.status} />
-								<Month>{item.month} 정정 내역</Month>
-							</CardLeft>
-							<CardRight>
-								<DateTime>
-									{new Date(item.date).toLocaleDateString("ko-KR", {
-										year: "numeric",
-										month: "2-digit",
-										day: "2-digit",
-									})}
-								</DateTime>
+			<LoaderWrapper isLoading={isLoading}>
+				<CardContainer>
+					{salaryData.length > 0 ? (
+						salaryData.map((item, index) => (
+							<Card
+								key={index}
+								onClick={() => {
+									setSelectedData({
+										...item,
+										history:
+											item.status === Status.Rejected ||
+											item.status === Status.Confirmed
+												? item.history
+												: "",
+									});
+									setHistoryModalOpen(true);
+								}}
+							>
+								<CardLeft>
+									<StatusBadge status={item.status} />
+									<Month>{item.month} 정정 내역</Month>
+								</CardLeft>
+								<CardRight>
+									<DateTime>
+										{new Date(item.date).toLocaleDateString("ko-KR", {
+											year: "numeric",
+											month: "2-digit",
+											day: "2-digit",
+										})}
+									</DateTime>
 
-								<Arrow>
-									<LeftArrow
-										width="12"
-										height="12"
-										style={{ transform: "rotate(180deg)" }}
-									/>
-								</Arrow>
-							</CardRight>
-						</Card>
-					))
-				) : (
-					<NoDataWrapper>
-						<NoDataMessage>
-							해당 년도의 정정 신청 내역 데이터가 없습니다.
-						</NoDataMessage>
-					</NoDataWrapper>
-				)}
+									<Arrow>
+										<LeftArrow
+											width="12"
+											height="12"
+											style={{ transform: "rotate(180deg)" }}
+										/>
+									</Arrow>
+								</CardRight>
+							</Card>
+						))
+					) : (
+						<NoDataWrapper>
+							<NoDataMessage>
+								해당 년도의 정정 신청 내역 데이터가 없습니다.
+							</NoDataMessage>
+						</NoDataWrapper>
+					)}
 
-				{selectedData && (
-					<HistoryModal
-						isOpen={isHistoryModalOpen}
-						onClose={() => setHistoryModalOpen(false)}
-						status={selectedData.status}
-						history={selectedData.history}
-						correctionType={selectedData.correctionType}
-						reason={selectedData.reason}
-					/>
-				)}
-			</CardContainer>
+					{selectedData && (
+						<HistoryModal
+							isOpen={isHistoryModalOpen}
+							onClose={() => setHistoryModalOpen(false)}
+							status={selectedData.status}
+							history={selectedData.history}
+							correctionType={selectedData.correctionType}
+							reason={selectedData.reason}
+						/>
+					)}
+				</CardContainer>
+			</LoaderWrapper>
 		</>
 	);
 };
