@@ -11,12 +11,13 @@ import SalaryDetailsSection from "./components/SalaryDetailSection";
 import type { SalaryData } from "./types/salaryData";
 import { calculateActualPayment } from "@/utils/calculateSalary";
 import { toast } from "react-toastify";
+import LoaderWrapper from "@/components/Loader/LoaderWrapper";
 
 const SalaryPage = () => {
 	const today = new Date();
 	const [selectedDate, setSelectedDate] = useState<Date>(today);
 	const [salaryData, setSalaryData] = useState<SalaryData | null>(null);
-	const [, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 	const [isCorrectionModalOpen, setIsCorrectionModalOpen] = useState(false);
 	const [isMonthlySalaryOpen, setIsMonthlySalaryOpen] = useState(false);
 	const [userName, setUserName] = useState<string | null>(null);
@@ -68,9 +69,8 @@ const SalaryPage = () => {
 				}
 			} catch (error) {
 				toast.error("데이터를 불러오는데 실패했습니다.");
-
 			} finally {
-				setIsLoading(false);
+				setIsLoading(true);
 			}
 		},
 		[uid],
@@ -83,7 +83,7 @@ const SalaryPage = () => {
 	}, [uid, selectedDate, fetchUserData]);
 
 	return (
-		<>
+		<LoaderWrapper isLoading={isLoading}>
 			<Header
 				selectedDate={selectedDate}
 				setSelectedDate={setSelectedDate}
@@ -119,7 +119,7 @@ const SalaryPage = () => {
 			) : (
 				<NoDataMessage>해당 월의 급여 데이터가 없습니다.</NoDataMessage>
 			)}
-		</>
+		</LoaderWrapper>
 	);
 };
 
