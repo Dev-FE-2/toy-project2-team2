@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 export const ListContainer = styled.ul`
 	list-style: none;
-	padding: 0;
-	margin: 0;
+	padding-left: 10px;
+	margin-left: 8px;
 	border-bottom: 1px solid ${getColor("grayLight")};
 	border-radius: ${getBorderRadius("sm")};
 	overflow: scroll;
@@ -32,7 +32,7 @@ export const ListItem = styled.li`
 export const Month = styled.div`
 	font-size: 18px;
 	font-weight: ${getFontWeight("bold")};
-	padding-left: 30px;
+	padding-left: 20px;
 	cursor: pointer;
 `;
 
