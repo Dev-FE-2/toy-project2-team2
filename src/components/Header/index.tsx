@@ -35,7 +35,7 @@ const Header = () => {
 				<Nav>
 					<NavLink to="/">내 일정</NavLink>
 					<NavLink to="/salary">급여내역 조회</NavLink>
-					<NavLink to="/salary-correction">급여 정정 신청</NavLink>
+					<NavLink to="/salary-correction">정정 신청 내역</NavLink>
 					<NavLink to="/mypage">마이페이지</NavLink>
 				</Nav>
 			</LeftContainer>
@@ -52,10 +52,7 @@ const Header = () => {
 				</ProfileInfo>
 
 				<ProfileImageContainer>
-					<Profile
-						src={user ? user.photoURL : profileImage}
-						alt="프로필 이미지"
-					/>
+					<Profile src={user?.photoURL || profileImage} alt="프로필 이미지" />
 				</ProfileImageContainer>
 			</ProfileContainer>
 		</HeaderContainer>
