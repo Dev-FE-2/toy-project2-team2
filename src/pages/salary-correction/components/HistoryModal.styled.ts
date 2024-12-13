@@ -39,4 +39,5 @@ export const Reason = styled.div`
 	overflow-wrap: break-word;
 	width: 100%;
 	max-width: 300px;
+	min-height: 120px;
 `;
