@@ -63,7 +63,7 @@ export const InputBox = styled.input<{ $isError: boolean }>`
 
 		&::-webkit-color-swatch {
 			border-radius: 50%;
-			border: none;
+			border: 1px solid ${getColor("grayLight")};
 		}
 	}
 `;

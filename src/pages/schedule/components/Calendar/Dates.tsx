@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useCalendar from "@/hooks/useCalendar";
-import { DateBox, DatesGrid, DateNum } from "./calendar.styled";
+import { DateBox, DatesGrid, DateNum, TodayBadge } from "./calendar.styled";
 import {
 	eachDayOfInterval,
 	endOfMonth,
@@ -9,6 +9,8 @@ import {
 	startOfWeek,
 	format,
 	set,
+	isSaturday,
+	isSunday,
 } from "date-fns";
 
 const Dates = () => {
@@ -46,8 +48,9 @@ const Dates = () => {
 			{dates.map((date) => (
 				<DateBox
 					key={date.toString()}
-					$isToday={isToday(date)}
 					$isThisMonth={isThisMonth(date)}
+					$isSaturday={isSaturday(date)}
+					$isSunday={isSunday(date)}
 					onClick={(e) => onClickDate(e, date)}
 					className={
 						selectedDate &&
@@ -57,6 +60,7 @@ const Dates = () => {
 					}
 				>
 					<DateNum>{format(date, "d")}</DateNum>
+					{isToday(date) && <TodayBadge>오늘</TodayBadge>}
 				</DateBox>
 			))}
 		</DatesGrid>
