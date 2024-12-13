@@ -31,10 +31,10 @@ const LoginPage = () => {
 	};
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+		setIsIdError(false);
+		setIsPasswordError(false);
 		signInWithEmailAndPassword(auth, email, password)
 			.then(() => {
-				setIsIdError(false);
-				setIsPasswordError(false);
 				listenAuthChanges(store.dispatch);
 				navigate("/");
 			})
