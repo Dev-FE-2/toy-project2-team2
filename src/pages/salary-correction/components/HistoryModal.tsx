@@ -11,17 +11,18 @@ const HistoryModal = ({
 	reason,
 	history,
 }: any) => {
-	const handleApply = () => {
-		onClose();
-	};
-
 	return (
 		<Modal
 			isOpen={isOpen}
 			title="정정 신청 내역"
 			onClose={onClose}
-			confirmLabel="확인"
-			onConfirm={handleApply}
+			buttons={[
+				{
+					label: "닫기",
+					onClick: onClose,
+					buttonType: "white",
+				},
+			]}
 		>
 			<Container>
 				<Label>정정 내역</Label>
@@ -34,7 +35,6 @@ const HistoryModal = ({
 					<StatusBadge status={status} />
 				</Row>
 			</Container>
-
 			<Input
 				label="정정 사항 선택 *"
 				value={correctionType}
