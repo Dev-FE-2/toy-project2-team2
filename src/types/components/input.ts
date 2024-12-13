@@ -7,4 +7,5 @@ export interface InputProps {
 	type?: string;
 	readOnly?: boolean;
 	name?: string;
+	autoComplete?: string;
 }

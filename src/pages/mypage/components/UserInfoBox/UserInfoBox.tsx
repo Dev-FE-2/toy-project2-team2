@@ -4,7 +4,7 @@ import {
 	UserInfoBoxContainer,
 	UserInfoContent,
 } from "./UserInfoBox.styled";
-import { UserData } from "../../type/UserInfoBox";
+import { UserDataProps } from "../../type/UserInfoBox";
 import { Input } from "@/components";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -15,9 +15,13 @@ import { RootState } from "@/types/store";
 import { getUserData } from "@/services/getDatas";
 import { UserInfoUpdateButton } from "./UserInfoUpdateButton";
 
-export const UserInfoBox = ({ userData }: UserData) => {
+export const UserInfoBox = ({
+	userData,
+	$isEditing,
+	$setIsEditing,
+}: UserDataProps) => {
 	const uid = useSelector((state: RootState) => state.loginAuth.uid);
-	const [isEditing, setIsEditing] = useState(false);
+
 	const [userInfoData, setUserInfoData] = useState({
 		email: userData.email,
 		name: userData.name,
@@ -26,28 +30,43 @@ export const UserInfoBox = ({ userData }: UserData) => {
 	});
 	const dispatch = useDispatch();
 	const handleInput = async () => {
-		if (!isEditing) {
-			setIsEditing(true);
+		if (!$isEditing) {
+			$setIsEditing(true);
 		} else {
-			if (uid) {
-				await updateUserInfoData(uid, userInfoData);
-				const newUserData = await getUserData(uid);
-				dispatch(
-					setUserInfo({
-						email: newUserData.email,
-						name: newUserData.name,
-						team: newUserData.team,
-						grade: newUserData.grade,
-						photoURL: newUserData.photoURL,
-					}),
-				);
+			console.log(userInfoData);
+			if (
+				userInfoData.grade === "" ||
+				userInfoData.name === "" ||
+				userInfoData.team === ""
+			) {
+				console.log("hi");
+				alert("이름 또는 소속 또는 직급이 비어있습니다.");
+				setUserInfoData({
+					email: userData.email,
+					name: userData.name,
+					team: userData.team,
+					grade: userData.grade,
+				});
 			} else {
-				console.log(
-					"데이터를 가져오는 중 문제가 발생했습니다. 다시 시도해주세요",
-				);
+				if (uid) {
+					await updateUserInfoData(uid, userInfoData);
+					const newUserData = await getUserData(uid);
+					dispatch(
+						setUserInfo({
+							email: newUserData.email,
+							name: newUserData.name,
+							team: newUserData.team,
+							grade: newUserData.grade,
+							photoURL: newUserData.photoURL,
+						}),
+					);
+					$setIsEditing(false);
+				} else {
+					console.log(
+						"데이터를 가져오는 중 문제가 발생했습니다. 다시 시도해주세요",
+					);
+				}
 			}
-
-			setIsEditing(false);
 		}
 	};
 	const handelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,7 +84,7 @@ export const UserInfoBox = ({ userData }: UserData) => {
 			team: userData.team,
 			grade: userData.grade,
 		});
-		setIsEditing(false);
+		$setIsEditing(false);
 	};
 	return (
 		<UserInfoBoxContainer>
@@ -76,30 +95,33 @@ export const UserInfoBox = ({ userData }: UserData) => {
 					<div>소속</div>
 					<div>직급</div>
 				</InfoTitle>
-				<InfoValue readOnly={!isEditing}>
+				<InfoValue readOnly={!$isEditing}>
 					<Input value={userInfoData.email} readOnly />
 					<Input
 						value={userInfoData.name}
-						readOnly={!isEditing}
+						readOnly={!$isEditing}
 						onChange={handelChange}
 						name="name"
+						autoComplete="off"
 					/>
 					<Input
 						value={userInfoData.team}
-						readOnly={!isEditing}
+						readOnly={!$isEditing}
 						onChange={handelChange}
 						name="team"
+						autoComplete="off"
 					/>
 					<Input
 						value={userInfoData.grade}
-						readOnly={!isEditing}
+						readOnly={!$isEditing}
 						onChange={handelChange}
 						name="grade"
+						autoComplete="off"
 					/>
 				</InfoValue>
 			</UserInfoContent>
 			<UserInfoUpdateButton
-				$isEditing={isEditing}
+				$isEditing={$isEditing}
 				onClick={{ handleInput, cancelEditing }}
 			/>
 		</UserInfoBoxContainer>
