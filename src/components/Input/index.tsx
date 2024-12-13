@@ -8,7 +8,6 @@ const Input = ({
 	value,
 	onChange,
 	type,
-	readOnly,
 	name,
 }: InputProps) => {
 	return (
@@ -20,11 +19,11 @@ const Input = ({
 				onChange={onChange}
 				type={type}
 				$isError={!!error}
-				readOnly={readOnly}
 				name={name}
 			/>
 			{error && <ErrorMessage>{error}</ErrorMessage>}
 		</InputContainer>
 	);
 };
+
 export default Input;
