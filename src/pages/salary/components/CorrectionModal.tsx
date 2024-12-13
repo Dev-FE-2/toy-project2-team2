@@ -9,6 +9,7 @@ import {
 	getSalaryAmount,
 	saveSalaryCorrection,
 } from "@/services/SalaryService";
+import { toast } from "react-toastify";
 
 const CorrectionModal = ({
 	isOpen,
@@ -75,6 +76,7 @@ const CorrectionModal = ({
 				},
 			});
 			console.log("정정 요청이 성공적으로 저장되었습니다.");
+			toast.success("정정 신청이 완료되었습니다.");
 			onClose();
 		} catch (error) {
 			console.error("정정 요청 저장 중 오류 발생:", error);
