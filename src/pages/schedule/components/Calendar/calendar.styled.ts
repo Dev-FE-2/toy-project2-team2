@@ -7,7 +7,9 @@ import {
 	getFontWeight,
 } from "@styles/theme";
 
-const CalendarContainer = styled.section``;
+const CalendarContainer = styled.section`
+	position: relative;
+`;
 
 const CalHeader = styled.div`
 	${flexCenter}
@@ -114,6 +116,32 @@ const TodayBadge = styled.span`
 	border-radius: ${getBorderRadius("md")};
 `;
 
+const UtilBtnBox = styled.div`
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: flex;
+	align-items: center;
+	gap: 5px;
+`;
+
+const UtilBtn = styled.button`
+	font-size: ${getFontSize("xs")};
+	font-weight: ${getFontWeight("regular")};
+	color: ${getColor("white")};
+	background-color: ${getColor("primary")};
+	padding-top: 5px;
+	padding-bottom: 4px;
+	width: 50px;
+	border-radius: ${getBorderRadius("sm")};
+	overflow: hidden;
+	transition: 0.2s;
+
+	&:hover {
+		background-color: ${getColor("primary_hover")};
+	}
+`;
+
 export {
 	CalendarContainer,
 	CalHeader,
@@ -125,4 +153,6 @@ export {
 	DateBox,
 	DateNum,
 	TodayBadge,
+	UtilBtnBox,
+	UtilBtn,
 };

@@ -6,7 +6,7 @@ import {
 	setCurrentDate,
 } from "@/store/slices/scheduleSlice";
 import { convertDateToLocaleString } from "@/utils";
-import { addMonths, startOfMonth, subMonths } from "date-fns";
+import { addMonths, subMonths } from "date-fns";
 
 const useCalendar = () => {
 	const dispatch = useAppDispatch();
@@ -16,13 +16,13 @@ const useCalendar = () => {
 	const currentDate = new Date(currentDateString);
 
 	const onPrevMonth = () => {
-		const newDate = startOfMonth(subMonths(currentDate, 1));
+		const newDate = subMonths(currentDate, 1);
 		dispatch(setCurrentDate(convertDateToLocaleString(newDate)));
 		dispatch(fetchSchedules({ startDate: newDate }));
 	};
 
 	const onNextMonth = () => {
-		const newDate = startOfMonth(addMonths(currentDate, 1));
+		const newDate = addMonths(currentDate, 1);
 		dispatch(setCurrentDate(convertDateToLocaleString(newDate)));
 		dispatch(fetchSchedules({ startDate: newDate }));
 	};
