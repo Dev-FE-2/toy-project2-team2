@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useCalendar from "@/hooks/useCalendar";
 import { DateBox, DatesGrid, DateNum } from "./calendar.styled";
 import {
@@ -13,8 +13,14 @@ import {
 
 const Dates = () => {
 	const today = new Date();
-	const { currentDate, setDate } = useCalendar();
+	const { currentDateString, setDate } = useCalendar();
 	const [selectedDate, setSelectedDate] = useState<Date | null>(null); // 선택된 날짜 상태 추가
+
+	const currentDate = new Date(currentDateString);
+
+	useEffect(() => {
+		setSelectedDate(currentDate);
+	}, [currentDateString]);
 
 	const start = startOfWeek(startOfMonth(currentDate));
 	const end = endOfWeek(endOfMonth(currentDate));

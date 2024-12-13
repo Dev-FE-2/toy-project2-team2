@@ -7,7 +7,7 @@ import ArrowIcon from "@/assets/img/left_arrow_icon.svg?react";
 
 const CalendarHeader = () => {
 	const theme = useTheme();
-	const { currentDate, onPrevMonth, onNextMonth } = useCalendar();
+	const { currentDateString, onPrevMonth, onNextMonth } = useCalendar();
 	return (
 		<CalHeader>
 			<CalButton onClick={onPrevMonth}>
@@ -17,7 +17,7 @@ const CalendarHeader = () => {
 					fill={getColor("primary")({ theme })}
 				/>
 			</CalButton>
-			<MonthLabel>{format(currentDate, "yyyy-MM")}</MonthLabel>
+			<MonthLabel>{format(new Date(currentDateString), "yyyy-MM")}</MonthLabel>
 			<CalButton onClick={onNextMonth}>
 				<ArrowIcon
 					width="12"

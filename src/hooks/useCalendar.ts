@@ -33,7 +33,6 @@ const useCalendar = () => {
 	};
 
 	return {
-		currentDate,
 		currentDateString,
 		setDate,
 		onPrevMonth,

@@ -6,18 +6,24 @@ import {
 	DetailInputContainer,
 } from "./scheduleModal.styled";
 import { ScheduleViewModalProps } from "../../types/schedule";
+import { format } from "date-fns";
 
 const ScheduleDetailModal = ({
 	isOpen,
 	onClose,
+	onConfirm,
 	detailData,
 }: ScheduleViewModalProps) => {
+	const startDate = detailData?.start_date
+		? format(new Date(detailData.start_date), "yyyy-MM-dd (E)")
+		: "-";
 	return (
 		<Modal
 			isOpen={isOpen}
 			title="일정 상세"
 			onClose={onClose}
 			confirmLabel="수정"
+			onConfirm={onConfirm}
 		>
 			<DetailInputContainer>
 				<DetailLabel>제목</DetailLabel>
@@ -25,7 +31,7 @@ const ScheduleDetailModal = ({
 			</DetailInputContainer>
 			<DetailInputContainer>
 				<DetailLabel>날짜</DetailLabel>
-				<FieldValue>{detailData?.start_date}</FieldValue>
+				<FieldValue>{startDate}</FieldValue>
 			</DetailInputContainer>
 
 			<DetailInputContainer>

@@ -14,31 +14,24 @@ const scheduleSlice = createSlice({
 	name: "schedule",
 	initialState,
 	reducers: {
-		addSchedule: (state, action: PayloadAction<ScheduleData>) => {
-			state.schedules.push(action.payload);
-		},
-		updateSchedule: (
-			state,
-			action: PayloadAction<{
-				schedule_id: string;
-				updates: Partial<ScheduleData>;
-			}>,
-		) => {
-			const { schedule_id, updates } = action.payload;
-			const schedule = state.schedules.find(
-				(s) => s.schedule_id === schedule_id,
+		upsertSchedule: (state, action: PayloadAction<ScheduleData>) => {
+			const newSchedule = action.payload;
+			const index = state.schedules.findIndex(
+				(schedule) => schedule.schedule_id === newSchedule.schedule_id,
 			);
-			if (schedule) {
-				Object.assign(schedule, updates);
+
+			if (index !== -1) {
+				// 기존 일정 업데이트
+				state.schedules[index] = { ...state.schedules[index], ...newSchedule };
+			} else {
+				// 새 일정 추가
+				state.schedules.push(newSchedule);
 			}
 		},
 		deleteSchedule: (state, action: PayloadAction<string>) => {
 			state.schedules = state.schedules.filter(
-				(s) => s.schedule_id !== action.payload,
+				(schedule) => schedule.schedule_id !== action.payload,
 			);
-		},
-		setSchedules: (state, action: PayloadAction<ScheduleData[]>) => {
-			state.schedules = action.payload;
 		},
 		setCurrentDate: (state, action: PayloadAction<string>) => {
 			state.currentDate = action.payload;
@@ -51,7 +44,23 @@ const scheduleSlice = createSlice({
 				state.error = null;
 			})
 			.addCase(fetchSchedules.fulfilled, (state, action) => {
-				state.schedules = action.payload;
+				action.payload.forEach((newSchedule) => {
+					const index = state.schedules.findIndex(
+						(schedule) => schedule.schedule_id === newSchedule.schedule_id,
+					);
+
+					if (index !== -1) {
+						// 기존 일정 업데이트
+						state.schedules[index] = {
+							...state.schedules[index],
+							...newSchedule,
+						};
+					} else {
+						// 새 일정 추가
+						state.schedules.push(newSchedule);
+					}
+				});
+
 				state.loading = false;
 			})
 			.addCase(fetchSchedules.rejected, (state, action) => {
@@ -85,13 +94,8 @@ export const fetchSchedules = createAsyncThunk(
 	},
 );
 
-export const {
-	addSchedule,
-	updateSchedule,
-	deleteSchedule,
-	setSchedules,
-	setCurrentDate,
-} = scheduleSlice.actions;
+export const { upsertSchedule, deleteSchedule, setCurrentDate } =
+	scheduleSlice.actions;
 
 // Selectors
 export const selectSchedules = (state: RootState) => state.schedule.schedules;
