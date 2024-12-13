@@ -9,6 +9,7 @@ import {
 	query,
 	where,
 } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 export const getSalaryAmount = async (userId: string, salaryId: string) => {
 	try {
@@ -19,10 +20,11 @@ export const getSalaryAmount = async (userId: string, salaryId: string) => {
 			const data = salarySnap.data();
 			return data.actualPayment || 0;
 		} else {
-			throw new Error("해당 월의 급여 데이터를 찾을 수 없습니다.");
+			toast.error("해당 월의 급여 데이터를 찾을 수 없습니다.");
 		}
 	} catch (error) {
-		console.error("급여 금액 가져오기 중 오류:", error);
+		toast.error("급여 정보를 불러오는데 실패했습니다.");
+
 		throw error;
 	}
 };
@@ -63,7 +65,7 @@ export const getYearlySalaryData = async (userId: string, year: number) => {
 			};
 		});
 	} catch (error) {
-		console.error("연간 급여 내역을 불러오는데 오류가 발생했습니다.", error);
+		toast.error("연간 급여 내역을 불러오는데 실패했습니다.");
 		throw error;
 	}
 };
@@ -92,10 +94,8 @@ export const saveSalaryCorrection = async ({
 		await setDoc(correctionRef, {
 			...correctionData,
 		});
-
-		console.log("정정 요청이 성공적으로 저장되었습니다.");
 	} catch (error) {
-		console.error("정정 요청 저장 중 오류 발생:", error);
+		toast.error("정정 요청을 보내는데 실패했습니다.");
 		throw error;
 	}
 };

@@ -21,6 +21,7 @@ import { db } from "@/firebase";
 import { useSelector } from "react-redux";
 import { RootState } from "@/types/store";
 import type { CorrectionData } from "./types/correctionData";
+import { toast } from "react-toastify";
 
 enum Status {
 	Pending = "검토중",
@@ -64,7 +65,6 @@ const SalaryCorrectionPage = () => {
 					} as CorrectionData;
 
 					corrections.push(correctionData);
-					console.log(correctionData);
 				});
 			}
 
@@ -79,7 +79,7 @@ const SalaryCorrectionPage = () => {
 
 			setSalaryData(sortedCorrections);
 		} catch (error) {
-			console.error("급여 정정 내역 불러오기 실패", error);
+			toast.error("정정 내역 데이터를 불러오는데 실패했습니다.");
 			setSalaryData([]);
 		}
 	};
