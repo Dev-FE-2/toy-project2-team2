@@ -21,6 +21,9 @@ export const InfoValue = styled.div<{ readOnly: boolean }>`
 	div {
 		height: 40px;
 	}
+	div:first-child > input {
+		border: none;
+	}
 	input {
 		padding: 0;
 		background-color: ${getColor("white")};

@@ -1,5 +1,6 @@
 import { UserInfoState } from "@/types/store";
 
-export interface userImageData {
+export interface userImageDataProps {
 	userImageData: UserInfoState["photoURL"];
+	$isEditing: boolean;
 }

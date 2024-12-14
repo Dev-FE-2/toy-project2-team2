@@ -1,9 +1,9 @@
 import { ImageBoxContainer, ImageCircle, UserImage } from "./ImageBox.styled";
 import profileImage from "@/assets/img/profile.png";
-import { userImageData } from "../../type/ImageBox";
+import { userImageDataProps } from "../../type/ImageBox";
 import { UploadButton } from "./UploadButton";
 
-export const ImageBox = ({ userImageData }: userImageData) => {
+export const ImageBox = ({ userImageData, $isEditing }: userImageDataProps) => {
 	return (
 		<ImageBoxContainer>
 			<ImageCircle>
@@ -12,7 +12,7 @@ export const ImageBox = ({ userImageData }: userImageData) => {
 					alt="프로필이미지"
 				/>
 			</ImageCircle>
-			<UploadButton>프로필 이미지 변경</UploadButton>
+			<UploadButton $isEditing={$isEditing} />
 		</ImageBoxContainer>
 	);
 };

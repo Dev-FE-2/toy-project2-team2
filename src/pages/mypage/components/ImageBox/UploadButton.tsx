@@ -1,4 +1,4 @@
-import { Button } from "@/components";
+import RotateIcon from "@/assets/img/rotate_icon.svg?react";
 import { UploadButtonContainer } from "./UploadButton.styled";
 import { useRef } from "react";
 import { storage } from "@/firebase";
@@ -16,7 +16,7 @@ import { getUserData } from "@/services/getDatas";
 import { setUserInfo } from "@/store/slices/userInfoSlice";
 import { useAppDispatch } from "@/hooks";
 
-export const UploadButton = ({ children }: { children: string }) => {
+export const UploadButton = ({ $isEditing }: { $isEditing: boolean }) => {
 	const fileInput = useRef<HTMLInputElement | null>(null);
 	const uploadStorage = storage;
 	const uid = useSelector((state: RootState) => state.loginAuth.uid);
@@ -61,7 +61,7 @@ export const UploadButton = ({ children }: { children: string }) => {
 				await deleteObject(item);
 			}
 		} catch (error) {
-			console.error("파일 삭제 중 오류 발생:", error);
+			console.error("이미지 파일 삭제 중 오류 발생:", error);
 		}
 
 		await uploadBytes(imageRef, file);
@@ -89,16 +89,16 @@ export const UploadButton = ({ children }: { children: string }) => {
 	};
 
 	return (
-		<UploadButtonContainer>
+		<UploadButtonContainer $isEditing={$isEditing}>
 			<input
 				type="file"
 				accept={".jpg, .jpeg, .png, .webp"}
 				ref={fileInput}
 				onChange={handleChange}
 			></input>
-			<Button size="small" onClick={handleClickButton}>
-				{children}
-			</Button>
+			<div>
+				<RotateIcon onClick={handleClickButton} />
+			</div>
 		</UploadButtonContainer>
 	);
 };

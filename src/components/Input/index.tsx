@@ -9,6 +9,7 @@ const Input = ({
 	onChange,
 	type,
 	name,
+	autoComplete,
 }: InputProps) => {
 	return (
 		<InputContainer>
@@ -20,6 +21,7 @@ const Input = ({
 				type={type}
 				$isError={!!error}
 				name={name}
+				autoComplete={autoComplete}
 			/>
 			{error && <ErrorMessage>{error}</ErrorMessage>}
 		</InputContainer>

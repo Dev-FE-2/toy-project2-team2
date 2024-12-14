@@ -6,4 +6,5 @@ export interface InputProps {
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	type?: string;
 	name?: string;
+	autoComplete?: string;
 }
