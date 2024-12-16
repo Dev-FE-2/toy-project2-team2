@@ -53,6 +53,7 @@ export const ModalContent = styled.div`
 	padding-bottom: 10px;
 	padding-top: 20px;
 	font-size: ${getFontSize("md")};
+	max-width: 400px;
 `;
 
 export const ButtonContainer = styled.div`
