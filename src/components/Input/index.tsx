@@ -10,6 +10,7 @@ const Input = ({
 	type,
 	name,
 	autoComplete,
+	readOnly,
 }: InputProps) => {
 	return (
 		<InputContainer>
@@ -22,6 +23,7 @@ const Input = ({
 				$isError={!!error}
 				name={name}
 				autoComplete={autoComplete}
+				readOnly={readOnly}
 			/>
 			{error && <ErrorMessage>{error}</ErrorMessage>}
 		</InputContainer>

@@ -20,7 +20,10 @@ export const Label = styled.label`
 	text-align: left;
 `;
 
-export const InputBox = styled.input<{ $isError: boolean }>`
+export const InputBox = styled.input<{
+	$isError: boolean;
+	readOnly: boolean | undefined;
+}>`
 	font-family: inherit;
 	padding: 10px;
 	font-size: ${getFontSize("md")};
@@ -33,7 +36,8 @@ export const InputBox = styled.input<{ $isError: boolean }>`
 	cursor: text;
 
 	&:focus {
-		border: 2px solid ${getColor("primary")};
+		border: ${({ readOnly }) =>
+			readOnly ? "none" : `2px solid ${getColor("primary")}`};
 	}
 
 	&[type="color"] {
