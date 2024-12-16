@@ -1,5 +1,5 @@
 import { flexCenter } from "@/styles";
-import { getColor } from "@/styles/theme";
+import { getBorderRadius, getBreakPoints, getColor } from "@/styles/theme";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -12,6 +12,11 @@ const Container = styled.div`
 
 	& > section:last-child {
 		flex-basis: 25%;
+	}
+
+	@media (max-width: ${getBreakPoints("md")}) {
+		flex-direction: column;
+		gap: 20px;
 	}
 `;
 
@@ -29,6 +34,14 @@ const InsertBtn = styled.button`
 
 	&:hover {
 		background-color: ${getColor("primary_hover")};
+	}
+
+	@media (max-width: ${getBreakPoints("md")}) {
+		top: 10px;
+		bottom: auto;
+		width: 31px;
+		height: 31px;
+		border-radius: ${getBorderRadius("sm")};
 	}
 `;
 

@@ -11,11 +11,13 @@ import {
 	set,
 	isSaturday,
 	isSunday,
+	isSameDay,
 } from "date-fns";
+import ScheduleListPerDate from "./ScheduleListPerDate";
 
 const Dates = () => {
 	const today = new Date();
-	const { currentDateString, setDate } = useCalendar();
+	const { currentDateString, setDate, schedules } = useCalendar();
 	const [selectedDate, setSelectedDate] = useState<Date | null>(null); // 선택된 날짜 상태 추가
 
 	const currentDate = new Date(currentDateString);
@@ -61,6 +63,11 @@ const Dates = () => {
 				>
 					<DateNum>{format(date, "d")}</DateNum>
 					{isToday(date) && <TodayBadge>오늘</TodayBadge>}
+					<ScheduleListPerDate
+						schedules={schedules.filter((schedule) =>
+							isSameDay(new Date(schedule.start_date), date),
+						)}
+					/>
 				</DateBox>
 			))}
 		</DatesGrid>
