@@ -1,5 +1,10 @@
 import { flexCenter } from "@/styles";
-import { getColor, getFontSize, getFontWeight } from "@/styles/theme";
+import {
+	getBreakPoints,
+	getColor,
+	getFontSize,
+	getFontWeight,
+} from "@/styles/theme";
 import styled from "styled-components";
 
 const Panel = styled.section`
@@ -7,8 +12,12 @@ const Panel = styled.section`
 	background-color: ${getColor("grayWhite")};
 	margin-top: 52px;
 	padding: 15px;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
+	border-radius: 10px;
+	border-radius: 10px;
+
+	@media (max-width: ${getBreakPoints("md")}) {
+		margin-top: 0;
+	}
 `;
 
 const DateStr = styled.div`
@@ -46,9 +55,9 @@ const ItemBox = styled.li`
 	}
 `;
 
-const Color = styled.div<{ color: string }>`
+const Color = styled.div<{ $color: string }>`
 	flex: 0 0 10px;
-	background-color: ${(props) => props.color};
+	background-color: ${({ $color }) => $color};
 `;
 
 const ItemInfo = styled.div`

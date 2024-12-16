@@ -16,7 +16,7 @@ const DetailItem = ({
 }: DetailItemProps) => {
 	return (
 		<ItemBox onClick={() => onClickItem(detailData)}>
-			<Color color={detailData.color} />
+			<Color $color={detailData.color} />
 			<ItemInfo>
 				<ItemTitle>{detailData.title}</ItemTitle>
 				<ItemContent>{detailData.content}</ItemContent>
