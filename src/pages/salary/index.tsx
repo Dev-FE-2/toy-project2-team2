@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import { Divider, UserInfo, Text, NoDataMessage } from "./Salay.styled";
@@ -26,7 +26,7 @@ const SalaryPage = () => {
 		return value !== undefined ? value.toLocaleString() : "0";
 	};
 
-	const getTotalDeductions = (data: SalaryData): number => {
+	const getTotalDeductions = useCallback((data: SalaryData): number => {
 		return (
 			data.nationalPension +
 			data.healthInsurance +
@@ -35,8 +35,11 @@ const SalaryPage = () => {
 			data.incomeTax +
 			data.localIncomeTax
 		);
-	};
-	const actualPayment = salaryData ? calculateActualPayment(salaryData) : 0;
+	}, []);
+	const actualPayment = useMemo(
+		() => (salaryData ? calculateActualPayment(salaryData) : 0),
+		[salaryData],
+	);
 
 	const uid = useSelector((state: RootState) => state.loginAuth.uid);
 
@@ -44,24 +47,21 @@ const SalaryPage = () => {
 		async (date: Date) => {
 			if (!uid) return;
 
-			setIsLoading(true);
-
 			const year = date.getFullYear();
 			const month = String(date.getMonth() + 1).padStart(2, "0");
 			const salaryDocPath = `user/${uid}/salaries/salaries_${year}_${month}`;
 			const userDocPath = `user/${uid}`;
 
 			try {
-				const userDocRef = doc(db, userDocPath);
-				const userDocSnap = await getDoc(userDocRef);
+				const [userDocSnap, salaryDocSnap] = await Promise.all([
+					getDoc(doc(db, userDocPath)),
+					getDoc(doc(db, salaryDocPath)),
+				]);
+
 				if (userDocSnap.exists()) {
 					setUserName(userDocSnap.data().name || null);
-				} else {
-					setUserName(null);
 				}
 
-				const salaryDocRef = doc(db, salaryDocPath);
-				const salaryDocSnap = await getDoc(salaryDocRef);
 				if (salaryDocSnap.exists()) {
 					setSalaryData(salaryDocSnap.data() as SalaryData);
 				} else {
@@ -69,8 +69,6 @@ const SalaryPage = () => {
 				}
 			} catch (error) {
 				toast.error("데이터를 불러오는데 실패했습니다.");
-			} finally {
-				setIsLoading(false);
 			}
 		},
 		[uid],
