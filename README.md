@@ -18,7 +18,7 @@
 
 ### 📅 1. 내 일정
 <div style="text-align:center">
-    <img src="https://hackmd.io/_uploads/rklEsZ6E1x.gif" alt="일정 gif" /></div>
+    <img src="./README_GIF/일정.gif" alt="일정 gif" /></div>
 
 
 - **일정 등록** : 나의 일정을 제목, 날짜, 컬러 라벨, 메모와 같은 내용을 직접 설정하여 등록할 수 있습니다.
@@ -28,7 +28,7 @@
 
 ### 💰 2. 급여 내역 조회
  <div style="text-align:center">
-  <img src="https://hackmd.io/_uploads/rJABabaEkl.gif" alt="급여 내역 GIF"/>
+  <img src="./README_GIF/급여내역조회.gif" alt="급여 내역 GIF"/>
 </div>
 
 - **이번 달 급여 내역 조회** : 이번 달의 급여 명세서를 가장 먼저 확인할 수 있습니다. 기본급, 실지급액, 공제 항목, 급여 지급일 등 급여와 관련된 모든 정보를 명확하게 제공합니다.
@@ -37,8 +37,8 @@
 - **급여 정정 신청** :특정 월의 급여 내역에 오류가 있는 경우,수정 요청을 보낼 수 있습니다. 신청 후에는 "검토 중" 상태로 표시됩니다.
 
 ### 📝 3. 정정 신청 내역
- <div style="text-align:center">
-  <img src="https://hackmd.io/_uploads/HkvxVGaNJl.gif" alt="급여 내역 GIF"/>
+<div style="text-align:center">
+  <img src="./README_GIF/정정신청내역.gif" alt="정정내역GIF"/>
 </div>
 
 - **정정 신청 내역 확인** : 신청한 정정 요청을 월별로 목록 형태로 확인할 수 있습니다. 목록에는 정정 신청의 상태와 정정 신청 날짜가 표시됩니다.
@@ -48,11 +48,11 @@
     - **신청 내용** : 신청 당시 작성했던 정정 요청 내용이 표시됩니다.
 
 ### 👨‍💼4. 로그인 & 마이페이지
-<div style="display: flex; justify-content: space-around; align-items: center;">
-  <img src="https://hackmd.io/_uploads/rJnksf64kg.gif"  style="width: 45%; height: auto;"/>
-  <img src="https://hackmd.io/_uploads/ByFFGMp41e.gif"  style="width: 45%; height: auto;"/>
-</div>
 
+<div style="display: flex; justify-content: space-around; align-items: center;">
+  <img src="./README_GIF/마이페이지.gif" alt="My Page" style="width: 45%; height: auto;"/>
+  <img src="./README_GIF/로그인.gif" alt="Login Page" style="width: 45%; height: auto;"/>
+</div>
 
 - **로그인**: 사용자의 이메일과 비밀번호를 입력해 로그인하여 GoodWork 서비스를 이용할 수 있습니다.
 - **프로필 변경**: 프로필 이미지 및 이메일을 제외한 인적사항을 변경할 수 있습니다.
