@@ -22,8 +22,8 @@ const Header = () => {
 	const dispatch = useAppDispatch();
 	const logOut = () => {
 		auth.signOut();
-		dispatch(setIsLogined(false));
 		dispatch(setUserInfo(null));
+		dispatch(setIsLogined(false));
 	};
 	return (
 		<HeaderContainer>
