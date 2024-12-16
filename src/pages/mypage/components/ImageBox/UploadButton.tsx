@@ -44,8 +44,6 @@ export const UploadButton = ({ $isEditing }: { $isEditing: boolean }) => {
 			alert("지원하지 않는 확장자입니다.");
 			e.target.value = "";
 			return;
-		} else {
-			console.log("지원하는 확장자입니다.");
 		}
 
 		if (file.size > maxSizeBytes) {
