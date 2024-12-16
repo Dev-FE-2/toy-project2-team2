@@ -1,6 +1,5 @@
 import { getColor, getFontSize, getFontWeight } from "@/styles/theme";
 import styled from "styled-components";
-
 export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -29,7 +28,10 @@ export const Amount = styled.div`
 	font-size: ${getFontSize("md")};
 	font-weight: ${getFontWeight("medium")};
 	color: ${getColor("grayDark")};
+	text-align: left;
+	padding-top: 4px;
 `;
+
 export const Reason = styled.div`
 	font-size: ${getFontSize("md")};
 	font-weight: ${getFontWeight("medium")};
@@ -38,6 +40,7 @@ export const Reason = styled.div`
 	white-space: pre-wrap;
 	overflow-wrap: break-word;
 	width: 100%;
-	max-width: 300px;
+	box-sizing: border-box;
+	line-height: 1.7;
 	min-height: 120px;
 `;
