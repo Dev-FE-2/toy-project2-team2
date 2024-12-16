@@ -1,16 +1,25 @@
-import reactLogo from "./assets/react.svg";
+import Router from "./router";
+import { RouterProvider } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyle, DefaultTheme } from "./styles";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-function App() {
+const App = () => {
 	return (
-		<>
-			<div>
-				<a href="https://react.dev" target="_blank">
-					<img src={reactLogo} className="logo react" alt="React logo" />
-				</a>
-			</div>
-			<h1>App</h1>
-		</>
+		<ThemeProvider theme={DefaultTheme}>
+			<GlobalStyle />
+			<RouterProvider router={Router} />
+			<ToastContainer
+				position="bottom-right"
+				autoClose={3000}
+				hideProgressBar={false}
+				newestOnTop={true}
+				closeOnClick
+				draggable
+			/>
+		</ThemeProvider>
 	);
-}
+};
 
 export default App;

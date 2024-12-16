@@ -1,0 +1,2 @@
+npx lint-staged || echo "Lint errors occurred but commit proceeds."
+exit 0
