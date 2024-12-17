@@ -4,11 +4,6 @@ import {
 	SectionHalf,
 	SectionHeader,
 	SectionTitle,
-	TimeButtonWrapper,
-	TimeButton,
-	Tooltip,
-	TooltipRow,
-	TooltipDivider,
 	List,
 	ListItem,
 	Label,
@@ -28,24 +23,6 @@ const SalaryDetailsSection = ({
 				<Section>
 					<SectionHeader>
 						<SectionTitle>지급 내역</SectionTitle>
-						{/* <TimeButtonWrapper>
-							<TimeButton>근무시간</TimeButton>
-							<Tooltip>
-								<TooltipRow>
-									<span>이번달 고정 근무시간</span>
-									<span>40 시간</span>
-								</TooltipRow>
-								<TooltipRow>
-									<span>+ 연장 근무시간</span>
-									<span>3시간 30분</span>
-								</TooltipRow>
-								<TooltipDivider />
-								<TooltipRow>
-									<strong>총 근무시간</strong>
-									<strong>43시간 30분</strong>
-								</TooltipRow>
-							</Tooltip>
-						</TimeButtonWrapper> */}
 					</SectionHeader>
 					<List>
 						<ListItem>
