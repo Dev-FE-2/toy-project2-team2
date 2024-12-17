@@ -1,6 +1,14 @@
 import Modal from "@/components/Modal";
 import StatusBadge from "./StatusBadge";
 import { Amount, Container, Label, Reason, Row } from "./HistoryModal.styled";
+interface HistoryModalProps {
+	isOpen: boolean;
+	onClose: () => void;
+	status: string;
+	correctionType: string;
+	reason: string;
+	history: number | string;
+}
 
 const HistoryModal = ({
 	isOpen,
@@ -9,7 +17,7 @@ const HistoryModal = ({
 	correctionType,
 	reason,
 	history,
-}: any) => {
+}: HistoryModalProps) => {
 	return (
 		<Modal
 			isOpen={isOpen}

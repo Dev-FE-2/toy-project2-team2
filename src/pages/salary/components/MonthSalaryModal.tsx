@@ -11,7 +11,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/types/store";
 import { getYearlySalaryData } from "@/services/SalaryService";
 
-const MonthlySalaryModal = ({ isOpen, onClose }: any) => {
+interface MonthlySalaryModalProps {
+	isOpen: boolean;
+	onClose: () => void;
+}
+
+const MonthlySalaryModal = ({ isOpen, onClose }: MonthlySalaryModalProps) => {
 	const userId = useSelector((state: RootState) => state.loginAuth.uid);
 
 	const currentYear = new Date().getFullYear().toString();
