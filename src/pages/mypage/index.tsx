@@ -1,6 +1,5 @@
 import { MyPageContainer, MyPageHeader, ProfileBox } from "./MyPage.styled";
-import { UserInfoBox } from "./components/UserInfoBox/UserInfoBox";
-import { ImageBox } from "./components/ImageBox/ImageBox";
+import { UserInfoBox } from "./components/UserInfoBox";
 import Title from "@/components/Title";
 import { useSelector } from "react-redux";
 import type { RootState } from "@/types/store";
@@ -37,10 +36,6 @@ const MyPage = () => {
 				<Title title="마이페이지" />
 			</MyPageHeader>
 			<ProfileBox>
-				<ImageBox
-					userImageData={userData.photoURL}
-					$isEditing={$isEditing}
-				></ImageBox>
 				<UserInfoBox
 					userData={userData}
 					$isEditing={$isEditing}
