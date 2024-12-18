@@ -22,6 +22,7 @@ export const UploadButton = ({
 			fileInput.current.value = "";
 		}
 	}, [$isEditing]);
+
 	return (
 		<UploadButtonContainer $isEditing={$isEditing}>
 			<input
