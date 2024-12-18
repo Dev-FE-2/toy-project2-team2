@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import CustomSelect from "@/components/Select";
 import Modal from "@/components/Modal";
 import {
@@ -9,7 +8,7 @@ import {
 } from "./MonthSalaryModal.styled";
 import { useSelector } from "react-redux";
 import { RootState } from "@/types/store";
-import { getYearlySalaryData } from "@/services/SalaryService";
+import { useMonthlySalaryModal } from "@/hooks/useMonthlySalaryModal";
 
 interface MonthlySalaryModalProps {
 	isOpen: boolean;
@@ -18,36 +17,8 @@ interface MonthlySalaryModalProps {
 
 const MonthlySalaryModal = ({ isOpen, onClose }: MonthlySalaryModalProps) => {
 	const userId = useSelector((state: RootState) => state.loginAuth.uid);
-
-	const currentYear = new Date().getFullYear().toString();
-	const [selectedYear, setSelectedYear] = useState(currentYear);
-	const [yearlySalaryData, setYearlySalaryData] = useState<
-		{ month: string; salary: number }[]
-	>([]);
-
-	const years = Array.from({ length: 5 }, (_, i) =>
-		(Number(currentYear) - i).toString(),
-	);
-
-	useEffect(() => {
-		if (userId && selectedYear) {
-			fetchYearlySalaryData(userId, selectedYear);
-		}
-	}, [userId, selectedYear]);
-
-	const fetchYearlySalaryData = async (userId: string, year: string) => {
-		try {
-			const data = await getYearlySalaryData(userId, parseInt(year));
-
-			if (Array.isArray(data) && data.length > 0) {
-				setYearlySalaryData(data);
-			} else {
-				setYearlySalaryData([]);
-			}
-		} catch (error) {
-			setYearlySalaryData([]);
-		}
-	};
+	const { selectedYear, setSelectedYear, yearlySalaryData, years } =
+		useMonthlySalaryModal({ userId });
 
 	return (
 		<Modal
