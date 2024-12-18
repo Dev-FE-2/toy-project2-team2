@@ -34,3 +34,22 @@ export const InfoValue = styled.div<{ readOnly: boolean }>`
 			props.readOnly ? "none" : `1px solid ${getColor("grayLight")}`};
 	}
 `;
+export const ImageBoxContainer = styled.div`
+	${flexCenter}
+	flex-direction: column;
+	button {
+		padding: 13px 0;
+	}
+`;
+export const ImageCircle = styled.div`
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	margin-bottom: 20px;
+	overflow: hidden;
+`;
+export const UserImage = styled.img`
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+`;
