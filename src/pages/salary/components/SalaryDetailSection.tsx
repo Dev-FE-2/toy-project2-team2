@@ -1,3 +1,4 @@
+import Dot from "@/types/components/Dot";
 import {
 	Section,
 	SectionRow,
@@ -9,7 +10,6 @@ import {
 	Label,
 	Value,
 } from "../Salay.styled";
-import Dot from "@/assets/img/dot_icon.svg?react";
 import type { SalaryDetailsSectionProps } from "../types/salaryPage";
 
 const SalaryDetailsSection = ({
@@ -27,7 +27,7 @@ const SalaryDetailsSection = ({
 					<List>
 						<ListItem>
 							<Label>
-								<Dot style={{ margin: "0 4px 3px 4px" }} />
+								<Dot />
 								기본급
 							</Label>
 							<Value>
@@ -36,7 +36,7 @@ const SalaryDetailsSection = ({
 						</ListItem>
 						<ListItem>
 							<Label>
-								<Dot style={{ margin: "0 4px 3px 4px" }} />총 지급액
+								<Dot />총 지급액
 							</Label>
 							<Value>
 								{salaryData ? formatNumber(salaryData.baseSalary) : "0"} 원
@@ -54,21 +54,21 @@ const SalaryDetailsSection = ({
 							<>
 								<ListItem>
 									<Label>
-										<Dot style={{ margin: "0 4px 3px 4px" }} />
+										<Dot />
 										국민연금
 									</Label>
 									<Value>{formatNumber(salaryData.nationalPension)} 원</Value>
 								</ListItem>
 								<ListItem>
 									<Label>
-										<Dot style={{ margin: "0 4px 3px 4px" }} />
+										<Dot />
 										건강보험
 									</Label>
 									<Value>{formatNumber(salaryData.healthInsurance)} 원</Value>
 								</ListItem>
 								<ListItem>
 									<Label>
-										<Dot style={{ margin: "0 4px 3px 4px" }} />
+										<Dot />
 										장기요양보험
 									</Label>
 									<Value>
@@ -77,7 +77,7 @@ const SalaryDetailsSection = ({
 								</ListItem>
 								<ListItem>
 									<Label>
-										<Dot style={{ margin: "0 4px 3px 4px" }} />
+										<Dot />
 										고용보험
 									</Label>
 									<Value>
@@ -86,21 +86,21 @@ const SalaryDetailsSection = ({
 								</ListItem>
 								<ListItem>
 									<Label>
-										<Dot style={{ margin: "0 4px 3px 4px" }} />
+										<Dot />
 										소득세
 									</Label>
 									<Value>{formatNumber(salaryData.incomeTax)} 원</Value>
 								</ListItem>
 								<ListItem>
 									<Label>
-										<Dot style={{ margin: "0 4px 3px 4px" }} />
+										<Dot />
 										지방소득세
 									</Label>
 									<Value>{formatNumber(salaryData.localIncomeTax)} 원</Value>
 								</ListItem>
 								<ListItem>
 									<Label>
-										<Dot style={{ margin: "0 4px 3px 4px" }} />총 공제액
+										<Dot />총 공제액
 									</Label>
 									<Value> {formatNumber(totalDeductions)} 원</Value>
 								</ListItem>
