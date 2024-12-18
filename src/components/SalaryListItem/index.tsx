@@ -1,3 +1,4 @@
+import { Label, ListItem, Value } from "@/pages/salary/Salay.styled";
 import Dot from "../Dot";
 
 const SalaryListItem = ({
@@ -7,11 +8,13 @@ const SalaryListItem = ({
 	label: string;
 	value: string | number;
 }) => (
-	<div>
-		<Dot />
-		<span>{label}</span>
-		<strong>{value}</strong>
-	</div>
+	<ListItem>
+		<Label>
+			<Dot />
+			{label}
+		</Label>
+		<Value>{value}</Value>
+	</ListItem>
 );
 
 export default SalaryListItem;
