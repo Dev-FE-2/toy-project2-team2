@@ -40,7 +40,7 @@ const MyPage = () => {
 					userData={userData}
 					$isEditing={$isEditing}
 					$setIsEditing={$setIsEditing}
-				></UserInfoBox>
+				/>
 			</ProfileBox>
 		</MyPageContainer>
 	);
