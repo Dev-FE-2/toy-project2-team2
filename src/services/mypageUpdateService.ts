@@ -10,6 +10,7 @@ export const updateUserInfoData = async (
 		grade: string;
 		photoURL: string;
 	},
+	imgUrl?: string,
 ) => {
 	const docRef = doc(db, "user", uid);
 	await updateDoc(docRef, {
@@ -17,6 +18,6 @@ export const updateUserInfoData = async (
 		name: userInfoData.name,
 		team: userInfoData.team,
 		grade: userInfoData.grade,
-		photoURL: userInfoData.photoURL,
+		photoURL: imgUrl || userInfoData.photoURL,
 	});
 };

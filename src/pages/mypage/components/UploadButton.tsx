@@ -7,7 +7,7 @@ export const UploadButton = ({
 	onChange,
 }: {
 	$isEditing: boolean;
-	onChange: () => void;
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
 	const fileInput = useRef<HTMLInputElement | null>(null);
 

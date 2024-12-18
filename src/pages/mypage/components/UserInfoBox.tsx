@@ -42,7 +42,9 @@ export const UserInfoBox = ({
 		photoURL: userData.photoURL,
 	});
 	const [file, setFile] = useState<File | null>(null);
+	const [previewURL, setPreviewURL] = useState("");
 	const dispatch = useAppDispatch();
+	const uploadStorage = storage;
 	const handleInput = async () => {
 		if (!$isEditing) {
 			$setIsEditing(true);
@@ -62,8 +64,8 @@ export const UserInfoBox = ({
 				});
 			} else {
 				if (uid) {
+					let imgUrl = userData.photoURL;
 					if (file !== null) {
-						const uploadStorage = storage;
 						const imageRef = ref(uploadStorage, `images/${uid}/` + file.name);
 						const deleteFilePath = ref(uploadStorage, `images/${uid}`);
 						try {
@@ -76,14 +78,14 @@ export const UserInfoBox = ({
 						}
 
 						await uploadBytes(imageRef, file);
-						const imgUrl = await getDownloadURL(imageRef);
+						imgUrl = await getDownloadURL(imageRef);
 						setUserInfoData({
 							...userInfoData,
 							photoURL: imgUrl,
 						});
 						setFile(null);
 					}
-					await updateUserInfoData(uid, userInfoData);
+					await updateUserInfoData(uid, userInfoData, imgUrl);
 					const newUserData = await getUserData(uid);
 					dispatch(
 						setUserInfo({
@@ -109,7 +111,7 @@ export const UserInfoBox = ({
 			[name]: value,
 		});
 	};
-	const inputHandleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+	const inputHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const maxSizeMB = 5;
 		const maxSizeBytes = maxSizeMB * 1024 * 1024;
 		const allowedExtentions = ["jpg", "jpeg", "png", "webp"];
@@ -133,14 +135,9 @@ export const UserInfoBox = ({
 			e.target.value = "";
 			return;
 		}
-		const previewURL = URL.createObjectURL(file);
-		setUserInfoData({
-			...userInfoData,
-			photoURL: previewURL,
-		});
+		setPreviewURL(URL.createObjectURL(file));
 	};
 	const cancelEditing = () => {
-		setFile(null);
 		setUserInfoData({
 			email: userData.email,
 			name: userData.name,
@@ -148,6 +145,8 @@ export const UserInfoBox = ({
 			grade: userData.grade,
 			photoURL: userData.photoURL,
 		});
+		setPreviewURL("");
+		setFile(null);
 		$setIsEditing(false);
 	};
 
@@ -157,9 +156,11 @@ export const UserInfoBox = ({
 				<ImageCircle>
 					<UserImage
 						src={
-							userInfoData.photoURL === null
-								? profileImage
-								: userInfoData.photoURL
+							previewURL !== ""
+								? previewURL
+								: userInfoData.photoURL === null
+									? profileImage
+									: userInfoData.photoURL
 						}
 						alt="프로필이미지"
 					/>
