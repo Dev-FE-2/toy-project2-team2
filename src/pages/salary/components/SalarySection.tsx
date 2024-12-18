@@ -1,4 +1,4 @@
-import Dot from "@/types/components/Dot";
+import Dot from "@/components/Dot";
 import {
 	Section,
 	SectionTitle,

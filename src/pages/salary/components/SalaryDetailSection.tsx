@@ -1,4 +1,4 @@
-import Dot from "@/types/components/Dot";
+import Dot from "@/components/Dot";
 import {
 	Section,
 	SectionRow,
@@ -11,6 +11,7 @@ import {
 	Value,
 } from "../Salay.styled";
 import type { SalaryDetailsSectionProps } from "../types/salaryPage";
+import SalaryListItem from "@/components/SalaryListItem";
 
 const SalaryDetailsSection = ({
 	salaryData,
@@ -52,58 +53,34 @@ const SalaryDetailsSection = ({
 					<List>
 						{salaryData ? (
 							<>
-								<ListItem>
-									<Label>
-										<Dot />
-										국민연금
-									</Label>
-									<Value>{formatNumber(salaryData.nationalPension)} 원</Value>
-								</ListItem>
-								<ListItem>
-									<Label>
-										<Dot />
-										건강보험
-									</Label>
-									<Value>{formatNumber(salaryData.healthInsurance)} 원</Value>
-								</ListItem>
-								<ListItem>
-									<Label>
-										<Dot />
-										장기요양보험
-									</Label>
-									<Value>
-										{formatNumber(salaryData.longTermCareInsurance)} 원
-									</Value>
-								</ListItem>
-								<ListItem>
-									<Label>
-										<Dot />
-										고용보험
-									</Label>
-									<Value>
-										{formatNumber(salaryData.employmentInsurance)} 원
-									</Value>
-								</ListItem>
-								<ListItem>
-									<Label>
-										<Dot />
-										소득세
-									</Label>
-									<Value>{formatNumber(salaryData.incomeTax)} 원</Value>
-								</ListItem>
-								<ListItem>
-									<Label>
-										<Dot />
-										지방소득세
-									</Label>
-									<Value>{formatNumber(salaryData.localIncomeTax)} 원</Value>
-								</ListItem>
-								<ListItem>
-									<Label>
-										<Dot />총 공제액
-									</Label>
-									<Value> {formatNumber(totalDeductions)} 원</Value>
-								</ListItem>
+								<SalaryListItem
+									label="국민연금"
+									value={`${formatNumber(salaryData.nationalPension)} 원`}
+								/>
+								<SalaryListItem
+									label="건강보험"
+									value={`${formatNumber(salaryData.healthInsurance)} 원`}
+								/>
+								<SalaryListItem
+									label="장기요양보험"
+									value={`${formatNumber(salaryData.longTermCareInsurance)} 원`}
+								/>
+								<SalaryListItem
+									label="고용보험"
+									value={`${formatNumber(salaryData.employmentInsurance)} 원`}
+								/>
+								<SalaryListItem
+									label="소득세"
+									value={`${formatNumber(salaryData.incomeTax)} 원`}
+								/>
+								<SalaryListItem
+									label="지방소득세"
+									value={`${formatNumber(salaryData.localIncomeTax)} 원`}
+								/>
+								<SalaryListItem
+									label="총 공제액"
+									value={`${formatNumber(totalDeductions)} 원`}
+								/>
 							</>
 						) : (
 							<p>공제 내역 데이터가 없습니다.</p>

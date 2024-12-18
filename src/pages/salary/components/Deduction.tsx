@@ -1,4 +1,4 @@
-import Dot from "@/types/components/Dot";
+import Dot from "@/components/Dot";
 import { Label, ListItem, Value } from "../Salay.styled";
 
 const DeductionItem = ({ label, value }: { label: string; value: string }) => {
