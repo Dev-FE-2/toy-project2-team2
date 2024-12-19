@@ -30,7 +30,8 @@ export const TextAreaBox = styled.textarea<{ $isError?: boolean }>`
 	outline: none;
 	resize: vertical;
 	min-height: 180px;
-
+	background-color: transparent;
+	color: ${getColor("secondaryDark")};
 	&:focus {
 		border: 2px solid ${getColor("primary")};
 	}

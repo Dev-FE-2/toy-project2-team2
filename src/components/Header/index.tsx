@@ -8,15 +8,19 @@ import {
 	Profile,
 	ProfileInfo,
 	ProfileImageContainer,
+	ThemeToggleButton,
 } from "./Header.styled";
 import profileImage from "@/assets/img/profile.png";
 import logoImage from "@/assets/img/logo.png";
+import SunIcon from "@/assets/img/light.png";
+import MoonIcon from "@/assets/img/dark.png";
+import logo_white from "@/assets/img/logo_white.png";
 import Button from "../Button";
+import { useTheme } from "@/context/themeContext";
 import { auth } from "@/firebase";
 import { setIsLogined } from "@/store/slices/loginAuthSlice";
 import { setUserInfo } from "@/store/slices/userInfoSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-
 const Header = () => {
 	const user = useAppSelector((state) => state.userInfo.user);
 	const dispatch = useAppDispatch();
@@ -25,11 +29,13 @@ const Header = () => {
 		dispatch(setIsLogined(false));
 		dispatch(setUserInfo(null));
 	};
+	const { isDarkMode, toggleTheme } = useTheme();
+
 	return (
 		<HeaderContainer>
 			<LeftContainer>
 				<NavLink to="/">
-					<Logo src={logoImage} alt="로고" />
+					<Logo src={isDarkMode ? logo_white : logoImage} alt="로고" />
 				</NavLink>
 
 				<Nav>
@@ -41,6 +47,12 @@ const Header = () => {
 			</LeftContainer>
 
 			<ProfileContainer>
+				<ThemeToggleButton
+					src={isDarkMode ? SunIcon : MoonIcon}
+					alt={isDarkMode ? "라이트 모드 아이콘" : "다크 모드 아이콘"}
+					onClick={toggleTheme}
+					isDarkMode={isDarkMode}
+				/>
 				<ProfileInfo>
 					<div>{user?.name}</div>
 					<div>

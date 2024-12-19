@@ -30,7 +30,6 @@ export const ModalBox = styled.div`
 	padding: 30px;
 	height: auto;
 	max-height: 90vh;
-	box-shadow: 0 2px 10px ${getColor("grayDark")};
 	box-sizing: border-box;
 `;
 

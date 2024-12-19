@@ -1,24 +1,35 @@
 import Router from "./router";
 import { RouterProvider } from "react-router-dom";
-import { ThemeProvider } from "styled-components";
-import { GlobalStyle, DefaultTheme } from "./styles";
+import { ThemeProvider as StyledThemeProvider } from "styled-components";
+import { GlobalStyle } from "./styles";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { darkTheme, lightTheme } from "./styles/theme";
+import { ThemeProvider, useTheme } from "./context/themeContext";
 
 const App = () => {
 	return (
-		<ThemeProvider theme={DefaultTheme}>
+		<ThemeProvider>
+			<ThemeConsumer />
+		</ThemeProvider>
+	);
+};
+
+const ThemeConsumer = () => {
+	const { isDarkMode } = useTheme();
+	return (
+		<StyledThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
 			<GlobalStyle />
 			<RouterProvider router={Router} />
 			<ToastContainer
 				position="bottom-right"
 				autoClose={3000}
 				hideProgressBar={false}
-				newestOnTop={true}
+				newestOnTop
 				closeOnClick
 				draggable
 			/>
-		</ThemeProvider>
+		</StyledThemeProvider>
 	);
 };
 
