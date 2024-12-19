@@ -23,20 +23,26 @@ export const HeaderContainer = styled.header`
 	z-index: 1000;
 
 	@media (max-width: ${getBreakPoints("md")}) {
-		padding: 10px 20px;
+		padding: 12px 20px 13px;
 		justify-content: center;
 	}
 `;
 
 export const LogoLink = styled(RouterNavLink)`
 	display: inline-block;
-	height: 45px;
-	width: 150px;
-	max-width: 150px;
-	object-fit: contain;
-	padding-top: 10px;
+	width: 144px;
+	font-size: 0;
+
 	& > img {
 		width: 100%;
+	}
+
+	@media (max-width: ${getBreakPoints("lg")}) {
+		width: 124px;
+	}
+
+	@media (max-width: ${getBreakPoints("md")}) {
+		width: 144px;
 	}
 `;
 
@@ -50,7 +56,7 @@ export const Nav = styled.nav`
 	}
 
 	@media (max-width: ${getBreakPoints("lg")}) {
-		gap: 20px;
+		gap: 15px;
 	}
 
 	.open & {
@@ -125,6 +131,13 @@ export const ProfileInfo = styled.div`
 		font-size: ${getFontSize("xs")};
 		font-weight: ${getFontWeight("regular")};
 		padding: 0;
+	}
+
+	& > div:nth-child(2) {
+		max-width: 130px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
 	.open & {
@@ -221,5 +234,9 @@ export const ThemeToggleButton = styled.img<{ $isDarkMode: boolean }>`
 
 	&:active {
 		transform: scale(0.5);
+	}
+
+	@media (max-width: ${getBreakPoints("lg")}) {
+		margin-right: 10px;
 	}
 `;
