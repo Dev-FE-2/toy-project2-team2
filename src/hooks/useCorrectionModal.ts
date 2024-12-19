@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-	getSalaryAmount,
-	saveSalaryCorrection,
-} from "@/services/SalaryService";
+import { getSalaryAmount, saveSalaryCorrection } from "@/services";
 import { toast } from "react-toastify";
 
 interface UseCorrectionModalProps {

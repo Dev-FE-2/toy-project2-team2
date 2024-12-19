@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getYearlySalaryData } from "@/services/SalaryService";
+import { getYearlySalaryData } from "@/services";
 
 interface UseMonthlySalaryModalProps {
 	userId: string | null;
