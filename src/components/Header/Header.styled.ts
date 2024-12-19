@@ -93,7 +93,7 @@ export const ProfileInfo = styled.div`
 		padding: 0;
 	}
 `;
-export const ThemeToggleButton = styled.img<{ isDarkMode: boolean }>`
+export const ThemeToggleButton = styled.img<{ $isDarkMode: boolean }>`
 	width: 24px;
 	height: 24px;
 	cursor: pointer;
@@ -102,8 +102,8 @@ export const ThemeToggleButton = styled.img<{ isDarkMode: boolean }>`
 		transform 0.3s ease,
 		opacity 0.3s ease;
 
-	${({ isDarkMode }) =>
-		isDarkMode &&
+	${({ $isDarkMode }) =>
+		$isDarkMode &&
 		`
     filter: invert(1) brightness(2);
   `}

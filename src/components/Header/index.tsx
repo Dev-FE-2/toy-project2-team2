@@ -51,7 +51,7 @@ const Header = () => {
 					src={isDarkMode ? SunIcon : MoonIcon}
 					alt={isDarkMode ? "라이트 모드 아이콘" : "다크 모드 아이콘"}
 					onClick={toggleTheme}
-					isDarkMode={isDarkMode}
+					$isDarkMode={isDarkMode}
 				/>
 				<ProfileInfo>
 					<div>{user?.name}</div>
