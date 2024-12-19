@@ -28,6 +28,7 @@ declare module "styled-components" {
 
 			primary_hover: string;
 			white_hover: string;
+			blacks: string;
 		};
 
 		fontSize: {

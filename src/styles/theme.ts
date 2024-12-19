@@ -28,6 +28,7 @@ export const commonTheme: DefaultTheme = {
 
 		primary_hover: "#027056",
 		white_hover: "#F3F4F6",
+		blacks: "#000000",
 	},
 
 	fontSize: {
@@ -82,6 +83,7 @@ export const lightTheme: DefaultTheme = {
 		dim: "rgba(0,0,0,0.7)",
 		primary_hover: "#027056",
 		white_hover: "#F3F4F6",
+		blacks: "#000000",
 	},
 };
 
@@ -107,6 +109,7 @@ export const darkTheme: DefaultTheme = {
 		dim: "rgba(0,0,0,0.7)",
 		primary_hover: "#027056",
 		white_hover: "#6B7280",
+		blacks: "#FFFFFF",
 	},
 };
 export const theme = {

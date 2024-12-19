@@ -1,4 +1,4 @@
-import { getBorderRadius, getColor } from "@/styles/theme";
+import { getBorderRadius, getBreakPoints, getColor } from "@/styles/theme";
 import styled from "styled-components";
 
 export const Header = styled.div`
@@ -45,6 +45,10 @@ export const CardRight = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 50px;
+
+	@media (max-width: ${getBreakPoints("md")}) {
+		display: none;
+	}
 `;
 
 export const DateTime = styled.div`
@@ -64,5 +68,5 @@ export const NoDataMessage = styled.p`
 `;
 export const NoDataWrapper = styled.div`
 	margin-bottom: 140px;
-	text-align: center; 
+	text-align: center;
 `;
