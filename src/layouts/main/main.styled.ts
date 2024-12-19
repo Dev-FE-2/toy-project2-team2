@@ -20,12 +20,12 @@ export const Main = styled.main`
 export const MainContainer = styled.div`
 	width: 100%;
 	max-width: 1260px;
-	padding: 0 30px;
-	margin: 20px auto 0;
+	padding: 20px 30px;
+	margin: 0 auto;
 	box-sizing: border-box;
 	overflow: hidden;
 
 	@media (max-width: ${getBreakPoints("md")}) {
-		padding: 0 20px;
+		padding: 20px;
 	}
 `;

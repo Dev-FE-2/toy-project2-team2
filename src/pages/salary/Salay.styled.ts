@@ -200,7 +200,7 @@ export const SectionRow = styled.div`
 	margin-top: 20px;
 	@media (max-width: ${getBreakPoints("md")}) {
 		flex-direction: column;
-		margin-left: 20px;
+		padding-left: 20px;
 		width: 100%;
 	}
 `;

@@ -20,11 +20,11 @@ export const Main = styled.main`
 export const ScheduleContainer = styled.div`
 	width: 100%;
 	max-width: 1500px;
-	padding: 0 30px;
-	margin: 20px auto 0;
+	padding: 20px 30px 0;
+	margin: 0 auto;
 	overflow: hidden;
 
 	@media (max-width: ${getBreakPoints("md")}) {
-		padding: 0 20px;
+		padding: 20px 20px 0;
 	}
 `;
