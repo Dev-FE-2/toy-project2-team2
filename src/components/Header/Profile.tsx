@@ -9,7 +9,11 @@ import {
 	ProfileImage,
 	ProfileInfo,
 	ProfileImageContainer,
+	ThemeToggleButton,
 } from "./Header.styled";
+import { useTheme } from "@/context/themeContext";
+import SunIcon from "@/assets/img/light.png";
+import MoonIcon from "@/assets/img/dark.png";
 
 const Profile = () => {
 	const user = useAppSelector((state) => state.userInfo.user);
@@ -20,8 +24,15 @@ const Profile = () => {
 		dispatch(setIsLogined(false));
 		dispatch(setUserInfo(null));
 	};
+	const { isDarkMode, toggleTheme } = useTheme();
 	return (
 		<ProfileContainer>
+			<ThemeToggleButton
+				src={isDarkMode ? SunIcon : MoonIcon}
+				alt={isDarkMode ? "라이트 모드 아이콘" : "다크 모드 아이콘"}
+				onClick={toggleTheme}
+				$isDarkMode={isDarkMode}
+			/>
 			<ProfileInfo>
 				<div>{user?.name}</div>
 				<div>
