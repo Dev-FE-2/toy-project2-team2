@@ -7,6 +7,34 @@ import {
 	getFontWeight,
 } from "@/styles/theme";
 
+const buttonStyles = {
+	primary: {
+		background: getColor("primary"),
+		hoverBackground: getColor("primary_hover"),
+		color: getColor("white"),
+	},
+	secondary: {
+		background: getColor("secondary"),
+		hoverBackground: getColor("white_hover"),
+		color: getColor("white"),
+	},
+	danger: {
+		background: getColor("danger"),
+		hoverBackground: getColor("white_hover"),
+		color: getColor("white"),
+	},
+	white: {
+		background: getColor("white"),
+		hoverBackground: getColor("white_hover"),
+		color: getColor("secondaryDark"),
+		border: "1px solid #DFE4EA",
+	},
+	disabled: {
+		background: getColor("grayWhite"),
+		color: getColor("grayDark"),
+		cursor: "default",
+	},
+};
 // 버튼의 기본 스타일
 export const StyledButton = styled.button<{
 	$buttonType: ButtonType;
@@ -22,33 +50,23 @@ export const StyledButton = styled.button<{
 	border-radius: ${getBorderRadius("sm")};
 	background-color: ${(props) =>
 		props.disabled
-			? getColor("grayWhite")
-			: props.$buttonType === "primary"
-				? getColor("primary")
-				: props.$buttonType === "secondary"
-					? getColor("secondary")
-					: props.$buttonType === "danger"
-						? getColor("danger")
-						: getColor("white")};
+			? buttonStyles.disabled.background
+			: buttonStyles[props.$buttonType]?.background || getColor("white")};
 	color: ${(props) =>
 		props.disabled
-			? getColor("grayDark")
-			: props.$buttonType === "white"
-				? getColor("secondaryDark")
-				: getColor("white")};
+			? buttonStyles.disabled.color
+			: buttonStyles[props.$buttonType]?.color || getColor("white")};
 
 	&:hover {
 		background-color: ${(props) =>
 			props.disabled
-				? "grayWhite"
-				: props.$buttonType === "primary"
-					? getColor("primary_hover")
-					: getColor("white_hover")};
+				? buttonStyles.disabled.background
+				: buttonStyles[props.$buttonType]?.hoverBackground ||
+					buttonStyles[props.$buttonType]?.background};
 		color: ${(props) =>
 			props.disabled
-				? "grayDark"
-				: props.$buttonType === "primary"
-					? getColor("white")
-					: getColor("secondaryDark")};
+				? buttonStyles.disabled.color
+				: buttonStyles[props.$buttonType]?.color ||
+					buttonStyles[props.$buttonType]?.color};
 	}
 `;

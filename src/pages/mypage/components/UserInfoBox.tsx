@@ -7,76 +7,44 @@ import {
 	UserInfoBoxContainer,
 	UserInfoContent,
 } from "./UserInfoBox.styled";
-import { UserDataProps } from "../type/UserInfoBox";
 import { Input } from "@/components";
 import { useState } from "react";
 import { setUserInfo } from "@/store/slices/userInfoSlice";
-import { updateUserInfoData } from "@/services/mypageUpdateService";
-import { useSelector } from "react-redux";
-import { RootState } from "@/types/store";
+import {
+	deleteStorageFile,
+	updateUserInfoData,
+	validateFile,
+} from "@/services/MyPageService";
 import { getUserData } from "@/services/getDatas";
 import { UserInfoUpdateButton } from "./UserInfoUpdateButton";
 import { UploadButton } from "./UploadButton";
 import { storage } from "@/firebase";
-import {
-	deleteObject,
-	getDownloadURL,
-	listAll,
-	ref,
-	uploadBytes,
-} from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import profileImage from "@/assets/img/profile.png";
-import { useAppDispatch } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { UserDataProps } from "../type/UserInfoBox";
 
-export const UserInfoBox = ({
-	userData,
-	$isEditing,
-	$setIsEditing,
-}: UserDataProps) => {
-	const uid = useSelector((state: RootState) => state.loginAuth.uid);
-	const [userInfoData, setUserInfoData] = useState({
-		email: userData.email,
-		name: userData.name,
-		team: userData.team,
-		grade: userData.grade,
-		photoURL: userData.photoURL,
-	});
+export const UserInfoBox = ({ userData }: UserDataProps) => {
+	const uid = useAppSelector((state) => state.loginAuth.uid);
+	const [$isEditing, $setIsEditing] = useState(false);
+	const [userInfoData, setUserInfoData] = useState(userData);
 	const [file, setFile] = useState<File | null>(null);
 	const [previewURL, setPreviewURL] = useState("");
 	const dispatch = useAppDispatch();
-	const uploadStorage = storage;
+
 	const handleInput = async () => {
 		if (!$isEditing) {
 			$setIsEditing(true);
 		} else {
-			if (
-				userInfoData.grade === "" ||
-				userInfoData.name === "" ||
-				userInfoData.team === ""
-			) {
+			if (!userInfoData.grade || !userInfoData.name || !userInfoData.team) {
 				alert("이름 또는 소속 또는 직급이 비어있습니다.");
-				setUserInfoData({
-					email: userData.email,
-					name: userData.name,
-					team: userData.team,
-					grade: userData.grade,
-					photoURL: userData.photoURL,
-				});
 			} else {
 				if (uid) {
 					let imgUrl = userData.photoURL;
 					if (file !== null) {
-						const imageRef = ref(uploadStorage, `images/${uid}/` + file.name);
-						const deleteFilePath = ref(uploadStorage, `images/${uid}`);
-						try {
-							const result = await listAll(deleteFilePath);
-							for (const item of result.items) {
-								await deleteObject(item);
-							}
-						} catch (error) {
-							console.error("이미지 파일 삭제 중 오류 발생:", error);
-						}
-
+						const imageRef = ref(storage, `images/${uid}/` + file.name);
+						const deleteFilePath = ref(storage, `images/${uid}`);
+						await deleteStorageFile(deleteFilePath);
 						await uploadBytes(imageRef, file);
 						imgUrl = await getDownloadURL(imageRef);
 						setUserInfoData({
@@ -85,17 +53,10 @@ export const UserInfoBox = ({
 						});
 						setFile(null);
 					}
+
 					await updateUserInfoData(uid, userInfoData, imgUrl);
 					const newUserData = await getUserData(uid);
-					dispatch(
-						setUserInfo({
-							email: newUserData.email,
-							name: newUserData.name,
-							team: newUserData.team,
-							grade: newUserData.grade,
-							photoURL: newUserData.photoURL,
-						}),
-					);
+					dispatch(setUserInfo(newUserData));
 					$setIsEditing(false);
 				} else {
 					alert("데이터를 가져오는 중 문제가 발생했습니다. 다시 시도해주세요");
@@ -103,48 +64,22 @@ export const UserInfoBox = ({
 			}
 		}
 	};
-	const handelChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const name = e.target.name;
-		const value = e.target.value;
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target;
 		setUserInfoData({
 			...userInfoData,
 			[name]: value,
 		});
 	};
 	const inputHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const maxSizeMB = 5;
-		const maxSizeBytes = maxSizeMB * 1024 * 1024;
-		const allowedExtentions = ["jpg", "jpeg", "png", "webp"];
+		validateFile(e);
 		if (e.target.files !== null) {
 			setFile(e.target.files[0]);
-		} else {
-			return alert("이미지를 선택해주세요");
+			setPreviewURL(URL.createObjectURL(e.target.files[0]));
 		}
-		const file = e.target.files[0];
-		const fileNameSplit = file.name.split(".");
-		const fileExtention = fileNameSplit.pop().toLowerCase();
-
-		if (!allowedExtentions.includes(fileExtention)) {
-			alert("지원하지 않는 확장자입니다.");
-			e.target.value = "";
-			return;
-		}
-
-		if (file.size > maxSizeBytes) {
-			alert(`최대 ${maxSizeMB}MB까지 업로드 가능합니다.`);
-			e.target.value = "";
-			return;
-		}
-		setPreviewURL(URL.createObjectURL(file));
 	};
 	const cancelEditing = () => {
-		setUserInfoData({
-			email: userData.email,
-			name: userData.name,
-			team: userData.team,
-			grade: userData.grade,
-			photoURL: userData.photoURL,
-		});
+		setUserInfoData(userData);
 		setPreviewURL("");
 		setFile(null);
 		$setIsEditing(false);
@@ -155,13 +90,7 @@ export const UserInfoBox = ({
 			<ImageBoxContainer>
 				<ImageCircle>
 					<UserImage
-						src={
-							previewURL !== ""
-								? previewURL
-								: userInfoData.photoURL === null
-									? profileImage
-									: userInfoData.photoURL
-						}
+						src={previewURL || userInfoData.photoURL || profileImage}
 						alt="프로필이미지"
 					/>
 				</ImageCircle>
@@ -180,21 +109,21 @@ export const UserInfoBox = ({
 						<Input
 							value={userInfoData.name}
 							readOnly={!$isEditing}
-							onChange={handelChange}
+							onChange={handleChange}
 							name="name"
 							autoComplete="off"
 						/>
 						<Input
 							value={userInfoData.team}
 							readOnly={!$isEditing}
-							onChange={handelChange}
+							onChange={handleChange}
 							name="team"
 							autoComplete="off"
 						/>
 						<Input
 							value={userInfoData.grade}
 							readOnly={!$isEditing}
-							onChange={handelChange}
+							onChange={handleChange}
 							name="grade"
 							autoComplete="off"
 						/>

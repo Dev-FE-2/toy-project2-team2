@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { setIsLogined } from "@/store/slices/loginAuthSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import ClipLoader from "react-spinners/ClipLoader";
+import LoaderWrapper from "@/components/Loader/LoaderWrapper";
 
 export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
 	const dispatch = useAppDispatch();
@@ -21,32 +21,11 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
 			setIsLoading(false);
 		});
 		return () => unsubscribe();
-	}, []);
+	}, [dispatch]);
 
-	if (isLoading) {
-		return (
-			<div
-				style={{
-					display: "flex",
-					justifyContent: "center",
-					alignItems: "center",
-					height: "60vh",
-				}}
-			>
-				<ClipLoader
-					color="#029688"
-					loading={true}
-					size={50}
-					cssOverride={{
-						borderWidth: "4px",
-					}}
-				/>
-			</div>
-		);
-	}
-
-	if (!isLogined) {
-		return <Navigate to="/login" replace />;
-	}
-	return children;
+	return (
+		<LoaderWrapper isLoading={isLoading}>
+			{isLogined ? children : <Navigate to="/login" replace />}
+		</LoaderWrapper>
+	);
 };
