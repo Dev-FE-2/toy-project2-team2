@@ -1,10 +1,10 @@
 import { DefaultTheme } from "styled-components";
 
 // Styled-Components 테마 정의
-export const theme: DefaultTheme = {
+export const commonTheme: DefaultTheme = {
 	colors: {
 		primary: "#029688",
-
+		background: "#FFFFFF",
 		secondaryDark: "#212B36",
 		secondary: "#637381",
 		secondaryLight: "#DFE4EA",
@@ -28,6 +28,7 @@ export const theme: DefaultTheme = {
 
 		primary_hover: "#027056",
 		white_hover: "#F3F4F6",
+		blacks: "#000000",
 	},
 
 	fontSize: {
@@ -60,6 +61,61 @@ export const theme: DefaultTheme = {
 	},
 };
 
+export const lightTheme: DefaultTheme = {
+	...commonTheme,
+	colors: {
+		primary: "#029688",
+		background: "#FFFFFF",
+		secondaryDark: "#212B36",
+		secondary: "#637381",
+		secondaryLight: "#DFE4EA",
+		danger: "#E10E0E",
+		warning: "#FBBF24",
+		orange: "#F27430",
+		success: "#22AD5C",
+		grayDark: "#6B7280",
+		gray: "#9CA3AF",
+		grayLight: "#E5E7EB",
+		grayWhite: "#F3F4F6",
+		white: "#FFFFFF",
+		saturday: "#3c54ed",
+		sunday: "#f54e4e",
+		dim: "rgba(0,0,0,0.7)",
+		primary_hover: "#027056",
+		white_hover: "#F3F4F6",
+		blacks: "#000000",
+	},
+};
+
+export const darkTheme: DefaultTheme = {
+	...commonTheme,
+	colors: {
+		primary: "#029688",
+		background: "#121212",
+		secondaryDark: "#F3F4F6",
+		secondary: "#E5E7EB",
+		secondaryLight: "#6B7280",
+		danger: "#E10E0E",
+		warning: "#FBBF24",
+		orange: "#F27430",
+		success: "#22AD5C",
+		grayDark: "#9CA3AF",
+		gray: "#E5E7EB",
+		grayLight: "#6B7280",
+		grayWhite: "#212B36",
+		white: "#121212",
+		saturday: "#3c54ed",
+		sunday: "#f54e4e",
+		dim: "rgba(0,0,0,0.7)",
+		primary_hover: "#027056",
+		white_hover: "#6B7280",
+		blacks: "#FFFFFF",
+	},
+};
+export const theme = {
+	darkTheme,
+	lightTheme,
+};
 /**
  * @param section 테마 속성의 분류 (e.g. colors, breakpoints...)
  * @param key 분류 안에 key 값 (e.g. color -> primary)

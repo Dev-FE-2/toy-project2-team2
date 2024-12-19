@@ -1,3 +1,4 @@
+import Dot from "@/components/Dot";
 import {
 	Section,
 	SectionTitle,
@@ -9,7 +10,6 @@ import {
 } from "../Salay.styled";
 import CorrectionRequestModal from "../components/CorrectionModal";
 import type { SalarySectionProps } from "../types/salaryPage";
-import Dot from "@/assets/img/dot_icon.svg?react";
 
 const SalarySection = ({
 	actualPayment,
@@ -23,7 +23,7 @@ const SalarySection = ({
 			<SectionTitle>급여</SectionTitle>
 			<ActualSalaryContainer>
 				<LeftContainer>
-					<Dot style={{ margin: "0 4px 3px 4px" }} />
+					<Dot />
 					<p>실 지급액</p>
 				</LeftContainer>
 				<RightContainer>

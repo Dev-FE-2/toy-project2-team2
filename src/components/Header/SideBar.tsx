@@ -8,6 +8,8 @@ import {
 import CloseIcon from "@/assets/img/close_icon.svg?react";
 import Profile from "./Profile";
 import Navigator from "./Navigator";
+import { getColor } from "@/styles/theme";
+import { useTheme as useStyledTheme } from "styled-components";
 
 const SideBar = ({
 	isOpen,
@@ -16,6 +18,7 @@ const SideBar = ({
 	isOpen: boolean;
 	onClick: (isOpen: boolean) => void;
 }) => {
+	const theme = useStyledTheme();
 	return (
 		<MobileNavigation className={isOpen ? "open" : ""}>
 			<MobileNavCon>
@@ -26,7 +29,7 @@ const SideBar = ({
 							onClick={() => onClick(false)}
 							width="16"
 							height="16"
-							fill="#000"
+							fill={getColor("blacks")({ theme })}
 						/>
 					</CloseBtn>
 				</MobileNavHeader>

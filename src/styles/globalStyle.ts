@@ -20,7 +20,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Pretendard', 'Arial', sans-serif;
     font-weight: ${getFontWeight("regular")};
-    background-color: ${getColor("white")};
+    background-color: ${({ theme }) => theme.colors.background};
     color: ${getColor("secondaryDark")};
   }
 

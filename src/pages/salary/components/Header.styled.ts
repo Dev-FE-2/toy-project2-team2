@@ -56,8 +56,8 @@ export const TimeButton = styled.button`
 	font-family: inherit;
 	padding: 8px 16px;
 	font-size: ${getFontSize("sm")};
-	color: black;
-	border: 1px solid;
+	color: ${getColor("secondaryDark")};
+	border: 1px solid ${getColor("secondaryDark")};
 	border-radius: ${getBorderRadius("sm")};
 	background-color: transparent;
 	cursor: pointer;

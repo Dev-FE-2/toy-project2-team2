@@ -1,5 +1,4 @@
 import type { GraphProps } from "../types/salaryPage";
-import type { SalaryData } from "../types/salaryData";
 import {
 	GraphContainer,
 	GraphDeduction,
@@ -7,30 +6,20 @@ import {
 	GraphSalary,
 	GraphWrapper,
 } from "./Graph.styled";
+import {
+	calculateActualPayment,
+	calculateGrossPayment,
+	calculateTotalDeductions,
+} from "@/utils/calculateSalary";
 
 const Graph = ({ salaryData }: GraphProps) => {
-	const calculatePercentages = (data: SalaryData) => {
-		const totalDeductions =
-			data.nationalPension +
-			data.healthInsurance +
-			data.longTermCareInsurance +
-			data.employmentInsurance +
-			data.incomeTax +
-			data.localIncomeTax;
+	const totalDeductions = calculateTotalDeductions(salaryData);
+	const actualPayment = calculateActualPayment(salaryData);
+	const grossPayment = calculateGrossPayment(salaryData);
 
-		const actualPayment = data.baseSalary - totalDeductions;
-		const total = data.baseSalary;
+	const salaryPercent = ((actualPayment / grossPayment) * 100).toFixed(1);
+	const deductionPercent = ((totalDeductions / grossPayment) * 100).toFixed(1);
 
-		const salaryPercent = ((actualPayment / total) * 100).toFixed(1);
-		const deductionPercent = ((totalDeductions / total) * 100).toFixed(1);
-
-		return {
-			salaryPercent: parseFloat(salaryPercent),
-			deductionPercent: parseFloat(deductionPercent),
-		};
-	};
-
-	const { salaryPercent, deductionPercent } = calculatePercentages(salaryData);
 	return (
 		<GraphWrapper>
 			<GraphContainer>

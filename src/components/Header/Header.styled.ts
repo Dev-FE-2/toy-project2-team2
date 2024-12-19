@@ -30,9 +30,11 @@ export const HeaderContainer = styled.header`
 
 export const LogoLink = styled(RouterNavLink)`
 	display: inline-block;
-	width: 135px;
-	font-size: 0;
-
+	height: 45px;
+	width: 150px;
+	max-width: 150px;
+	object-fit: contain;
+	padding-top: 10px;
 	& > img {
 		width: 100%;
 	}
@@ -196,4 +198,28 @@ export const CloseBtn = styled.button`
 export const MobileNavTitle = styled.p`
 	font-size: ${getFontSize("md")};
 	font-weight: ${getFontWeight("bold")};
+`;
+export const ThemeToggleButton = styled.img<{ $isDarkMode: boolean }>`
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
+	margin-right: 16px;
+	transition:
+		transform 0.3s ease,
+		opacity 0.3s ease;
+
+	${({ $isDarkMode }) =>
+		$isDarkMode &&
+		`
+    filter: invert(1) brightness(2);
+  `}
+
+	&:hover {
+		transform: scale(1.1);
+		opacity: 0.6;
+	}
+
+	&:active {
+		transform: scale(0.5);
+	}
 `;

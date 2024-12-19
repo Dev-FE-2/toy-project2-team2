@@ -12,13 +12,13 @@ export interface HeaderProps {
 }
 export interface SalaryDetailsSectionProps {
 	salaryData: SalaryData | null;
-	formatNumber: any;
-	totalDeductions: any;
+	formatNumber: (value?: number) => string;
+	totalDeductions: number;
 }
 export interface SalarySectionProps {
 	actualPayment: number;
 	isCorrectionModalOpen: boolean;
 	setIsCorrectionModalOpen: (isOpen: boolean) => void;
 	formatNumber: (value: number) => string;
-	selectedDate: any;
+	selectedDate: Date;
 }
