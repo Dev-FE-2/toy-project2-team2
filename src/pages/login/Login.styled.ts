@@ -1,6 +1,7 @@
 import { flexCenter } from "@/styles/commonStyles";
 import {
 	getBorderRadius,
+	getBreakPoints,
 	getColor,
 	getFontSize,
 	getFontWeight,
@@ -18,16 +19,26 @@ export const LoginContainer = styled.div`
 	h1 {
 		padding-bottom: 30px;
 	}
+	@media (max-width: ${getBreakPoints("md")}) {
+		width: 100%;
+	}
 `;
 export const LoginBox = styled.div`
 	height: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	@media (max-width: ${getBreakPoints("md")}) {
+		width: 80%;
+		align-items: center;
+	}
 `;
 export const LoginHeader = styled.h1`
 	font-size: ${getFontSize("xl")};
 	font-weight: ${getFontWeight("bold")};
+	@media (max-width: ${getBreakPoints("md")}) {
+		width: 80%;
+	}
 `;
 export const LoginForm = styled.form`
 	margin: 0 -10px;
@@ -40,6 +51,15 @@ export const LoginForm = styled.form`
 	button {
 		margin: 10px;
 	}
+	@media (max-width: ${getBreakPoints("md")}) {
+		width: 80%;
+		button {
+			width: 100%;
+		}
+		div {
+			width: 100%;
+		}
+	}
 `;
 export const HelperText = styled.p<{
 	$isIdError?: boolean;
@@ -51,7 +71,13 @@ export const HelperText = styled.p<{
 	color: ${getColor("danger")};
 	display: ${(props) =>
 		props.$isIdError ? "block" : props.$isPasswordError ? "block " : "none"};
+	@media (max-width: ${getBreakPoints("md")}) {
+		width: 100%;
+	}
 `;
 export const SignUpGuide = styled.div`
 	margin-top: 30px;
+	@media (max-width: ${getBreakPoints("md")}) {
+		width: 80%;
+	}
 `;
