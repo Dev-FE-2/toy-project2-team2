@@ -1,6 +1,13 @@
 import styled from "styled-components";
 import { NavLink as RouterNavLink } from "react-router-dom";
-import { getColor, getFontWeight, getFontSize } from "../../styles/theme";
+import {
+	getColor,
+	getFontWeight,
+	getFontSize,
+	getBreakPoints,
+	getBorderRadius,
+} from "../../styles/theme";
+import { flexCenter } from "@/styles";
 
 export const HeaderContainer = styled.header`
 	position: fixed;
@@ -10,31 +17,45 @@ export const HeaderContainer = styled.header`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 15px 40px;
+	padding: 10px 30px;
 	border-bottom: 1px solid ${getColor("secondaryDark")};
 	background-color: ${getColor("white")};
 	z-index: 1000;
+
+	@media (max-width: ${getBreakPoints("md")}) {
+		padding: 10px 20px;
+		justify-content: center;
+	}
 `;
 
-export const LeftContainer = styled.div`
-	display: flex;
-	align-items: center;
-	gap: 140px;
-`;
+export const LogoLink = styled(RouterNavLink)`
+	display: inline-block;
+	width: 135px;
+	font-size: 0;
 
-export const Logo = styled.img`
-	height: 45px;
-	width: 150px;
-	max-width: 150px;
-	object-fit: contain;
-	padding-top: 10px;
+	& > img {
+		width: 100%;
+	}
 `;
 
 export const Nav = styled.nav`
 	display: flex;
 	gap: 40px;
-	margin-left: 20px;
 	text-align: left;
+
+	@media (max-width: ${getBreakPoints("md")}) {
+		display: none;
+	}
+
+	@media (max-width: ${getBreakPoints("lg")}) {
+		gap: 20px;
+	}
+
+	.open & {
+		display: flex;
+		flex-direction: column;
+		gap: 35px;
+	}
 `;
 
 export const NavLink = styled(RouterNavLink)`
@@ -55,7 +76,18 @@ export const NavLink = styled(RouterNavLink)`
 export const ProfileContainer = styled.div`
 	display: flex;
 	align-items: center;
-	gap: 20px;
+	gap: 10px;
+
+	.open & {
+		display: flex;
+		flex-direction: row-reverse;
+		justify-content: flex-end;
+		margin-bottom: 40px;
+	}
+
+	@media (max-width: ${getBreakPoints("md")}) {
+		display: none;
+	}
 `;
 
 export const ProfileImageContainer = styled.div`
@@ -68,7 +100,7 @@ export const ProfileImageContainer = styled.div`
 	justify-content: center;
 `;
 
-export const Profile = styled.img`
+export const ProfileImage = styled.img`
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
@@ -92,28 +124,76 @@ export const ProfileInfo = styled.div`
 		font-weight: ${getFontWeight("regular")};
 		padding: 0;
 	}
-`;
-export const ThemeToggleButton = styled.img<{ $isDarkMode: boolean }>`
-	width: 24px;
-	height: 24px;
-	cursor: pointer;
-	margin-right: 16px;
-	transition:
-		transform 0.3s ease,
-		opacity 0.3s ease;
 
-	${({ $isDarkMode }) =>
-		$isDarkMode &&
-		`
-    filter: invert(1) brightness(2);
-  `}
+	.open & {
+		align-items: flex-start;
+	}
+`;
+
+export const HamburgerBtn = styled.button`
+	display: none;
+	position: absolute;
+	top: 4px;
+	right: 16px;
+
+	background-color: transparent;
+	padding: 0;
+	font-size: 0;
+	border-radius: ${getBorderRadius("sm")};
 
 	&:hover {
-		transform: scale(1.1);
-		opacity: 0.6;
+		background-color: ${getColor("white_hover")};
 	}
 
-	&:active {
-		transform: scale(0.5);
+	@media (max-width: ${getBreakPoints("md")}) {
+		display: inline-block;
 	}
+`;
+
+export const MobileNavigation = styled.div`
+	position: fixed;
+	top: 0;
+	right: -320px;
+	z-index: 1001;
+
+	max-width: 320px;
+	width: 100%;
+	min-height: 100%;
+	background-color: ${getColor("white")};
+	border-left: 1px solid ${getColor("grayLight")};
+
+	transition: 0.3s;
+
+	&.open {
+		right: 0;
+	}
+`;
+
+export const MobileNavCon = styled.div`
+	padding: 20px;
+`;
+
+export const MobileNavHeader = styled.div`
+	${flexCenter}
+	position: relative;
+	margin-bottom: 40px;
+`;
+
+export const CloseBtn = styled.button`
+	position: absolute;
+	top: -5px;
+	right: -4px;
+	background-color: transparent;
+	border-radius: ${getBorderRadius("sm")};
+	padding: 5px;
+	font-size: 0;
+
+	&:hover {
+		background-color: ${getColor("white_hover")};
+	}
+`;
+
+export const MobileNavTitle = styled.p`
+	font-size: ${getFontSize("md")};
+	font-weight: ${getFontWeight("bold")};
 `;
