@@ -86,7 +86,7 @@ export const fetchSchedules = createAsyncThunk(
 		const uid = state.loginAuth.uid;
 
 		if (!uid) {
-			throw new Error("User ID is not available in the state");
+			throw new Error("로그인 오류가 발생했습니다.");
 		}
 
 		const data = await getScheduleData(uid, startDate, endDate);

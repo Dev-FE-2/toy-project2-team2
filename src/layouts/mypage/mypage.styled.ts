@@ -20,12 +20,11 @@ export const Main = styled.main`
 export const MypageContainer = styled.div`
 	width: 100%;
 	max-width: 900px;
-	padding: 10px 30px;
-	margin: 55px auto 0;
+	padding: 65px 30px 10px;
+	margin: 0 auto;
 	overflow: hidden;
 
 	@media (max-width: ${getBreakPoints("md")}) {
-		padding: 10px 20px;
-		margin-top: 35px;
+		padding: 45px 20px 10px;
 	}
 `;

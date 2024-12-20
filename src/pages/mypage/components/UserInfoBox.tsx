@@ -11,11 +11,11 @@ import { Input } from "@/components";
 import { useState } from "react";
 import { setUserInfo } from "@/store/slices/userInfoSlice";
 import {
+	getUserData,
 	deleteStorageFile,
 	updateUserInfoData,
 	validateFile,
-} from "@/services/MyPageService";
-import { getUserData } from "@/services/getDatas";
+} from "@/services";
 import { UserInfoUpdateButton } from "./UserInfoUpdateButton";
 import { UploadButton } from "./UploadButton";
 import { storage } from "@/firebase";

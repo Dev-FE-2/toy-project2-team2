@@ -8,7 +8,6 @@ import {
 	startOfMonth,
 	startOfWeek,
 	format,
-	set,
 	isSaturday,
 	isSunday,
 	isSameDay,
@@ -36,12 +35,8 @@ const Dates = () => {
 	const isThisMonth = (date: Date) =>
 		format(date, "MM") === format(currentDate, "MM");
 
-	const onClickDate = (e: React.MouseEvent, date: Date) => {
-		setDate(
-			set(currentDate, {
-				date: parseInt(e.currentTarget.textContent as string),
-			}),
-		);
+	const onClickDate = (date: Date) => {
+		setDate(date);
 		setSelectedDate(date);
 	};
 
@@ -53,7 +48,7 @@ const Dates = () => {
 					$isThisMonth={isThisMonth(date)}
 					$isSaturday={isSaturday(date)}
 					$isSunday={isSunday(date)}
-					onClick={(e) => onClickDate(e, date)}
+					onClick={() => onClickDate(date)}
 					className={
 						selectedDate &&
 						format(selectedDate, "yyyy-MM-dd") === format(date, "yyyy-MM-dd")
