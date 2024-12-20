@@ -9,6 +9,7 @@ import MyPage from "@/pages/mypage";
 import NotFoundPage from "@/pages/notFound";
 import ComponentExample from "@/pages/componentExample";
 import { ProtectedRoute } from "./ProtectedRoute";
+import MypageLayout from "@/layouts/mypage";
 
 const Router = createBrowserRouter([
 	{
@@ -20,7 +21,6 @@ const Router = createBrowserRouter([
 		children: [
 			{ path: "/salary", element: <SalaryPage /> },
 			{ path: "/salary-correction", element: <SalaryCorrectionPage /> },
-			{ path: "/mypage", element: <MyPage /> },
 			{ path: "/components", element: <ComponentExample /> },
 		],
 	},
@@ -31,6 +31,14 @@ const Router = createBrowserRouter([
 			</ProtectedRoute>
 		),
 		children: [{ path: "/", element: <Schedule /> }],
+	},
+	{
+		element: (
+			<ProtectedRoute>
+				<MypageLayout />
+			</ProtectedRoute>
+		),
+		children: [{ path: "/mypage", element: <MyPage /> }],
 	},
 	{
 		element: <AuthLayout />,

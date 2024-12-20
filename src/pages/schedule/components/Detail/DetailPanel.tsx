@@ -12,7 +12,7 @@ import { formModalMode } from "../../types/schedule";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { removeSchedule } from "@/store/slices/scheduleSlice";
 import { deleteSchedule } from "@/services";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const DetailPanel = () => {
 	const { currentDateString, schedules } = useCalendar();
@@ -58,7 +58,11 @@ const DetailPanel = () => {
 						prev.filter((schedule) => schedule.schedule_id !== scheduleId),
 					);
 				} catch (error) {
-					toast.error(`일정 삭제 중 오류가 발생했습니다.`);
+					const errorMessage =
+						error instanceof Error
+							? error.message
+							: "알 수 없는 오류가 발생했습니다.";
+					toast.error(errorMessage);
 				}
 			}
 		},
@@ -82,12 +86,8 @@ const DetailPanel = () => {
 
 	const getSchedulesForDate = useCallback(
 		(dateString: string) => {
-			return (
-				schedules
-					// eslint-disable-next-line @typescript-eslint/no-unused-vars
-					.filter(({ start_date }) =>
-						isSameDay(new Date(start_date), new Date(dateString)),
-					)
+			return schedules.filter(({ start_date }) =>
+				isSameDay(new Date(start_date), new Date(dateString)),
 			);
 		},
 		[schedules],

@@ -1,7 +1,7 @@
 import { getBreakPoints } from "@/styles/theme";
 import styled from "styled-components";
 
-export const MainWrapper = styled.div`
+export const MypageWrapper = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
@@ -17,15 +17,14 @@ export const Main = styled.main`
 	}
 `;
 
-export const MainContainer = styled.div`
+export const MypageContainer = styled.div`
 	width: 100%;
-	max-width: 1260px;
-	padding: 20px 30px;
+	max-width: 900px;
+	padding: 65px 30px 10px;
 	margin: 0 auto;
-	box-sizing: border-box;
 	overflow: hidden;
 
 	@media (max-width: ${getBreakPoints("md")}) {
-		padding: 20px;
+		padding: 45px 20px 10px;
 	}
 `;

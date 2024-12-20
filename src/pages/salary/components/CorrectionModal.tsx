@@ -1,15 +1,10 @@
-import { useEffect, useState } from "react";
 import CustomSelect from "@/components/Select";
 import Modal from "@/components/Modal";
 import { TextArea } from "@/components";
 import { useSelector } from "react-redux";
 import { RootState } from "@/types/store";
 import { ErrorMessage } from "../Salay.styled";
-import {
-	getSalaryAmount,
-	saveSalaryCorrection,
-} from "@/services/SalaryService";
-import { toast } from "react-toastify";
+import { useCorrectionModal } from "@/hooks/useCorrectionModal";
 
 const CorrectionModal = ({
 	isOpen,
@@ -26,59 +21,20 @@ const CorrectionModal = ({
 		{ value: "근무 시간", label: "근무 시간" },
 		{ value: "기타", label: "기타" },
 	];
-	const [selectedCorrection, setSelectedCorrection] = useState(
-		correctionOptions[0].value,
-	);
-	const [reason, setReason] = useState("");
-	const [error, setError] = useState(false);
 	const uid = useSelector((state: RootState) => state.loginAuth.uid);
-
-	useEffect(() => {
-		if (isOpen) {
-			setSelectedCorrection(correctionOptions[0].value);
-			setReason("");
-			setError(false);
-		}
-	}, [isOpen]);
-	const getSalaryId = () => {
-		const year = selectedDate.getFullYear();
-		const month = String(selectedDate.getMonth() + 1).padStart(2, "0");
-		return `salaries_${year}_${month}`;
-	};
-
-	const handleApply = async () => {
-		if (!uid) {
-			toast.error("사용자 정보를 확인할 수 없습니다.");
-			return;
-		}
-
-		if (!reason.trim()) {
-			setError(true);
-			return;
-		}
-
-		const salaryId = getSalaryId();
-		try {
-			setError(false);
-			const history = await getSalaryAmount(uid, salaryId);
-
-			await saveSalaryCorrection({
-				uid,
-				salaryId,
-				correctionData: {
-					correctionType: selectedCorrection,
-					reason,
-					history,
-					status: "검토중",
-					date: new Date().toISOString(),
-				},
-			});
-			toast.success("정정 신청이 완료되었습니다.");
-			onClose();
-		} catch (error) {
-			toast.error("정정 신청이 실패했습니다.");
-		}
-	};
+	const {
+		selectedCorrection,
+		setSelectedCorrection,
+		reason,
+		setReason,
+		error,
+		handleApply,
+		setError,
+	} = useCorrectionModal({
+		uid,
+		selectedDate,
+		onClose,
+	});
 
 	return (
 		<Modal

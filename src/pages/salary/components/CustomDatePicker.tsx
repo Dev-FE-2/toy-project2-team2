@@ -9,7 +9,7 @@ import {
 
 interface CustomDatePickerProps {
 	selectedDate: Date;
-	onDateChange: any;
+	onDateChange: (data: Date) => void;
 }
 
 const CustomDatePicker = ({

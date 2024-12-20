@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { getBreakPoints } from "@/styles/theme";
+
 import {
 	getBorderRadius,
 	getColor,
@@ -158,6 +160,9 @@ export const ListItem = styled.li`
 	&:hover {
 		border-bottom: 2px solid ${getColor("secondaryLight")};
 	}
+	@media (max-width: ${getBreakPoints("md")}) {
+		align-items: flex-start;
+	}
 `;
 
 export const Label = styled.p`
@@ -165,12 +170,20 @@ export const Label = styled.p`
 	font-size: ${getFontSize("lg")};
 	color: ${getColor("secondary")};
 	padding-bottom: 5px;
+	@media (max-width: ${getBreakPoints("md")}) {
+		width: 100%;
+		margin-bottom: 5px;
+	}
 `;
 
 export const Value = styled.p`
 	margin: 0;
 	font-size: ${getFontSize("lg")};
 	margin-right: 10px;
+	@media (max-width: ${getBreakPoints("md")}) {
+		width: 100%;
+		text-align: right;
+	}
 `;
 
 export const Divider = styled.div`
@@ -185,6 +198,11 @@ export const SectionRow = styled.div`
 	align-items: flex-start;
 	gap: 50px;
 	margin-top: 20px;
+	@media (max-width: ${getBreakPoints("md")}) {
+		flex-direction: column;
+		padding-left: 20px;
+		width: 100%;
+	}
 `;
 
 export const SectionHalf = styled.div`
@@ -192,6 +210,10 @@ export const SectionHalf = styled.div`
 	max-width: 50%;
 	display: flex;
 	flex-direction: column;
+	@media (max-width: ${getBreakPoints("md")}) {
+		max-width: 100%;
+		width: 100%;
+	}
 `;
 export const ErrorMessage = styled.p`
 	color: red;

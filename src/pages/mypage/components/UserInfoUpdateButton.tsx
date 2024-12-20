@@ -1,6 +1,6 @@
 import { Button } from "@/components";
 import { EditingButton } from "./UserInfoUpdateButton.styled";
-import { UpdateButtonProps } from "../../type/UserInfoUpdateButton";
+import { UpdateButtonProps } from "../type/UserInfoUpdateButton";
 
 export const UserInfoUpdateButton = ({
 	$isEditing,

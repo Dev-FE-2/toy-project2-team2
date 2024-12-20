@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { format } from "date-fns";
 import { Input, Modal, TextArea } from "@/components";
 import useCalendar from "@/hooks/useCalendar";
@@ -9,7 +9,7 @@ import type { ScheduleFormModalProps } from "../../types/schedule";
 import { convertDateToLocaleString } from "@/utils/date";
 import { upsertSchedule } from "@/store/slices/scheduleSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const ScheduleFormModal = ({
 	mode,
@@ -22,43 +22,42 @@ const ScheduleFormModal = ({
 	const uid = useAppSelector((state) => state.loginAuth.uid) as string;
 	const dispatch = useAppDispatch();
 
-	const [title, setTitle] = useState("");
-	const [date, setDate] = useState(
-		format(new Date(currentDateString), "yyyy-MM-dd"),
-	);
-	const [colorLabel, setColorLabel] = useState(getColor("primary")({ theme }));
-	const [content, setContent] = useState("");
+	const [formData, setFormData] = useState({
+		title: "",
+		date: format(new Date(currentDateString), "yyyy-MM-dd"),
+		colorLabel: getColor("primary")({ theme }),
+		content: "",
+	});
+
+	const resetForm = useCallback(() => {
+		if (mode === "insert") {
+			setFormData({
+				title: "",
+				date: format(new Date(currentDateString), "yyyy-MM-dd"),
+				colorLabel: getColor("primary")({ theme }),
+				content: "",
+			});
+		} else if (mode === "update" && detailData) {
+			setFormData({
+				title: detailData.title,
+				date: detailData.start_date,
+				colorLabel: detailData.color,
+				content: detailData.content,
+			});
+		}
+	}, [mode, currentDateString, theme, detailData]);
 
 	useEffect(() => {
-		if (isOpen) {
-			if (mode === "insert") {
-				setTitle("");
-				setDate(format(new Date(currentDateString), "yyyy-MM-dd"));
-				setColorLabel(getColor("primary")({ theme }));
-				setContent("");
-			} else if (mode === "update" && detailData) {
-				setTitle(detailData.title);
-				setDate(detailData.start_date);
-				setColorLabel(detailData.color);
-				setContent(detailData.content);
-			}
-		}
-	}, [isOpen, mode, currentDateString, theme, detailData]);
+		if (isOpen) resetForm();
+	}, [isOpen, resetForm]);
 
-	const onChangeColor = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setColorLabel(e.target.value);
+	const handleChange = (key: keyof typeof formData, value: string) => {
+		setFormData((prev) => ({ ...prev, [key]: value }));
 	};
 
-	const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) =>
-		setTitle(e.target.value);
-
-	const onChangeDate = (e: React.ChangeEvent<HTMLInputElement>) =>
-		setDate(e.target.value);
-
-	const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
-		setContent(e.target.value);
-
 	const handleApply = async () => {
+		const { title, date, colorLabel, content } = formData;
+
 		if (!title || !date) {
 			toast.warning("제목과 날짜를 입력해주세요.");
 			return;
@@ -72,21 +71,30 @@ const ScheduleFormModal = ({
 		};
 
 		try {
+			let scheduleId;
+
 			if (mode === "insert") {
-				const scheduleId = await insertSchedule(uid, scheduleData);
-				dispatch(upsertSchedule({ ...scheduleData, schedule_id: scheduleId }));
-				toast.success("일정이 등록되었습니다.");
+				scheduleId = await insertSchedule(uid, scheduleData);
 			} else if (mode === "update" && detailData) {
-				const scheduleId = await updateSchedule(uid, {
+				scheduleId = await updateSchedule(uid, {
 					...scheduleData,
 					schedule_id: detailData.schedule_id,
 				});
-				dispatch(upsertSchedule({ ...scheduleData, schedule_id: scheduleId }));
-				toast.success("일정이 수정되었습니다.");
 			}
+
+			dispatch(
+				upsertSchedule({ ...scheduleData, schedule_id: scheduleId as string }),
+			);
+			toast.success(
+				mode === "insert" ? "일정이 등록되었습니다." : "일정이 수정되었습니다.",
+			);
 			onClose();
 		} catch (error) {
-			toast.error(`일정 ${mode === "insert" ? "등록" : "수정"} 중 오류가 발생했습니다.`);
+			const errorMessage =
+				error instanceof Error
+					? error.message
+					: "알 수 없는 오류가 발생했습니다.";
+			toast.error(errorMessage);
 		}
 	};
 
@@ -117,29 +125,31 @@ const ScheduleFormModal = ({
 				type="text"
 				label="제목 *"
 				placeholder="일정 제목을 입력해주세요"
-				value={title}
-				onChange={onChangeTitle}
+				value={formData.title}
+				onChange={(e) => handleChange("title", e.target.value)}
 			/>
 			<Input
 				type="date"
 				label="날짜 *"
 				placeholder="날짜를 선택해주세요"
 				value={
-					isNaN(Date.parse(date)) ? "" : format(new Date(date), "yyyy-MM-dd")
+					isNaN(Date.parse(formData.date))
+						? ""
+						: format(new Date(formData.date), "yyyy-MM-dd")
 				}
-				onChange={onChangeDate}
+				onChange={(e) => handleChange("date", e.target.value)}
 			/>
 			<Input
 				type="color"
 				label="컬러 라벨"
-				value={colorLabel}
-				onChange={onChangeColor}
+				value={formData.colorLabel}
+				onChange={(e) => handleChange("colorLabel", e.target.value)}
 			/>
 			<TextArea
 				label="메모"
 				placeholder="일정 메모를 입력하세요"
-				value={content}
-				onChange={onChangeContent}
+				value={formData.content}
+				onChange={(e) => handleChange("content", e.target.value)}
 			/>
 		</Modal>
 	);

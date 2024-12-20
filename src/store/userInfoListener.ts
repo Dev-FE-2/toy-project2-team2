@@ -1,6 +1,6 @@
 import { setLoading, setUserInfo } from "@/store/slices/userInfoSlice";
 import { AppDispatch } from "@/types/store";
-import { getUserData } from "@/services/getDatas";
+import { getUserData } from "@/services";
 import { auth } from "@/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { setUid } from "./slices/loginAuthSlice";
